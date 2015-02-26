@@ -8,3 +8,7 @@ dependencies:
     - "vendor/bundle"
   override:
     - ./script/bootstrap
+
+test:
+  override:
+    - ./script/build
