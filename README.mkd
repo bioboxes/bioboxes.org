@@ -1,0 +1,14 @@
+### Development
+
+The development of the project is managed through using running code in
+`scripts` directory. These scripts are as follows:
+
+  * `scripts/bootstrap` set up all dependencies required by the project.
+
+
+### Deployment
+
+The website is deployed automatically using CircleCI. When a merge is detected
+on the master branch, CircleCI will build the website HTML files and push them
+to AWS S3. Therefore all that is necessary to update the website is to merge a
+pull request into the master branch.
