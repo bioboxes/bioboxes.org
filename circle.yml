@@ -12,3 +12,10 @@ dependencies:
 test:
   override:
     - ./script/build
+
+deployment:
+  deploy:
+    branch: /*/
+    owner: bioboxes
+    commands:
+      - ./deploy_feature.sh
