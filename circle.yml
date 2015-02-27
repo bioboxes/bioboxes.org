@@ -15,6 +15,7 @@ test:
 
 deployment:
   deploy:
-    branch: /.*/
+    branch: master
+    owner: bioboxes
     commands:
       - ./script/publish
