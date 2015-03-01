@@ -1,1 +1,76 @@
-We welcome all
+The bioboxes project aims to be developed through feedback and contributions
+from the bioinformatics community. This standard will best when solving the
+right problems in the right way. Therefore if you have found the specifications
+wanting or would like to provide comments there are a many ways to do so.
+
+### Create a discussion issue
+
+General comments and feedback can be given by opening an issue on the [github
+issue tracker][issue] for the project. This can be used to provide comments on
+any general area of the project such as improvements you would like to see or
+flaws that would like to be pointed out. The more specific your comments, the
+better and more likely to receive a fast response from one of the bioboxes
+members. Issues of this type will be labelled "A-discussion" for "Area -
+discussion".
+
+[issue]: https://github.com/bioboxes/rfc/issues
+
+### Create an actionable issue
+
+Your feedback may be more detailed than just general general comments. For
+example you may have found inaccurate information in one of the specifications
+or one the website. You can open a more specific type of issue on the [github
+tracker][issue]. When opening this type of issue please include how a
+successful implementation would look. For example: *"A patch to resolve this will
+update the short read assembler RFC to illustrate how long mate pair reads can
+given to the container."* As above, the more specific your comments in the
+issue the easier it will be for the bioboxes core team to respond.
+
+### Make a minor fix or improvement
+
+You may be able to provide a specific improvement to an [RFC][] or the
+[website][]. This may be fixing typos, or rewording text for clarity. In this
+case we very much appreciate [github pull requests][request]. You can do this
+as follows:
+
+  * Fork the corresponding repository you would like to make the change to.
+  * create a branch containing your commits on your github fork of the
+    repository. The branch should be named **fix/PATH-TO-SPEC/name-of-fix** for
+    a change to a specfication, or **fix/name-of-fix** for general changes.
+  * Create a pull request to the original repository from your branch.
+  * Add a description to the pull request outlining changes.
+
+[RFC]: https://github.com/bioboxes/rfc
+[website]: https://github.com/bioboxes/bioboxes.org
+[request]: https://help.github.com/articles/using-pull-requests/
+
+### Make a major change
+
+If you would like to make changes to an RFC such as in the way data is given to
+the container or what the output should be, then is a major change. Before
+implementing a major change please open a general discussion ticket with a
+general outline of your changes first, this will help us provide feedback and
+suggestions.
+
+Each RFC has a [semantic version number][semver] and a named maintainer. All
+issues and pull requests for each specification will be assigned to them for
+action. The branch containing the commits should be named
+`feature/PATH-TO-RFC/name-of-fix` to help identify which RFCs are changed. The
+branch should also update the version number in the relevant RFC depending on
+the type of change. The version is updated as follows:
+
+  * **X.0.0**: A change containing a one or more backwards-incompatible major
+    update to an RFC. This type of branch should be rare as this will require
+    all existing implementations to be updated to match the new interface.
+    Therefore as many breaking changes as possible should be combined at once.
+    An example of this type of breaking change would be renaming an existing
+    environment variable.
+
+  * **X.Y.0**: A branch containing to one or more backwards-compatible changes
+    to an RFC. An example is an additional environment variable provided to the
+    container that may be optionally used, and does not break existing
+    implementations. This type of branch should still be considered with
+    caution as once implemented, this must be maintained in all future versions
+    to prevent backwards-incompatible changes.
+
+[semver]: http://semver.org
