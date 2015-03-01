@@ -1,14 +1,39 @@
-### Development
+### Development scripts
 
 The development of the project is managed through using running code in
-`scripts` directory. These scripts are as follows:
+`scripts` directory. These scripts are:
 
-  * `scripts/bootstrap` set up all dependencies required by the project.
+  * `scripts/bootstrap` - set up all dependencies required by the project.
 
+  * `scripts/build` - builds the website from the source files.
+
+  * `scripts/dev` - starts a live version of the website on http://localhost:4567/.
+
+  * `scripts/publish` - deploys the website to bioboxes.org. This is used by
+    the [CI server][ci].
+
+### Updating the website
+
+Changes to existing pages can be made by editting the corresponding `.mkd` file
+in `./source` directory. A new page can be added to the website by creating a
+file in the source directory. Changes to the site page structure can be made by
+editting the HAML files in the `./source/layouts` directory. Once you have
+finished do the following steps:
+
+  * create a branch containing your commits on a github fork of this
+    repository.
+  * Create a pull request to the `bioboxes.org/master` branch from the branch
+    containing your commits.
+  * Create an issue on `bioboxes/rfc` with a description of the changes, with a
+    link to the PR.
 
 ### Deployment
 
-The website is deployed automatically using CircleCI. When a merge is detected
-on the master branch, CircleCI will build the website HTML files and push them
-to AWS S3. Therefore all that is necessary to update the website is to merge a
-pull request into the master branch.
+The website is deployed automatically using [CircleCI][ci]. When a merge is
+detected on the master branch, CircleCI will build the website HTML files and
+push them to AWS S3. Therefore all that is necessary to update the website is
+to merge a pull request into the master branch.
+
+[ci]: https://circleci.com/gh/bioboxes/bioboxes.or://circleci.com/gh/bioboxes/bioboxes.org
+
+[haml]: http://haml.info/
