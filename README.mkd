@@ -34,6 +34,5 @@ detected on the master branch, CircleCI will build the website HTML files and
 push them to AWS S3. Therefore all that is necessary to update the website is
 to merge a pull request into the master branch.
 
-[ci]: https://circleci.com/gh/bioboxes/bioboxes.or://circleci.com/gh/bioboxes/bioboxes.org
-
+[ci]: https://circleci.com/gh/bioboxes/bioboxes.org
 [haml]: http://haml.info/
