@@ -1,6 +1,9 @@
 publish: build
 	bundle exec middleman s3_sync
 
+test: build
+	bundle exec htmlproof $<
+
 build: $(shell find source) Gemfile.lock
 	rm -fr $@
 	bundle exec middleman build --verbose

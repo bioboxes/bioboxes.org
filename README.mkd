@@ -7,6 +7,8 @@ The development of the project is managed through using running code in
 
   * `scripts/build` - builds the website from the source files.
 
+  * `scripts/build` - ensures all links in the site are valid
+
   * `scripts/dev` - starts a live version of the website on http://localhost:4567/.
 
   * `scripts/publish` - deploys the website to bioboxes.org. This is used by
