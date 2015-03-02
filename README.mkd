@@ -7,6 +7,8 @@ The development of the project is managed through using running code in
 
   * `scripts/build` - builds the website from the source files.
 
+  * `scripts/build` - ensures all links in the site are valid
+
   * `scripts/dev` - starts a live version of the website on http://localhost:4567/.
 
   * `scripts/publish` - deploys the website to bioboxes.org. This is used by
@@ -30,9 +32,10 @@ finished do the following steps:
 ### Deployment
 
 The website is deployed automatically using [CircleCI][ci]. When a merge is
-detected on the master branch, CircleCI will build the website HTML files and
-push them to AWS S3. Therefore all that is necessary to update the website is
-to merge a pull request into the master branch.
+detected on the master branch, CircleCI will build the website HTML files using
+`script/build`, test then using `script/test`, and if they are valid push them
+to AWS S3 using `script/publish`. Therefore to update the website a valid merge
+into the master branch is required.
 
 [ci]: https://circleci.com/gh/bioboxes/bioboxes.org
 [haml]: http://haml.info/
