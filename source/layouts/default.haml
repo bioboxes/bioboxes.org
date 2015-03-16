@@ -1,14 +1,7 @@
 !!! 5
 %HTML{lang: "en"}
 
-  %link{rel:  "stylesheet",
-        href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"}
-
-  %link{rel:  "stylesheet",
-        href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"}
-
   %link{rel: "stylesheet", href: "/stylesheets/stylesheet.css" }
-
 
   %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"}
 
@@ -16,10 +9,10 @@
 
   %body
     .container
-      .row.title
-        .div{class: "col-xs-12 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-5"}
+      .title
+        .content
           %h1
             Bioboxes
-      .row
-        .div{class: " col-xs-12 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-5"}
+      .main
+        .content
           = yield
