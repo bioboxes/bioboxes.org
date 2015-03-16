@@ -1,14 +1,7 @@
 !!! 5
 %HTML{lang: "en"}
 
-  %link{rel:  "stylesheet",
-        href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"}
-
-  %link{rel:  "stylesheet",
-        href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"}
-
   %link{rel: "stylesheet", href: "/stylesheets/stylesheet.css" }
-
 
   %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"}
 
@@ -16,14 +9,9 @@
 
   %body
     .container
-      .row.title
-        .div{class: "col-md-2"}
-        .div{class: "col-xs-12 col-md-7"}
-          %h1
-            Bioboxes
-        .div{class: "col-md-3"}
-      .row
-        .div{class: "col-md-2"}
-        .div{class: "col-xs-12 col-md-7"}
+      .banner
+        .content
+          %img{src: "https://raw.githubusercontent.com/bioboxes/logo/0c6bfccd2440ccf06356243ba71b32588ad40617/logo_dark.png", class: 'img-responsive', alt: "Bioboxes Logo"}
+      .main
+        .content
           = yield
-        .div{class: "col-md-3"}

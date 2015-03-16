@@ -11,7 +11,19 @@ build: $(shell find source) Gemfile.lock
 dev: $(shell find source) Gemfile.lock
 	bundle exec middleman server
 
-bootstrap: Gemfile.lock
+
+bootstrap: Gemfile.lock vendor/bootstrap
+
+vendor/bootstrap:
+	mkdir -p vendor
+	wget \
+	  --quiet \
+	  --output-document bootstrap.zip \
+	  https://github.com/twbs/bootstrap/archive/v3.3.4.zip
+	unzip bootstrap.zip
+	mv bootstrap-3.3.4 $@
+	rm bootstrap.zip
+	touch $@
 
 Gemfile.lock: Gemfile
 	bundle install --path vendor/bundle

@@ -1,3 +1,5 @@
+# How to contribute
+
 The bioboxes project aims to be developed through feedback and contributions
 from the bioinformatics community. This standard can only work if it solves the
 right problems in the right way. Therefore if you have found any problems or
