@@ -1,8 +1,11 @@
 @import '../../vendor/bootstrap/less/bootstrap.less';
+@import url(http://fonts.googleapis.com/css?family=Raleway:500|Open+Sans);
+
+@colour:    #37474f;
 
 .banner {
   .make-row();
-  background-color: #37474f;
+  background-color: @colour;
   box-shadow: 0px 2px 1px #888888;
 }
 
@@ -14,7 +17,35 @@
 .content {
   .make-lg-column(5);
   .make-lg-column-offset(3);
-
   .make-md-column(6);
   .make-md-column-offset(3);
+
+  color: @colour;
+
+  h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+    font-family: Raleway, sans-serif;
+    text-transform: lowercase;
+    font-variant: small-caps;
+  }
+
+  h1 {
+    margin-bottom: 1em;
+  }
+
+  h3 {
+    letter-spacing: 0.1em;
+    line-height: 2;
+    margin-top: 2em;
+  }
+
+  p, ul {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+  }
+
+  a {
+    font-weight: bold;
+  }
+
 }
