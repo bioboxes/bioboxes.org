@@ -1,9 +1,8 @@
 # How to contribute
 
-The bioboxes project aims to be developed through feedback and contributions
-from the bioinformatics community. This standard can only work if it solves the
-right problems in the right way. Therefore if you have found any problems or
-would like to provide comments there are many ways to do so.
+Bioboxes is developed through feedback and contributions from the
+bioinformatics community. We welcome any comments and improvements, and there
+are number of ways you can get involved.
 
 ### Create a discussion issue
 
@@ -26,6 +25,15 @@ look. For example: *"A patch to resolve this will update the short read
 assembler RFC to illustrate how long mate pair reads can given to the
 container."* As above, the more specific your comments in the issue the easier
 it will be for the bioboxes core team to respond and resolve it.
+
+### Fix an existing issue
+
+There are always outstanding tasks on the[github issue tracker][issue] that
+need some help. A good place to start are those tagged ["E-Easy"][easy] as
+these should relatively simple. Feel welcome to comment or ask for help on a
+issue if you need more information on how to get started it.
+
+[easy]: https://github.com/bioboxes/rfc/labels/E-Easy
 
 ### Propose a minor fix or improvement
 
