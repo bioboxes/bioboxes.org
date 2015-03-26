@@ -11,7 +11,13 @@ dev: $(shell find source) Gemfile.lock
 	bundle exec middleman server
 
 
-bootstrap: Gemfile.lock vendor/bootstrap
+bootstrap: Gemfile.lock vendor/bootstrap source/validate-input.mkd
+
+source/validate-input.mkd:
+	wget \
+		--quiet \
+		--output-document $@ \
+		https://raw.githubusercontent.com/bioboxes/input-validator/master/doc/validate-input.mkd
 
 vendor/bootstrap:
 	mkdir -p vendor

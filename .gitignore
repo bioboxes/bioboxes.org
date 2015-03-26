@@ -17,3 +17,6 @@ Gemfile.lock
 
 # Dependencies directory
 vendor
+
+# Pulled files
+source/validate-input.mkd
