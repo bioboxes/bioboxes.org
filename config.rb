@@ -1,3 +1,6 @@
+require 'extensions/page'
+
+activate :page_title
 activate :automatic_image_sizes
 activate :directory_indexes
 
