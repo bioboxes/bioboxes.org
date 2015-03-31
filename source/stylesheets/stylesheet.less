@@ -3,6 +3,36 @@
 
 @colour:    #37474f;
 
+.splash {
+  .make-row();
+  background-color: @colour;
+
+  .description {
+    padding-top: 40px;
+
+    .make-lg-column(4);
+    .make-lg-column-offset(4);
+    .make-md-column(4);
+    .make-md-column-offset(4);
+    .make-sm-column(4);
+    .make-sm-column-offset(4);
+  }
+
+  .logo {
+    width: 225px;
+    .center-block();
+
+    .hidden-xs;
+  }
+
+  h1, h2 {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    text-align: center;
+
+  }
+}
+
 .banner {
   .make-row();
   background-color: @colour;
