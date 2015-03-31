@@ -5,7 +5,6 @@
 @strong-accent: #9E9E9E;
 @weak-accent:   #E0E0E0;
 
-
 .banner {
   .make-row();
   background-color: @primary;
@@ -54,16 +53,24 @@
 
 .navbar {
   background-color: @primary;
-  box-shadow: 0px 2px 1px #888888;
+  color: @weak-accent;
+
+
 
   .link{
     color: @weak-accent;
     font-family: 'Open Sans', sans-serif;
     word-spacing: -4px;
     font-weight: 300;
+    background-color: @primary;
   }
   a:visited{ .link; }
   a:link{ .link; }
+  a{ .link; }
+  a:hover{
+    .link;
+    color: @primary;
+  }
 
 
 }
