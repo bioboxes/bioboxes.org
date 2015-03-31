@@ -1,0 +1,6 @@
+- data.guides.map{|g| sitemap.resources.select{|i| i.destination_path == g}.first }.each do |guide|
+  .guide
+    %h2
+      = link_to guide.data.title, guide.destination_path
+    %p
+      = guide.data.summary
