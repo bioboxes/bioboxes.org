@@ -1,42 +1,57 @@
 @import '../../vendor/bootstrap/less/bootstrap.less';
-@import url(http://fonts.googleapis.com/css?family=Raleway:500|Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Raleway:500|Open+Sans:400,300,700);
 
-@colour:    #37474f;
-
+@primary: #37474f;
+@accent:  #9E9E9E;
 
 .logo {
-  width: 225px;
+  padding-top: 40px;
+  width: 175px;
   .center-block();
   .hidden-xs;
 }
 
-
 .splash {
   .make-row();
-  background-color: @colour;
+  background-color: @primary;
 
   .description {
     padding-top: 40px;
+    padding-bottom: 60px;
 
-    .make-lg-column(4);
-    .make-lg-column-offset(4);
-    .make-md-column(4);
-    .make-md-column-offset(4);
-    .make-sm-column(4);
-    .make-sm-column-offset(4);
+    .make-lg-column(6);
+    .make-lg-column-offset(3);
+    .make-md-column(6);
+    .make-md-column-offset(3);
+    .make-sm-column(6);
+    .make-sm-column-offset(3);
   }
 
   h1, h2 {
     font-family: 'Open Sans', sans-serif;
     color: white;
     text-align: center;
-
+    font-weight: 300;
+    line-height: 1.2;
   }
+
+  h1 {
+    margin-top: -7px;
+    padding-bottom: 15px;
+    font-size: @font-size-h1 * 1.5;
+    word-spacing: -12px;
+  }
+
+  h2 {
+    font-size: @font-size-h2 * 0.7;
+    color: @accent;
+  }
+
 }
 
 .banner {
   .make-row();
-  background-color: @colour;
+  background-color: @primary;
   box-shadow: 0px 2px 1px #888888;
 }
 
@@ -51,7 +66,7 @@
   .make-md-column(6);
   .make-md-column-offset(3);
 
-  color: @colour;
+  color: @primary;
 
   h1, h2, h3, h4, h5, h6 {
     text-align: center;
