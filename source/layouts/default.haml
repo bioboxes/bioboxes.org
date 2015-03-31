@@ -4,10 +4,15 @@
   = partial "_header"
 
   %body
-    .container-fluid
-      .banner
-        .content
-          %img{src: logo("logo_only_dark.png"), class: "logo", alt: "Bioboxes Logo"}
+    %nav{class: "navbar"}
+      .container-fluid
+        .navbar-header
+          %a{class: "navbar-brand", href: "/"}
+            bio
+            %strong
+              boxes
+
+
     .container
       .main
         .content
