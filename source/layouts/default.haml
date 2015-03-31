@@ -1,17 +1,11 @@
 !!! 5
 %HTML{lang: "en"}
 
-  %link{rel: "stylesheet", href: "/stylesheets/stylesheet.css" }
-
-  %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"}
-
-  %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
+  = partial "_header"
 
   %body
+    = partial "_nav"
     .container
-      .banner
-        .content
-          %img{src: "https://s3-us-west-1.amazonaws.com/bioboxes-images/logo/0.1.1/logo_horizontal_dark.png", class: 'img-responsive', alt: "Bioboxes Logo"}
       .main
         .content
           = yield
