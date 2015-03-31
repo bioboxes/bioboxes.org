@@ -22,3 +22,4 @@ end
 ::I18n.config.enforce_available_locales = false
 
 page "*", :layout => "layouts/default"
+page "/", :layout => "layouts/front-page"
