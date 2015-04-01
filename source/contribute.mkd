@@ -1,4 +1,4 @@
-# How to contribute
+# Contribute to bioboxes
 
 Bioboxes is developed through feedback and contributions from the
 bioinformatics community. We welcome any comments and improvements, and there
