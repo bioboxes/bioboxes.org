@@ -7,7 +7,7 @@ have [guidelines][] for how you can contribute to the project.
 
 [org]: https://github.com/bioboxes
 [issue]: https://github.com/bioboxes/rfc/issues
-[guidelines]: /contribute
+[guidelines]: /contribute/how-to-contribute/
 
 ### Core team
 
