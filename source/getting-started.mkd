@@ -1,0 +1,108 @@
+# Getting started
+
+Bioboxes aims to make bioinformatics software simple to use for everyone. This
+page will provide a short example of using a biobox genome assembler. The
+purpose of this is to illustrate how bioboxes work and can be applied for any
+application for which a biobox exists, not only genome assembly. The only
+familiarity you'll need is running commands in the the terminal such as `ls`.
+If you're familiar with that, this should be straight-forward.
+
+## Set up
+
+The only software you'll need to run bioboxes is [Docker][]. If you don't
+already have it installed on your computer you should following the
+[instructions for installing Docker][install] and then continue with this
+tutorial. Once you have installed Docker, you can test it works with the
+following command:
+
+~~~ shell
+$ docker -v
+~~~
+
+[Docker]: http://www.docker.com
+[install]: https://docs.docker.com/installation/
+
+Once you have Docker set up, this tutorial will also need some real data so
+that the example biobox can be run as you might do so with your own data. The
+data [is available for download][data] and is a FASTQ file of Illumina reads
+from a real genome which was sequenced at the JGI. An example of fetching this
+with wget is:
+
+[data]: https://www.dropbox.com/s/uxgn6cqngctqv74/reads.fq.gz?dl=1
+
+~~~ shell
+$ mkdir input_data
+$ wget \
+    --output-document input_data/reads.fq.gz \
+    'https://www.dropbox.com/s/uxgn6cqngctqv74/reads.fq.gz?dl=1'
+~~~
+
+## Create a biobox.yml file
+
+The inputs to a biobox are specified using a file named 'bioboxes.yml' An
+example file for the data is:
+
+~~~ yaml
+version: "0.9"
+arguments:
+  - fastq:
+    - id: "test_reads"
+      type: "paired"
+      value: "/bbx/input/reads.fq.gz"
+~~~
+
+In this file we specify the current bioboxes version `0.9`, along with the
+arguments to the biobox. In this case there is single FASTQ argument. This
+argument which has the identifier `test_reads`, the type is `paired` because
+these is the type of sequencing data downloaded. The final argument specifies
+the location of the files. In the biobox.yml file this is in the directory
+named `/bbx/input/` which is where you will place the reads in the biobox
+container.
+
+The `biobox.yml` file can be created as follows:
+
+~~~ bash
+cat << EOF > input_data/biobox.yml
+version: "0.9"
+arguments:
+  - fastq:
+    - id: "test_reads"
+      type: "paired"
+      value: "/input/reads.fq.gz"
+EOF
+~~~
+
+## Run the biobox
+
+The input data and biobox.yml file are all that's required to test a biobox.
+Run the following command to use the velvet biobox to assemble the test reads:
+
+~~~ bash
+mkdir -p output_data
+docker run \
+  --volume="$(pwd)/input_data:/bbx/input:ro" \
+  --volume="$(pwd)/output_data:/bbx/output:rw" \
+  --rm \
+  biobox/velvet \
+  default
+~~~
+
+This uses `$(pwd)` syntax. If you are unfamiliar the command `pwd` returns the
+current working directory. The construct `$(...)` replaces itself with the
+result of evaluating the contents inside the parenthesis. Therefore `$(pwd)`
+will be replaced with the current working directory you are in. This is
+necessary because the `--volume` flags require the full directory path.
+
+The `--volume` flag is used to link a directory on your computer to a directory
+inside the biobox. In the example you mount the directory `input_data` to the
+directory `/bbx/input`, the `ro` is an abbreviation of read-only. This means
+only data can be read from the directory. You will generally always want to use
+`ro` for your input data to prevent a biobox accidentally changing it. The
+second volume mounts `output_data` to `/bbx/output` inside the biobox. This is
+the location where the results with be created. The `rw` means read-write and
+allows the biobox to write to this location.
+
+The `--rm` flag specifies that the biobox container should be removed after it
+has finished running. If you don't specify this, then your computer may fill up
+with finish bioboxes each time you start one. This will cause you to run out of
+disk space if there enough of them.
