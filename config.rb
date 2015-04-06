@@ -1,5 +1,6 @@
 activate :automatic_image_sizes
 activate :directory_indexes
+activate :livereload
 
 activate :s3_sync do |s3_sync|
   s3_sync.bucket = 'bioboxes.org'
