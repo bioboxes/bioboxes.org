@@ -43,7 +43,8 @@ The inputs to a biobox are specified using a file named 'bioboxes.yaml' An
 example file for the data is:
 
 ~~~ yaml
-version: "0.9"
+---
+version: "0.9.0"
 arguments:
   - fastq:
     - id: "test_reads"
@@ -63,12 +64,13 @@ The `biobox.yaml` file can be created as follows:
 
 ~~~ bash
 cat << EOF > input_data/biobox.yaml
-version: "0.9"
+---
+version: "0.9.0"
 arguments:
   - fastq:
     - id: "test_reads"
       type: "paired"
-      value: "/input/reads.fq.gz"
+      value: "/bbx/input/reads.fq.gz"
 EOF
 ~~~
 
@@ -83,7 +85,7 @@ docker run \
   --volume="$(pwd)/input_data:/bbx/input:ro" \
   --volume="$(pwd)/output_data:/bbx/output:rw" \
   --rm \
-  biobox/velvet \
+  bioboxes/velvet \
   default
 ~~~
 
