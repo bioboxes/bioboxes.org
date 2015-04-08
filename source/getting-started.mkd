@@ -37,9 +37,9 @@ $ wget \
     'https://www.dropbox.com/s/uxgn6cqngctqv74/reads.fq.gz?dl=1'
 ~~~
 
-## Create a biobox.yml file
+## Create a biobox.yaml file
 
-The inputs to a biobox are specified using a file named 'bioboxes.yml' An
+The inputs to a biobox are specified using a file named 'bioboxes.yaml' An
 example file for the data is:
 
 ~~~ yaml
@@ -55,14 +55,14 @@ In this file we specify the current bioboxes version `0.9`, along with the
 arguments to the biobox. In this case there is single FASTQ argument. This
 argument which has the identifier `test_reads`, the type is `paired` because
 these is the type of sequencing data downloaded. The final argument specifies
-the location of the files. In the biobox.yml file this is in the directory
+the location of the files. In the biobox.yaml file this is in the directory
 named `/bbx/input/` which is where you will place the reads in the biobox
 container.
 
-The `biobox.yml` file can be created as follows:
+The `biobox.yaml` file can be created as follows:
 
 ~~~ bash
-cat << EOF > input_data/biobox.yml
+cat << EOF > input_data/biobox.yaml
 version: "0.9"
 arguments:
   - fastq:
@@ -74,7 +74,7 @@ EOF
 
 ## Run the biobox
 
-The input data and biobox.yml file are all that's required to test a biobox.
+The input data and biobox.yaml file are all that's required to test a biobox.
 Run the following command to use the velvet biobox to assemble the test reads:
 
 ~~~ bash
