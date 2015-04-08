@@ -3,6 +3,7 @@ publish: build
 
 test: build
 	bundle exec htmlproof $<
+	bundle exec ./plumbing/check-forbidden-words forbidden.txt $(shell find $< -name "*index.html")
 
 build: $(shell find source) Gemfile.lock
 	bundle exec middleman build --verbose
