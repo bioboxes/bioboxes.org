@@ -53,13 +53,15 @@
 
 .navbar {
   background-color: @primary;
-  color: @weak-accent;
   .hidden-xs;
 
-  .link{
+  .navbar-brand {
+    word-spacing: -4px;
+  }
+
+  .link {
     color: @weak-accent;
     font-family: 'Open Sans', sans-serif;
-    word-spacing: -4px;
     font-weight: 300;
   }
   a:visited{ .link; }
@@ -108,7 +110,7 @@
     margin-bottom: 1em;
   }
 
-  h3 {
+  h2 {
     letter-spacing: 0.1em;
     line-height: 2;
     margin-top: 2em;
@@ -123,6 +125,15 @@
 
   a {
     font-weight: bold;
+  }
+
+  pre {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  .footer {
+    margin-bottom: 10em;
   }
 
 }

@@ -1,0 +1,27 @@
+# Getting started
+
+We would be very happy if you would help make bioboxes better. This project
+runs on people prepared to contribute changes and improvements. We aim for this
+project to be welcoming to people of all skill levels, as all input is useful.
+This page lists the places you can get started with helping out.
+
+### Adopt an issue
+
+Adopt an issue on the [github issue tracker][issue]. These are the currently
+outstanding tasks that need some help. If you would like to help with one of
+these the ones tagged ["E-Easy"][easy], these should be relatively simple to
+get started with. Feel welcome to comment or ask for help on the issue if you
+need more information on how to get started it.
+
+### Improve the documentation
+
+Improve the documentation on the website or on the RFCs. We would like the
+documentation for bioboxes to be excellent and allow someone of any experience
+level to get started. You could help improve this documentation with something
+as simple fix a few typos, perhaps help improve the clarity, or even add a new
+page that you think would be useful. The source for this [website is available
+on github][website].
+
+[issue]: https://github.com/bioboxes/rfc/issues
+[easy]: https://github.com/bioboxes/rfc/labels/E-Easy
+[website]: https://github.com/bioboxes/bioboxes.org
