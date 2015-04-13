@@ -20,3 +20,4 @@ vendor
 
 # Pulled files
 source/validate-input.mkd
+source/validator/short-read-assembler.mkd
