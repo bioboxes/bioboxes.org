@@ -11,5 +11,19 @@
           %a{href: "/getting-started/" }
             Getting Started
         %li
+          %a{href: "#", class:"dropdown-toggle",
+            "data-toggle": "dropdown",
+            role: "button",
+            "aria-expanded": "false"}
+            Tools
+            %span.caret
+          %ul{class: "dropdown-menu", role: "menu"}
+            %li
+              %a{href: "/validate-input/"}
+                Input Validator
+            %li
+              %a{href: "/validator/short-read-assembler/"}
+                Assembler Validator
+        %li
           %a{href: "/contribute/how-to-contribute/" }
             Contribute

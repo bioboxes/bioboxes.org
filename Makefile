@@ -2,7 +2,7 @@ publish: build
 	bundle exec middleman s3_sync
 
 test: build
-	bundle exec htmlproof $<
+	bundle exec htmlproof --check-html --check-favicon --href-ignore '#' $<
 	bundle exec ./plumbing/check-forbidden-words forbidden.txt $(shell find $< -name "*index.html")
 
 build: $(shell find source) Gemfile.lock
