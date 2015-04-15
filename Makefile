@@ -20,7 +20,7 @@ clean:
 #
 ###################################
 
-fetch =  source/validate-input.mkd source/validator/short-read-assembler.mkd
+fetch =  source/validate-biobox-file.mkd source/validator/short-read-assembler.mkd
 
 bootstrap: Gemfile.lock vendor/bootstrap $(fetch)
 
@@ -44,11 +44,11 @@ Gemfile.lock: Gemfile
 #
 ###################################
 
-source/validate-input.mkd:
+source/validate-biobox-file.mkd:
 	wget \
 		--quiet \
 		--output-document $@ \
-		https://raw.githubusercontent.com/bioboxes/input-validator/master/doc/validate-input.mkd
+		https://raw.githubusercontent.com/bioboxes/file-validator/master/doc/validate-biobox-file.mkd
 
 source/validator/short-read-assembler.mkd:
 	mkdir -p $(dir $@)
@@ -56,5 +56,3 @@ source/validator/short-read-assembler.mkd:
 		--quiet \
 		--output-document $@ \
 		https://raw.githubusercontent.com/bioboxes/validator-short-read-assembler/master/doc/short-read-assembler-validator.md
-
-
