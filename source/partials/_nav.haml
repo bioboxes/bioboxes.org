@@ -1,29 +1,29 @@
-%nav{class: "navbar navbar-fixed-top"}
+%nav{:class => "navbar navbar-fixed-top"}
   .container
     .navbar-header
-      %a.navbar-brand{href: "/"}
+      %a.navbar-brand{:href =>"/"}
         bio
         %strong
           boxes
-    %div{id: "navbar"}
-      %ul{class: "nav navbar-nav navbar-right"}
+    %div{:id => "navbar"}
+      %ul{ :class => "nav navbar-nav navbar-right"}
         %li
-          %a{href: "/getting-started/" }
+          %a{ :href => "/getting-started/" }
             Getting Started
         %li
-          %a{href: "#", class:"dropdown-toggle",
-            "data-toggle": "dropdown",
-            role: "button",
-            "aria-expanded": "false"}
+          %a{:href => "#", :class => "dropdown-toggle",
+            :"data-toggle" => "dropdown",
+            :role => "button",
+            :"aria-expanded" => "false"}
             Tools
             %span.caret
-          %ul{class: "dropdown-menu", role: "menu"}
+          %ul{:class => "dropdown-menu", :role => "menu"}
             %li
-              %a{href: "/validate-biobox-file/"}
+              %a{:href => "/validate-biobox-file/"}
                 Biobox File Validator
             %li
-              %a{href: "/validator/short-read-assembler/"}
+              %a{:href => "/validator/short-read-assembler/"}
                 Assembler Validator
         %li
-          %a{href: "/contribute/how-to-contribute/" }
+          %a{:href => "/contribute/how-to-contribute/" }
             Contribute
