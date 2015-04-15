@@ -1,15 +1,18 @@
 # How to create a biobox
 
-Bioboxes should follow an interface definition to allow interchangeable docker containers.
-This page provides a step by step description for creating a simple biobox and each step has a short example.
-At the moment the only biobox type that can be implemented with this instructions is an assembler biobox with the version 0.9.0+.
-For this tutorial you have to be familiar with [unix commands][] and [Docker][].
+Bioboxes should follow an interface definition to allow interchangeable docker
+containers. This page provides a step by step description for creating a simple
+biobox and each step has a short example. At the moment the only biobox type
+that can be implemented with this instructions is an assembler biobox with the
+version 0.9.0+. For this tutorial you have to be familiar with [unix
+commands][] and [Docker][].
 
 
 ## Dockerize your tool
 
-The first step is to containerize your tool by creating a [Dockerfile][] which is similar to a make file.
-Every line in a Dockerfile is a command that will be executed by running the command
+The first step is to containerize your tool by creating a [Dockerfile][] which
+is similar to a make file. Every line in a Dockerfile is a command that will be
+executed by running the command
 
 ~~~shell
 docker build -t arbitrary_tool_name .
@@ -20,9 +23,10 @@ in the directory of your Dockerfile.
 
 ### Example
 
-The following dockerfile fetches ubuntu:14:04 as a base image, downloads [velvet][] and installs it in /usr/local/bin/.
+The following dockerfile fetches ubuntu:14:04 as a base image, downloads
+[velvet][] and installs it in /usr/local/bin/.
 
-~~~shell
+~~~ shell
 FROM ubuntu:14.04
 
 MAINTAINER Michael Barton, mail@michaelbarton.me.uk
@@ -69,35 +73,41 @@ and you will access the container with the bash.
 ./usr/local/bin/velvetg
 ~~~
 
-and you will get velvets help page. Exit the container with `CTRL+D`.
-A [Dockerfile][] has way more command that are worth to take a look at before you start to create a Dockerfile.
+and you will get velvets help page. Exit the container with `CTRL+D`. A
+[Dockerfile][] has way more command that are worth to take a look at before you
+start to create a Dockerfile.
 
 ## Read the rfc
 
-Each rfc document contains a description for an interface that is represented by a yaml file. Each assembler biobox specific input and
-output type is specified in the [inputs][] and [outputs][] sections.
+Each rfc document contains a description for an interface that is represented
+by a yaml file. Each assembler biobox specific input and output type is
+specified in the [inputs][] and [outputs][] sections.
 
-1.The first step is to check if your tool would work with the provided types.
-In the assembler biobox specification this would be the `fastq` and `fragment_size` types.
-If your assembler works with just providing the `fastq` parameter then you don't have to include the `fragment_size` parameter.
+  1. The first step is to check if your tool would work with the provided
+     types. In the assembler biobox specification this would be the `fastq` and
+     `fragment_size` types. If your assembler works with just providing the
+     `fastq` parameter then you don't have to include the `fragment_size`
+     parameter. 
+     
+  2. If you can not implement your biobox then just create a [new issue][]. The
+     bioboxes community will help.
 
-2.If you can not implement your biobox then just create a [new issue][]. The bioboxes community will help.
-
-3.Each yaml that will be provided to your container should be tested with our [file-validator binary][].
-The command line interface for this tool is:
+  3. Each yaml that will be provided to your container should be tested with
+     our [file-validator binary][]. The command line interface for this tool
+     is:
 
 ~~~shell
 validate-biobox-file --schema=schema.yml --input=input.yml
 ~~~
 
-Each rfc links to a schema file that can be used with the validator.
-You can find a description for how to integrate the file-validator in the
-[biobox file validator][] section.
+Each rfc links to a schema file that can be used with the validator. You can
+find a description for how to integrate the file-validator in the [biobox file
+validator][] section.
 
 ### Example
 
-Our velvet example works with just the provided fastq type.
-The above Dockerfile together with the `file-validator` looks like this:
+Our velvet example works with just the provided fastq type. The above
+Dockerfile together with the `file-validator` looks like this:
 
 ~~~shell
 FROM ubuntu:14.04
@@ -139,16 +149,18 @@ ENV PATH ${PATH}:${VALIDATOR}
 ADD schema.yaml ${VALIDATOR}
 ~~~
 
-This file dowloads the file validator, adds it to the PATH variable and adds the schema.yaml with the [ADD][] command.
+This file dowloads the file validator, adds it to the PATH variable and adds
+the schema.yaml with the [ADD][] command.
 
 ## Create the task
 
-A biobox can be called with different modes or `tasks`. One task could be a default task.
-The task is provided to the docker run command.
+A biobox can be called with different modes or `tasks`. One task could be a
+default task. The task is provided to the docker run command.
 
 ### Example
 
-In our velvet example we have created a [script][] that provides a `default` and a `careful` task:
+In our velvet example we have created a [script][] that provides a `default`
+and a `careful` task:
 
 ~~~shell
 default: velveth ${TMP_DIR} 31 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff auto
@@ -157,11 +169,13 @@ careful: velveth ${TMP_DIR} 91 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cut
 
 ## Putting it together
 
-Now that we have specified our task, integrated the file-validator, we can now start to write a script that
+Now that we have specified our task, integrated the file-validator, we can now
+start to write a script that
 
-1. Checks if the provided yaml has the correct format with the file-validator.
-2. Runs the specified task.
-3. Provides an output.yaml.
+  1. Checks if the provided yaml has the correct format with the
+     file-validator.
+  2. Runs the specified task.
+  3. Provides an output.yaml.
 
 ### Example
 
@@ -208,15 +222,18 @@ arguments:
 EOF
 ~~~
 
-You see that the first part of the script checks the .yaml (`/bbx/input/biobox.yaml`) with the validate-input binary.
-In the next step the `yaml2json` binary transforms the yaml to json and the [jq][] tool fetches the fastq entries.
-Now that we have the paths to the fastq files, one of the task methods is called. On successful run a bioboxes.yaml is created as
-specified in the [outputs][] section.
+You see that the first part of the script checks the .yaml
+(`/bbx/input/biobox.yaml`) with the validate-input binary. In the next step the
+`yaml2json` binary transforms the yaml to json and the [jq][] tool fetches the
+fastq entries. Now that we have the paths to the fastq files, one of the task
+methods is called. On successful run a bioboxes.yaml is created as specified in
+the [outputs][] section.
 
 ## Test it
 
-The last step is now to check if your created container follows the bioboxes specification.
-In our [bioboxes assembler validator][] section see how to validate your container.
+The last step is now to check if your created container follows the bioboxes
+specification. In our [bioboxes assembler validator][] section see how to
+validate your container.
 
 ### Example
 
@@ -234,7 +251,6 @@ docker run \
 ~~~
 
 You can find the final [biobox velvet][] example in our Github repository.
-
 
 [Docker]: http://www.docker.com
 [install]: https://docs.docker.com/installation/
