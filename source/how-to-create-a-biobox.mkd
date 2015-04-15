@@ -26,7 +26,7 @@ in the directory of your Dockerfile.
 The following dockerfile fetches ubuntu:14:04 as a base image, downloads
 [velvet][] and installs it in /usr/local/bin/.
 
-~~~ shell
+~~~ dockerfile
 FROM ubuntu:14.04
 
 MAINTAINER Michael Barton, mail@michaelbarton.me.uk
@@ -96,7 +96,7 @@ specified in the [inputs][] and [outputs][] sections.
      our [file-validator binary][]. The command line interface for this tool
      is:
 
-~~~shell
+~~~ shell
 validate-biobox-file --schema=schema.yml --input=input.yml
 ~~~
 
@@ -109,7 +109,7 @@ validator][] section.
 Our velvet example works with just the provided fastq type. The above
 Dockerfile together with the `file-validator` looks like this:
 
-~~~shell
+~~~ dockerfile
 FROM ubuntu:14.04
 
 MAINTAINER Michael Barton, mail@michaelbarton.me.uk
