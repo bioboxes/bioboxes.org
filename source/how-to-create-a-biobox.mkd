@@ -191,7 +191,7 @@ INPUT=/bbx/input/biobox.yaml
 OUTPUT=/bbx/output/bbx
 TASK=$1
 
-# Ensure the biobox.yml file is valid
+# Ensure the biobox.yaml file is valid
 validate-input --input ${INPUT} --schema /bbx/validator/schema.yaml
 mkdir -p ${OUTPUT}
 
