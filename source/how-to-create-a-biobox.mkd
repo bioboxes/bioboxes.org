@@ -1,7 +1,7 @@
 # How to create a biobox
 
 Bioboxes should follow an interface definition to allow interchangeable docker containers.
-This page provides step by step description for creating a simple biobox and each step has a short example.
+This page provides a step by step description for creating a simple biobox and each step has a short example.
 At the moment the only biobox type that can be implemented with this instructions is an assembler biobox with the version 0.9.0+.
 For this tutorial you have to be familiar with [unix commands][] and [Docker][].
 
@@ -20,7 +20,7 @@ in the directory of your Dockerfile.
 
 ### Example
 
-The following dockerfile fetches ubuntu:14:04 as a base image, downloads velvet  and installs velvet in /usr/local/bin/.
+The following dockerfile fetches ubuntu:14:04 as a base image, downloads [velvet][] and installs it in /usr/local/bin/.
 
 ~~~shell
 FROM ubuntu:14.04
@@ -46,7 +46,7 @@ tar xzf - --directory . --strip-components=1 && eval ${ASSEMBLER_BLD}
 
 You can test this dockerfile with the following steps:
 
-1.Copy and paste the above dockerfile in a file called "Dockerfile".
+1.Copy the above commands and paste them in a file called `Dockerfile`.
 2.Run
 
 ~~~shell
@@ -69,7 +69,7 @@ and you will access the container with the bash.
 ./usr/local/bin/velvetg
 ~~~
 
-and you will get velvets help page. Exit the container with CTRL+D.
+and you will get velvets help page. Exit the container with `CTRL+D`.
 A [Dockerfile][] has way more command that are worth to take a look at before you start to create a Dockerfile.
 
 ## Read the rfc
@@ -78,8 +78,8 @@ Each rfc document contains a description for an interface that is represented by
 output type is specified in the [inputs][] and [outputs][] sections.
 
 1.The first step is to check if your tool would work with the provided types.
-In the assembler biobox specification this would be the fastq and fragment_size types.
-If your assembler works with just providing the fastq parameter then you don't have to include the fragment_size parameter.
+In the assembler biobox specification this would be the `fastq` and `fragment_size` types.
+If your assembler works with just providing the `fastq` parameter then you don't have to include the `fragment_size` parameter.
 
 2.If you can not implement your biobox then just create a [new issue][]. The bioboxes community will help.
 
@@ -97,7 +97,7 @@ You can find a description for how to integrate the file-validator in the
 ### Example
 
 Our velvet example works with just the provided fastq type.
-The above Dockerfile together with the file-validator looks like this:
+The above Dockerfile together with the `file-validator` looks like this:
 
 ~~~shell
 FROM ubuntu:14.04
@@ -143,12 +143,12 @@ This file dowloads the file validator, adds it to the PATH variable and adds the
 
 ## Create the task
 
-A biobox can be called with different modes or tasks. One task could be a default task.
+A biobox can be called with different modes or `tasks`. One task could be a default task.
 The task is provided to the docker run command.
 
 ### Example
 
-In our velvet example we have created a [script][] that provides a default and a careful task:
+In our velvet example we have created a [script][] that provides a `default` and a `careful` task:
 
 ~~~shell
 default: velveth ${TMP_DIR} 31 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff auto
@@ -208,8 +208,8 @@ arguments:
 EOF
 ~~~
 
-You see that the first part of the script checks the .yaml (/bbx/input/biobox.yaml) with the validate-input binary.
-In the next step the yaml2json binary transforms the yaml to json and the [jq][] tool fetches the fastq entries.
+You see that the first part of the script checks the .yaml (`/bbx/input/biobox.yaml`) with the validate-input binary.
+In the next step the `yaml2json` binary transforms the yaml to json and the [jq][] tool fetches the fastq entries.
 Now that we have the paths to the fastq files, one of the task methods is called. On successful run a bioboxes.yaml is created as
 specified in the [outputs][] section.
 
