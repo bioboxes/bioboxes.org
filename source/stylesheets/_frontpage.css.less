@@ -1,12 +1,12 @@
 @import '_settings.less';
 
+@logo-background-size: 300px;
+@logo-size: 175px;
+
 .banner {
   .make-row();
 
   .description {
-    padding-top: 40px;
-    padding-bottom: 60px;
-
     .make-lg-column(6);
     .make-lg-column-offset(3);
     .make-md-column(6);
@@ -20,13 +20,13 @@
     margin-top: 5em;
     background-color: @primary;
 
-    width: 400px;
-    height: 400px;
-    border-radius: 400px;
+    width: @logo-background-size;
+    height: @logo-background-size;
+    border-radius: @logo-background-size;
   }
 
   .logo-padding {
-    height: 75px;
+    height: 30px;
   }
 
   .logo {
@@ -34,13 +34,13 @@
      background-image: url('https://s3-us-west-1.amazonaws.com/bioboxes-images/logo/0.2.1/logo_only_dark.png');
      background-position: 50% 50%;
      background-repeat: no-repeat; 
-     background-size: 200px 200px;
-     width: 200px;
-     height: 200px;
+     background-size: @logo-size;
+     width: @logo-size;
+     height: @logo-size;
   }
 
   .logo-title {
-    padding-top: 10px;
+    padding-top: 15px;
   }
 
   h1, h2 {
@@ -48,13 +48,11 @@
     color: white;
     text-align: center;
     font-weight: 300;
-    line-height: 1.2;
   }
 
   h1 {
     margin-top: -7px;
-    padding-bottom: 15px;
-    font-size: @font-size-h1 * 1.5;
+    padding-bottom: 20px;
     word-spacing: -0.25em;
   }
 
