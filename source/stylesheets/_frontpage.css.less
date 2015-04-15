@@ -2,8 +2,6 @@
 
 .banner {
   .make-row();
-  background-color: @primary;
-  box-shadow: 0px 2px 1px #888888;
 
   .description {
     padding-top: 40px;
@@ -17,11 +15,32 @@
     .make-sm-column-offset(3);
   }
 
-  img {
-    padding-top: 100px;
-    width: 175px;
+  .logo-background {
     .center-block();
-    .hidden-xs;
+    margin-top: 5em;
+    background-color: @primary;
+
+    width: 400px;
+    height: 400px;
+    border-radius: 400px;
+  }
+
+  .logo-padding {
+    height: 75px;
+  }
+
+  .logo {
+     .center-block();
+     background-image: url('https://s3-us-west-1.amazonaws.com/bioboxes-images/logo/0.2.1/logo_only_dark.png');
+     background-position: 50% 50%;
+     background-repeat: no-repeat; 
+     background-size: 200px 200px;
+     width: 200px;
+     height: 200px;
+  }
+
+  .logo-title {
+    padding-top: 10px;
   }
 
   h1, h2 {
@@ -40,8 +59,7 @@
   }
 
   h2 {
-    font-size: @font-size-h2 * 0.7;
-    color: @strong-accent;
+    color: @primary;
   }
 
 }
