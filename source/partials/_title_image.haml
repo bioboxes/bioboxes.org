@@ -1,5 +1,5 @@
-- if current_page.url =~ /contribute/
+- if current_page.url =~ /contribute\/$/
   %img{src: image("contribute.png"), class: "title-image", alt: "Exploded biobox"}
 
-- if current_page.url =~ /getting-started/
+- if current_page.url =~ /^\/getting-started\/$/
   %img{src: image("getting-started.png"), class: "title-image", alt: "Jack in the biobox"}
