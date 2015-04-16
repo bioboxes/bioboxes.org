@@ -65,3 +65,40 @@
   }
 
 }
+
+.menus {
+  .make-row();
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    font-weight: 500;
+  }
+  h3 {
+    font-weight: 300;
+  }
+}
+
+.left-menu {
+  margin-top: 3em;
+  .make-lg-column(2);
+  .make-lg-column-offset(3);
+  .make-md-column(2);
+  .make-md-column-offset(3);
+  .make-sm-column(2);
+  .make-sm-column-offset(3);
+  .make-xs-column(4);
+  .make-xs-column-offset(4);
+}
+
+.right-menu {
+  margin-top: 3em;
+  .make-lg-column-offset(2);
+  .make-lg-column(3);
+  .make-md-column-offset(2);
+  .make-md-column(3);
+  .make-sm-column-offset(2);
+  .make-sm-column(3);
+  .make-xs-column(4);
+  .make-xs-column-offset(4);
+}
+
