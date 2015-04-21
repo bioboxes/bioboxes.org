@@ -1,5 +1,9 @@
 # Trying Docker for the first time
 
+This guide page describes how to fetch Docker images onto your computers. This
+is the starting point for using Docker. You will often begin by fetching an
+image somelse has written for their software.
+
 Docker uses the concept of software images. A Docker image is analogous to a
 box that can include applications, data or anything else that can be stored on
 a computer. These 'boxes' allow you or others to more easily share some

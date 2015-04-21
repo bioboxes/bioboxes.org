@@ -25,7 +25,7 @@ class PageTitle < Middleman::Extension
   end
 
   def fetch_first_paragraph(path)
-    File.read(path).split("\n\n", 2)[1]
+    File.read(path).split("\n\n")[1]
   end
 
   def is_index?(resource)
