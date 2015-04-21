@@ -1,0 +1,35 @@
+@import '_settings.less';
+
+.navbar {
+  background-color: @primary;
+  .hidden-xs;
+
+  .navbar-brand {
+    word-spacing: -4px;
+  }
+
+  .link {
+    color: @weak-accent;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+  }
+  a:visited{ .link; }
+  a:link{ .link; }
+  a{ .link; }
+  a:hover{
+    .link;
+    color: @primary;
+    background-color: @strong-accent;
+  }
+
+  .dropdown-menu{
+    a:visited{ color: @primary;  }
+    a:link{ color: @primary; }
+    a{ color: @primary; }
+  }
+
+  img {
+    height: 1.5em;
+  }
+
+}

@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'colorize'
+
+word_file, *files = ARGV
+word_list = File.open(word_file).readlines.map(&:strip)
+
+detected_words = files.map do |file|
+  contents = File.read(file)
+  words = word_list.select{|word| contents.include?(word) }
+  [file, words]
+end
+
+failing = detected_words.select{|_, words| not words.empty?}
+
+unless failing.empty?
+  failing.each do |file, words|
+    STDERR.puts "Forbidden text '#{words.join(', ')}' found in file '#{file}'.".colorize(:red)
+  end
+  exit 1
+else
+  STDOUT.puts "All generated pages pass word filter".colorize(:green)
+  exit 0
+end

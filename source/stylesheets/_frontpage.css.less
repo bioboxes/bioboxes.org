@@ -1,0 +1,105 @@
+@import '_settings.less';
+
+@logo-background-size: 300px;
+@logo-size: 175px;
+
+.banner {
+  .make-row();
+  margin-top: 3em;
+
+  .description {
+    .make-lg-column(6);
+    .make-lg-column-offset(3);
+    .make-md-column(6);
+    .make-md-column-offset(3);
+    .make-sm-column(6);
+    .make-sm-column-offset(3);
+  }
+
+  .logo-background {
+    .center-block();
+    background-color: @primary;
+
+    width: @logo-background-size;
+    height: @logo-background-size;
+    border-radius: @logo-background-size;
+  }
+
+  .logo-padding {
+    height: 30px;
+  }
+
+  .logo {
+     .center-block();
+     background-image: url('https://s3-us-west-1.amazonaws.com/bioboxes-images/logo/0.2.1/logo_only_dark.png');
+     background-position: 50% 50%;
+     background-repeat: no-repeat; 
+     background-size: @logo-size;
+     width: @logo-size;
+     height: @logo-size;
+  }
+
+  .logo-title {
+    padding-top: 15px;
+  }
+
+  h1, h2 {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    text-align: center;
+    font-weight: 300;
+  }
+
+  h1 {
+    margin-top: -7px;
+    padding-bottom: 20px;
+    word-spacing: -0.25em;
+  }
+
+  h2 {
+    color: @primary;
+  }
+
+  .tagline {
+    padding-top: 15px;
+  }
+
+}
+
+.menus {
+  .make-row();
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    font-weight: 500;
+    line-height: @line-height-base * 1.2;
+  }
+  h3 {
+    font-weight: 300;
+  }
+}
+
+.left-menu {
+  margin-top: 3em;
+  .make-lg-column(2);
+  .make-lg-column-offset(3);
+  .make-md-column(2);
+  .make-md-column-offset(3);
+  .make-sm-column(2);
+  .make-sm-column-offset(3);
+  .make-xs-column(8);
+  .make-xs-column-offset(3);
+}
+
+.right-menu {
+  margin-top: 3em;
+  .make-lg-column-offset(2);
+  .make-lg-column(3);
+  .make-md-column-offset(2);
+  .make-md-column(3);
+  .make-sm-column-offset(2);
+  .make-sm-column(3);
+  .make-xs-column(8);
+  .make-xs-column-offset(3);
+}
+

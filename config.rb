@@ -3,6 +3,7 @@ require 'extensions/page'
 activate :page_title
 activate :automatic_image_sizes
 activate :directory_indexes
+activate :livereload
 
 activate :s3_sync do |s3_sync|
   s3_sync.bucket = 'bioboxes.org'
@@ -25,3 +26,4 @@ end
 ::I18n.config.enforce_available_locales = false
 
 page "*", :layout => "layouts/default"
+page "/", :layout => "layouts/front-page"
