@@ -3,6 +3,6 @@
   - page = sitemap.resources.select{|i| i.destination_path == path }.first
   .guide
     %h2
-      = link_to page.data.title, '/' + path
+      = link_to name, '/' + path
     %p
       = page.data.summary
