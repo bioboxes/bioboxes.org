@@ -1,0 +1,55 @@
+# Trying Docker for the first time
+
+Docker uses the concept of software images. A Docker image is analogous to a
+box that can include applications, data or anything else that can be stored on
+a computer. These 'boxes' allow you or others to more easily share some
+bioinformatics software, for instance compared with trying to compile a tool
+from C source.
+
+## Getting a Docker image
+
+First test that Docker is installed on your system. The following command
+should exit without error. If this does not work see [the instructions for
+installing Docker.][install]
+
+[install]: https://docs.docker.com/installation/
+
+~~~ bash
+docker -v
+~~~
+
+The command `docker pull` will fetch an image from DockerHub where images are
+stored. Try fetching the `busybox` which is a simple image.
+
+~~~ bash
+docker pull busybox
+~~~
+
+Once this command has completed, you can test that the `busybox` image is
+available on your system. The command `docker images` will show you all the
+images on the system. You should see `busybox` in the list along with its size
+and when it was created.
+
+~~~ bash
+docker images
+~~~
+
+This is the basics for getting Docker images. If someone tells you they created
+a Docker image of their bioinformatics tool these are the commands you would
+for getting the image
+
+
+## Exercises
+
+  * Fetch the nucleotides/velvet image. How big is it?
+
+  * Create a sleeping docker container without using '&'. You can do this by
+    looking at available options for `docker run`
+
+  * Create a sleeping docker container and then kill it using `docker kill`
+
+  * Change the internal state of a container using `docker run busybox sh -c`.
+    Then use `docker diff` to show which file have changed inside the
+    container. *This exercise may be tricky.* You will have to work out how to
+    identify your container after is no longer running.
+
