@@ -9,6 +9,9 @@
     %div{:id => "navbar"}
       %ul{ :class => "nav navbar-nav navbar-right"}
         %li
+          %a{ :href => "/how-to-create-a-biobox/" }
+            How to create a biobox
+        %li
           %a{:href => "#", :class => "dropdown-toggle",
             :"data-toggle" => "dropdown",
             :role => "button",
@@ -20,16 +23,12 @@
               %li
                 %a{:href => "/guide/user" + url }
                   = name
-
-        %li
-          %a{ :href => "/how-to-create-a-biobox/" }
-            How to create a biobox
         %li
           %a{:href => "#", :class => "dropdown-toggle",
             :"data-toggle" => "dropdown",
             :role => "button",
             :"aria-expanded" => "false"}
-            Tools
+            Developer Tools
             %span.caret
           %ul{:class => "dropdown-menu", :role => "menu"}
             %li
@@ -39,5 +38,20 @@
               %a{:href => "/validator/short-read-assembler/"}
                 Assembler Validator
         %li
-          %a{:href => "/contribute/how-to-contribute/" }
-            Contribute
+          %a{:href => "#", :class => "dropdown-toggle",
+            :"data-toggle" => "dropdown",
+            :role => "button",
+            :"aria-expanded" => "false"}
+            Community
+            %span.caret
+          %ul{:class => "dropdown-menu", :role => "menu"}
+            - data.guides.community.each do |name, url|
+              %li
+                %a{:href => url}
+                  = name
+        %li
+          %a{:href => "https://github.com/bioboxes"}
+            %img{:src => 'https://s3-us-west-1.amazonaws.com/bioboxes-images/third-party-website/GitHub-Mark-Light-64px.png', :alt => "GitHub Logo"}
+        %li
+          %a{:href => "https://twitter.com/bioboxes"}
+            %img{:src => 'https://s3-us-west-1.amazonaws.com/bioboxes-images/third-party-website/Twitter_logo_white.png', :alt => "Twitter Logo"}
