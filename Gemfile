@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'titleize',     '~>  1.3.0'
 gem 'fog',          '~> 1.29.0'
 gem 'therubyracer', '~> 0.12.0'
 gem 'less',         '~>  2.6.0'

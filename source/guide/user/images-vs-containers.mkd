@@ -1,0 +1,90 @@
+# Images versus containers
+
+This explains the difference between a Docker image and a container. These
+terms are sometimes used interchangeably however they are not the same have two
+different meanings.
+
+Previously you downloaded the `busybox` image and showed that it was present on
+your computer. Run these two commands if you haven't done so already.
+
+~~~ bash
+docker pull busybox
+docker images
+~~~
+
+When you run a Docker image using `docker run` you are creating a container
+from that instance. This can be illustrated by creating a container container
+that sleep for 60 seconds. The flag `--detach` means the Docker process will
+run in the background and you may still continue to type in the terminal.
+
+~~~ bash
+docker run --detach busybox sleep 60
+~~~
+
+After you have started this command, you can list the running containers on
+your system using the `docker ps` command. You should see your busybox
+container and the time it was created.
+
+~~~ bash
+docker ps
+~~~
+
+Remember this running container was started from the busybox image. Images are
+like blueprints for a 'box' with all the software and data inside. When you
+start an image using `docker run` you are creating a container from that image
+blueprint. You can illustrate this further by creating two busybox containers
+running at the same time.
+
+~~~ bash
+docker run --detach busybox sleep 60
+docker run --detach busybox sleep 60
+docker ps
+~~~
+
+In the output here you can see the created containers will have an ID like
+'cd2e3b4c60b4' and a name like 'determined_mayer'. There are used to manage
+multiple containers created from the same image.
+
+## Data in containers
+
+A further point to clarify in the relationship between images and containers is
+that filesystem changes made in a container do not affect the image. This can
+be initially confusing because if you create a file in a container, then create
+a new container the files are not there. This is because the 'blueprint' image
+has not been changed, and the created container has not changed.
+
+We can illustrate this with an example. The `touch` command is used to create
+files. We will use `touch` to create a busybox container then list the
+container contents.
+
+~~~ bash
+docker run busybox sh -c "touch i_made_a_file && ls -l"
+~~~
+
+The `&&` symbols are used to combined two commands together into a single line.
+This is part of bash and can be done on your own computer, this is not specific
+to Docker. You should see the created file `i_made_a_file` in the container
+file system. Now repeat the listing command again.
+
+~~~ bash
+docker run busybox ls -l
+~~~
+
+The file `i_made_a_file` does not appear. This is because everytime you use
+`docker run` **you create a new, fresh container** from the image blueprint. If
+you are ever confused about why data is missing in a container, this may be the
+cause.
+
+## Exercises
+
+  * Create a sleeping `busybox` container using `--detach`, then stop it early
+    using `docker kill`. You'll need to get the container ID or name from using
+    `docker ps`.
+
+  * Do the same thing with `docker pause` and `docker unpause`. This
+    illustrates how you can manage running containers on your system.
+
+  * Change the internal state of a container again using `touch`. Then use
+    `docker diff` to show which file have changed inside the container. *This
+    exercise may be tricky.* You will have to work out how to identify your
+    container after is no longer running. Try `docker help ps` for help.

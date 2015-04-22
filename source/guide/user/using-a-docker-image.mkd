@@ -1,0 +1,52 @@
+# Using a Docker image
+
+This guide page describes how to use a Docker image once you have one. This
+will outline running an image and providing commands which are executed inside.
+
+Once you have a Docker image you will want to do something with it. The command
+for using an image is `docker run` with two arugments: the name of the image
+and the command you want to run. A simple example to list the contents of the
+`busybox` image using the `ls` command is:
+
+~~~ bash
+docker run busybox ls
+~~~
+
+This uses the common Linux command `ls` and you should have seen the names of
+the all directories in `busybox` image. A command can also be given arguments.
+For example you can list the contents of the `/bin` directory in the `busybox`
+image by giving the name of the directory as an additional argument to `ls`
+
+~~~ bash
+docker run busybox ls /bin
+~~~
+
+Remember because images can be thought of as 'boxes' of data and software, the
+`ls` command is running inside the container and **not** on your computer.
+Therefore the list of directories you see, are those inside the image and not
+on your computer. You can easily compare the two by listing the contents of
+your `/bin` directory.
+
+~~~ bash
+ls /bin
+~~~
+
+We can also illustrate this further with the `uname` command. The command below
+will print out information about your operating system and then about the
+operating system inside the image. This is an important point to remember
+running a Docker image is creates a separate environment from the one you are
+using on your computer.
+
+~~~ bash
+uname -a
+docker run busybox uname -a
+~~~
+
+## Exercises
+
+  * Start a `busybox` image that waits for 30 seconds using the `sleep`
+    command.
+
+  * Start a `busybox` image that waits for 30 seconds using `sleep` again, but
+    this time also include the docker flag `--detach`. What is the difference
+    when compared the last command?

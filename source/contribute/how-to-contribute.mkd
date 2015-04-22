@@ -4,7 +4,7 @@ Bioboxes is developed through feedback and contributions from the
 bioinformatics community. We welcome any comments and improvements, and there
 are number of ways you can get involved.
 
-### Create a discussion issue
+## Create a discussion issue
 
 General comments and feedback can be given by opening an issue on the [github
 issue tracker][issue]. This can be used to provide comments on any general area
@@ -15,7 +15,7 @@ of this type will be labelled "A-discussion" for "Area - discussion".
 
 [issue]: https://github.com/bioboxes/rfc/issues
 
-### Create an actionable issue
+## Create an actionable issue
 
 Your feedback may be more detailed than just general comments. For example you
 may have found inaccurate information in one of the RFCs or on the website. You
@@ -26,7 +26,7 @@ assembler RFC to illustrate how long mate pair reads can given to the
 container."* As above, the more specific your comments in the issue the easier
 it will be for the bioboxes core team to respond and resolve it.
 
-### Fix an existing issue
+## Fix an existing issue
 
 There are always outstanding tasks on the[github issue tracker][issue] that
 need some help. A good place to start are those tagged ["E-Easy"][easy] as
@@ -35,7 +35,7 @@ issue if you need more information on how to get started it.
 
 [easy]: https://github.com/bioboxes/rfc/labels/E-Easy
 
-### Propose a minor fix or improvement
+## Propose a minor fix or improvement
 
 You may be able to provide a specific improvement to an [RFC][] or the
 [website][]. This may be fixing typos, or rewording text for clarity. In this
@@ -55,7 +55,7 @@ as follows:
 [website]: https://github.com/bioboxes/bioboxes.org
 [request]: https://help.github.com/articles/using-pull-requests/
 
-### Propose a major change
+## Propose a major change
 
 A change to an RFC that would be classified as major might be in the way data
 is given to the container or what the output should be. Before implementing a

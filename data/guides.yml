@@ -1,0 +1,6 @@
+---
+user:
+  - ["Getting Docker Images", "/getting-an-image/"]
+  - ["Using Docker Images", "/using-a-docker-image/"]
+  - ["Images vs. Containers", "/images-vs-containers/"]
+  - ["Using a biobox", "/using-a-biobox/"]
