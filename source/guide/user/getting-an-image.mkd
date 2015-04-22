@@ -45,15 +45,4 @@ for getting the image
 
 ## Exercises
 
-  * Fetch the nucleotides/velvet image. How big is it?
-
-  * Create a sleeping docker container without using '&'. You can do this by
-    looking at available options for `docker run`
-
-  * Create a sleeping docker container and then kill it using `docker kill`
-
-  * Change the internal state of a container using `docker run busybox sh -c`.
-    Then use `docker diff` to show which file have changed inside the
-    container. *This exercise may be tricky.* You will have to work out how to
-    identify your container after is no longer running.
-
+  * Fetch the bioboxes/velvet image. How big is it?

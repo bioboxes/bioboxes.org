@@ -1,4 +1,5 @@
 ---
 user:
-  - ["Getting Images", "/getting-an-image/"]
-  - ["Using Images", "/using-a-docker-image/"]
+  - ["Getting Docker Images", "/getting-an-image/"]
+  - ["Using Docker Images", "/using-a-docker-image/"]
+  - ["Images vs. Containers", "/images-vs-containers/"]

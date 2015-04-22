@@ -1,5 +1,8 @@
 # Using a Docker image
 
+This guide page describes how to use a Docker image once you have one. This
+will outline running an image and providing commands which are executed inside.
+
 Once you have a Docker image you will want to do something with it. The command
 for using an image is `docker run` with two arugments: the name of the image
 and the command you want to run. A simple example to list the contents of the
