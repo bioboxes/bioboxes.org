@@ -39,18 +39,7 @@
           %h3
             Community
           %ul
-            %li
-              %a{:href => "https://github.com/bioboxes"}
-                GitHub
-            %li
-              %a{:href => "https://github.com/bioboxes/rfc"}
-                Request for Comments
-            %li
-              %a{:href => "https://github.com/bioboxes/rfc/issues"}
-                Issue Tracker
-            %li
-              %a{:href => "https://gitter.im/bioboxes/rfc"}
-                Chat Room
-            %li
-              %a{:href => "/organisation/"}
-                Organisation
+            - data.guides.community.each do |name, url|
+              %li
+                %a{:href => url}
+                  = name
