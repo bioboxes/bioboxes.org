@@ -1,36 +1,19 @@
 # Getting started
 
-Bioboxes aims to make bioinformatics software simple to use for everyone. This
-page will provide a short example of using a biobox genome assembler. The
-purpose of this is to illustrate how bioboxes work and can be applied for any
-application for which a biobox exists, not only genome assembly. The only
-familiarity you'll need is running commands in the the terminal such as `ls`.
-If you're familiar with that, this should be straight-forward.
+Bioboxes aims to make it much simpler for anyone to use the most recent
+advances in bioinformatics software. This page will provide a short example of
+using a biobox genome assembler. The purpose of this guide is to illustrate how
+bioboxes work and this could then be applied for any application for which a
+biobox exists, not only genome assembly.
 
-## Set up
-
-The only software you'll need to run bioboxes is [Docker][]. If you don't
-already have it installed on your computer you should following the
-[instructions for installing Docker][install] and then continue with this
-tutorial. Once you have installed Docker, you can test it works with the
-following command:
-
-~~~ shell
-$ docker -v
-~~~
-
-[Docker]: http://www.docker.com
-[install]: https://docs.docker.com/installation/
-
-Once you have Docker set up, this tutorial will also need some real data so
-that the example biobox can be run as you might do so with your own data. The
-data [is available for download][data] and is a FASTQ file of Illumina reads
-from a real genome which was sequenced at the JGI. An example of fetching this
-with wget is:
+This tutorial will use real sequencing data so that the example biobox can be
+run as you might do so with your own data. The data [is available for
+download][data] and is a FASTQ file of Illumina reads from a real genome which
+was sequenced at the JGI. This file can be downloaded using `wget`.
 
 [data]: https://www.dropbox.com/s/uxgn6cqngctqv74/reads.fq.gz?dl=1
 
-~~~ shell
+~~~ bash
 $ mkdir input_data
 $ wget \
     --output-document input_data/reads.fq.gz \
@@ -40,7 +23,7 @@ $ wget \
 ## Create a biobox.yaml file
 
 The inputs to a biobox are specified using a file named 'bioboxes.yaml' An
-example file for the data is:
+example file where we specific this data is:
 
 ~~~ yaml
 ---
@@ -53,14 +36,13 @@ arguments:
 ~~~
 
 In this file we specify the current bioboxes version `0.9`, along with the
-arguments to the biobox. In this case there is single FASTQ argument. This
-argument which has the identifier `test_reads`, the type is `paired` because
-these is the type of sequencing data downloaded. The final argument specifies
-the location of the files. In the biobox.yaml file this is in the directory
-named `/bbx/input/` which is where you will place the reads in the biobox
-container.
+arguments to the biobox. In this case we're giving a single FASTQ file. This
+argument has the identifier `test_reads` and the type is `paired` because this
+is the type of sequencing data. The final argument specifies the location of
+the files. In the biobox.yaml file this is in the directory named `/bbx/input/`
+which is where you will place the reads in the biobox container.
 
-The `biobox.yaml` file can be created as follows:
+This `biobox.yaml` file can be created as follows:
 
 ~~~ bash
 cat << EOF > input_data/biobox.yaml
