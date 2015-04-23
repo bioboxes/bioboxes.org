@@ -14,11 +14,10 @@ share their scientific software. Working in a truly standardized and
 interoperable ecosystem, will allow bioinformatics algorithmic developments to
 become useful to everyone.
 
-## Points
+Bioboxes's target audience is users. A biobox should be a simple to use as
+possible for both a biologist or a bioinformatician. This project will help
+software developers create bioboxes by providing documentation and tooling but
+the ultimate goal is making software usable for end users. Any decision made
+about the bioboxes standard should be made with the question:
 
-  1. Bioboxes's target audience is users. A biobox should be a simple to use as
-     possible for both a biologist or a bioinformatician. This project will
-     help software developers create bioboxes by providing documentation and
-     tooling but the ultimate goal is making software usable for end users. Any
-     decision made about the bioboxes standard should be made with the
-     question: *Does this make bioinformatics software simple and more usable?*
+*Does this make bioinformatics software simpler and more usable?*
