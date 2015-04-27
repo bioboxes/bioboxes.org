@@ -1,0 +1,30 @@
+Previous Section: [Read the RFC][read the rfc]
+
+# Create a Task
+
+A biobox is called with a `task` parameter:
+ 
+~~~shell
+sudo docker run [OPTIONS] BIOBOX_NAME TASK
+~~~
+
+Tasks allow the same assembler to be run with different combinations of parameters. 
+You can also think of a task as a command bundle that groups different command line 
+flags together into a simpler interface. Each biobox should provide a `default` task which should be
+the set of command line flags that work best in most situations.
+The task should later be provided to your run command:
+
+### Example
+
+In this velvet example we'll create a script that provides the `default` task.
+We'll define this in a file called `Taskfile`. You can see this `Taskfile`
+contains the commands to run velvet along with environment variables.
+
+~~~ shell
+default: velveth ${TMP_DIR} 31 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff auto
+~~~
+
+Next Section: [Putting everything together][]
+
+[read the rfc]:/guide/developer/read-the-rfc/
+[Putting everything together]:/guide/developer/putting-everything-together/

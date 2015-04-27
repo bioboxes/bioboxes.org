@@ -1,0 +1,95 @@
+# How to create a biobox
+
+Bioboxes provides an interface definition to allow Docker containers of the
+same type to be interchangeable. This guide provides a step by step description
+for creating a simple biobox and consists out of the sections
+
+* [Create a Docker Image][create]
+
+* [Read the RFC][read-the-rfc]
+
+* [Create a Task][task]
+
+* [Putting everything Together][together]
+
+* [Validate your Biobox][validate]
+
+Each section has an example where an assembler biobox (velvet) following the biobox specification version 0.9.0+  
+is implemented. The final velvet biobox is available in our [Github][velvet] repository. 
+This guide requires that you have familiarity with [unix commands][] and [Docker][].
+
+[unix commands]: http://en.wikipedia.org/wiki/List_of_Unix_commands
+[Docker]: http://www.docker.com
+
+# Creating a Docker image
+
+Docker uses the concepts "images" and "containers". An image can be thought of
+as a blueprint of your tool, including all the dependencies it needs to run.
+When you use a Docker image, such as passing FASTQ data, then you create an
+live instance of the image running on your system. This is called a container.
+
+The first step to creating an image of your tool is to write a Dockerfile. Each
+line in a Dockerfile is a set of instructions that are to build an image. Below
+is an example Dockerfile which you can copy. There is more [detailed
+documentation available for building Dockerfiles][Dockerfile].
+
+[Dockerfile]:https://docs.docker.com/reference/builder/
+
+## Example
+
+This example sets the base image operating system as Ubuntu version 14:04 using
+the `BASE` directive. Next you should specify your name and email address
+using the `MAINTAINER` line. The last line installs the [velvet][] genome
+assembler using the apt package manager. This line is broken across two lines
+using `\`, this makes the Dockerfile easier to read as opposed to very long
+lines.
+
+[velvet]:https://www.ebi.ac.uk/~zerbino/velvet/
+
+~~~ Dockerfile
+FROM ubuntu:14.04
+MAINTAINER first_name last_name, mail@example.com
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends velvet
+~~~
+
+You can test this example Dockerfile by building an image. The `--tag`
+specifies what the image should be called. In this case "velvet", because this
+is the name of the assembler.
+
+~~~ shell
+docker build --tag velvet .
+~~~
+
+If this builds successfully you should have a velvet Docker image available on
+your system. You list all your images with the command.
+
+~~~ shell
+docker images
+~~~
+
+You can create a container from this image and then log into it. This will
+allow you to test that the internals are correct.
+
+~~~ shell
+docker run --interactive --tty velvet /bin/bash
+~~~
+
+This specifies that you want to log into a velvet container interactively and run
+the command `/bin/bash`. When you run this you should a prompt inside your
+container. You can test that velvet is available:
+
+~~~ shell
+velveth
+~~~
+
+You can now exit this container with `CTRL+D`.
+
+Next section: [Read the RFC][read the rfc]
+
+[create]:/guide/developer/build-your-image/
+[read-the-rfc]:/guide/developer/read-the-rfc/
+[task]:/guide/developer/create-a-task/
+[together]:/guide/developer/putting-everything-together/
+[validate]:/guide/developer/validate-your-biobox/
+[read the rfc]:/guide/developer/read-the-rfc/

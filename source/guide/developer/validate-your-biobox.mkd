@@ -1,0 +1,27 @@
+Previous Section: [Putting everything together][]
+
+# Validate your Biobox
+
+The last step is now to check if your created container follows the bioboxes
+specification. In our [bioboxes assembler validator][] section you can see how to
+validate your container.
+
+### Example
+
+The example first downloads and extracts the validator.
+Then the `default` task of the local bioboxes/velvet image is tested.
+
+~~~ shell
+# Fetch the latest 0.1.x release of the validator
+wget https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-short-read-assembler/0.1.x/validate-short-read-assembler.tar.gz
+tar xzf validate-short-read-assembler.tar.gz
+
+./validate-short-read-assembler/validate bioboxes/velvet default
+~~~
+
+You can find the final [biobox velvet][] example in our Github repository.
+
+[putting everything together]:/guide/developer/putting-everything-together/
+[jq]:http://stedolan.github.io/jq/
+[bioboxes assembler validator]:http://bioboxes.org/validator/short-read-assembler/
+[biobox velvet]:https://github.com/bioboxes/velvet
