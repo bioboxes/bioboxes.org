@@ -16,24 +16,30 @@
             :"data-toggle" => "dropdown",
             :role => "button",
             :"aria-expanded" => "false"}
-            Developer Guide
+            User Guide
             %span.caret
           %ul{:class => "dropdown-menu", :role => "menu"}
-            - data.guides.developer.each do |name, url|
+            %li
+              %a{:href => "/guide/user/" }
+                Contents
+            - data.guides.user.each do |name, url|
               %li
-                %a{:href => "/guide/developer" + url }
+                %a{:href => "/guide/user" + url }
                   = name
         %li
           %a{:href => "#", :class => "dropdown-toggle",
             :"data-toggle" => "dropdown",
             :role => "button",
             :"aria-expanded" => "false"}
-            User Guide
+            Developer Guide
             %span.caret
           %ul{:class => "dropdown-menu", :role => "menu"}
-            - data.guides.user.each do |name, url|
+            %li
+              %a{:href => "/guide/developer/" }
+                Contents
+            - data.guides.developer.each do |name, url|
               %li
-                %a{:href => "/guide/user" + url }
+                %a{:href => "/guide/developer" + url }
                   = name
         %li
           %a{:href => "#", :class => "dropdown-toggle",
