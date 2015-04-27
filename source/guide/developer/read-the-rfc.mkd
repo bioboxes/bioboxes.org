@@ -1,5 +1,3 @@
-Previous Section: [Creating a Docker image][]
-
 # Read the rfc
 
 Bioboxes provides RFC documents describing the interface. Each biobox of the
@@ -110,8 +108,6 @@ RUN wget \
 
 This downloads the [biobox file validator][validator] and adds it to the $PATH.
 The corresponding biobox assembler schema is also downloaded.
-
-Next Section: [Create a Task][]
 
 [Putting everything together]:/guide/developer/putting-everything-together/
 [Creating a Docker image]:/guide/developer/build-your-image/

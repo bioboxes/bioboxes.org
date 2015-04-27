@@ -1,5 +1,3 @@
-Previous Section: [Read the RFC][read the rfc]
-
 # Create a Task
 
 A biobox is called with a `task` parameter:
@@ -23,8 +21,6 @@ contains the commands to run velvet along with environment variables.
 ~~~ shell
 default: velveth ${TMP_DIR} 31 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff auto
 ~~~
-
-Next Section: [Putting everything together][]
 
 [read the rfc]:/guide/developer/read-the-rfc/
 [Putting everything together]:/guide/developer/putting-everything-together/

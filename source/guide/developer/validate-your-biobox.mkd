@@ -1,5 +1,3 @@
-Previous Section: [Putting everything together][]
-
 # Validate your Biobox
 
 The last step is now to check if your created container follows the bioboxes
