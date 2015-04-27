@@ -1,16 +1,27 @@
 # Create a Task
 
-A biobox is called with a `task` parameter:
+Tasks allow the same assembler to be run with different combinations of
+parameters. You can also think of a task as a command bundle that groups
+different command line flags together into a simpler interface. This guide
+describes using tasks in your image.
+
+The a biobox interface requires that a container be called with a `task`
+parameter. This follows the name of the biobox when using `docker run`.
  
 ~~~shell
-sudo docker run [OPTIONS] BIOBOX_NAME TASK
+docker run [OPTIONS] BIOBOX_NAME TASK
 ~~~
 
-Tasks allow the same assembler to be run with different combinations of parameters. 
-You can also think of a task as a command bundle that groups different command line 
-flags together into a simpler interface. Each biobox should provide a `default` task which should be
-the set of command line flags that work best in most situations.
-The task should later be provided to your run command:
+You should use tasks to describe the different ways your software can be run.
+Using genome assembly as an example, there might be a way to run an assembler
+that create large contigs but at the same time may contain errors. There may
+also be a separate way to run an assembler more carefully which results in
+smaller more correct contigs. These different ways of running the same software
+are the reason tasks are used.
+
+Each biobox should provide a `default` task which should be the set of command
+line flags that work best in most situations. The task should later be provided
+to your run command:
 
 ### Example
 

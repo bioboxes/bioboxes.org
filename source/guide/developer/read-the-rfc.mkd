@@ -1,9 +1,16 @@
-# Read the rfc
+# Use the rfc
 
-Bioboxes provides RFC documents describing the interface. Each biobox of the
-same type should have the same interface, and therefore can be be swapped with
-each other. The interface is represented by a YAML file and each assembler has
-biobox specific [inputs][] and [outputs][].
+The value of bioboxes is that software of the same biobox type can be used
+interchangably because they have the same interface. This means that the velvet
+assember biobox can be replaced with the ray assembler biobox without changing
+anything. This guides is about the RFC documents which describe how a biobox
+interface should behave.
+
+The biobox RFC documents describe how data should be given to a container and
+what format it should be returned in. A standardised interface means each
+biobox of the same type can be be swapped with each other without the user
+having to change their pipelines. The interface is represented by a YAML file
+and each assembler has biobox specific [inputs][] and [outputs][].
 
 [inputs]:https://github.com/bioboxes/rfc/blob/master/container/short-read-assembler/rfc.mkd#inputs
 [outputs]:https://github.com/bioboxes/rfc/blob/master/container/short-read-assembler/rfc.mkd#outputs

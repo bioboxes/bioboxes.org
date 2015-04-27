@@ -1,5 +1,8 @@
 # Creating a Docker image
 
+This guide describes creating a Docker image. This includes using Dockerfiles
+and the commands used to create and name the images from Dockerfiles.
+
 Docker uses the concepts "images" and "containers". An image can be thought of
 as a blueprint of your tool, including all the dependencies it needs to run.
 When you use a Docker image, such as passing FASTQ data, then you create an

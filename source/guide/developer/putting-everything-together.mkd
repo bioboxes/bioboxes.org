@@ -1,7 +1,12 @@
 # Putting everything together
 
-Now that we have in the previous sections integrated the file-validator, specified the task,
-we will write a script to combine everything. This script will do the following:
+The previous guides described building the individual parts of a biobox. The
+guide puts all these parts together to create a working biobox that you can
+give to users. This includes parsing the biobox.yaml file.
+
+Now that we have in the previous sections integrated the file-validator,
+specified the task, we will write a script to combine everything. This script
+will do the following:
 
   1. Check if the provided biobox.yaml is in the correct format using the
      file-validator.
@@ -11,8 +16,8 @@ we will write a script to combine everything. This script will do the following:
 
 ### Example
 
-The first part of the script checks the given `/bbx/input/biobox.yaml` file with the
-`validate-biobox-file`: 
+The first part of the script checks the given `/bbx/input/biobox.yaml` file
+with the `validate-biobox-file`: 
 
 ~~~shell
 #!/bin/bash
@@ -25,28 +30,31 @@ OUTPUT=/bbx/output/bbx
 TASK=$1
 
 # Ensure the biobox.yaml file is valid
-validate-biobox-file --input ${INPUT} --schema /schema.yaml
-mkdir -p ${OUTPUT}
+validate-biobox-file \
+  --input ${INPUT} \
+  --schema /schema.yaml \
 
+mkdir -p ${OUTPUT}
 ~~~
 
-You can savely reuse this part in your biobox implementation since all biobox RFCs have to use the validate-biobox-file binary.  
+You can savely reuse this part in your biobox implementation since all biobox
+RFCs have to use the validate-biobox-file binary.  
 
-
-The next part transforms the yaml to json and uses the [jq][] tool to fetch the paths to fastq files.
-Jq is used to slice, filter, map and even to manipulate the json data by using pipes. In the example we try to access the 
-following yaml:
+The next part transforms the yaml to json and uses the [jq][] tool to fetch the
+paths to fastq files. Jq is used to slice, filter, map and even to manipulate
+the json data by using pipes. In the example we try to access the following
+yaml:
 
 ~~~YAML
 ---
 version: 0.9.0
 arguments:
-    - fastq:
-      - id: "pe" 
-        value: "/test1/reads.fastq.gz"
-        type: paired
-      - id: "pe_1" 
-        value: "/test2/reads.fastq.gz"
+  - fastq:
+    - id: "pe" 
+      value: "/test1/reads.fastq.gz"
+      type: paired
+    - id: "pe_1" 
+      value: "/test2/reads.fastq.gz"
 ~~~
 
 You see below that we first fetch the array in the `arguments` property with `.arguments[]` then we select the `fastq` property and access the `value` entry in 

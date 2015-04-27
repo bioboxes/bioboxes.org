@@ -6,7 +6,7 @@ user:
   - ["Using a biobox", "/using-a-biobox/"]
 developer:
   - ["Creating a Docker Image", "/build-your-image/"]
-  - ["Read the RFC", "/read-the-rfc/"]
+  - ["Use the RFC", "/read-the-rfc/"]
   - ["Create a Task", "/create-a-task/"]
   - ["Putting Everything Together", "/putting-everything-together/"]
   - ["Validate your Biobox", "/validate-your-biobox/"]
