@@ -1,0 +1,124 @@
+# Use the rfc
+
+The value of bioboxes is that software of the same biobox type can be used
+interchangably because they have the same interface. This means that the velvet
+assember biobox can be replaced with the ray assembler biobox without changing
+anything. This guides is about the RFC documents which describe how a biobox
+interface should behave.
+
+The biobox RFC documents describe how data should be given to a container and
+what format it should be returned in. A standardised interface means each
+biobox of the same type can be be swapped with each other without the user
+having to change their pipelines. The interface is represented by a YAML file
+and each assembler has biobox specific [inputs][] and [outputs][].
+
+[inputs]:https://github.com/bioboxes/rfc/blob/master/container/short-read-assembler/rfc.mkd#inputs
+[outputs]:https://github.com/bioboxes/rfc/blob/master/container/short-read-assembler/rfc.mkd#outputs
+
+  1. The first step is to check if your tool would work with the provided
+     types. 
+     
+  2. If you can not implement your biobox then just create a [new issue][]. The
+     bioboxes community will help.
+
+  3. Each YAML that will be provided to your container should be tested with
+     our [file-validator binary][binary]. The command line interface for this
+     tool is:
+
+     ~~~ shell
+     validate-biobox-file --schema=schema.yaml --input=input.yaml
+     ~~~
+
+     Each RFC links to a schema file that can be used with a validator to ensure the
+     data the user has provided is valid. There is a description and downloads
+     available for the [biobox file validator][validator]. By using the schema.yaml and 
+     the validate-biobox-file binary you can ensure the yaml provided to your assembler 
+     always follows the types and structure defined in the rfc.
+
+  4. In the RFC you find the definition where the input biobox.yaml and data should be mounted
+     and where you will find the output biobox.yaml (see section [Putting everything together][together]).
+
+[new issue]: https://github.com/bioboxes/rfc/issues/new
+[binary]: https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file/0.x.y/validate-biobox-file.tar.xz
+[validator]: /validate-biobox-file/
+
+### Example
+Let's go through the points specified in this section:
+
+1. The types in the assembler biobox specification are the `fastq` and 
+`fragment_size` types. If your assembler works with just providing the
+`fastq` parameter then you don't have to include the `fragment_size` parameter. 
+The velvet example works with just the provided FASTQ type. 
+
+2. Since the biobox works with the provided types there is no need to discuss this in an issue.
+
+3. By specifying the below instructions in the Dockerfile we download the validate-biobox-file binary. 
+
+~~~Dockerfile
+# Locations for biobox file validator
+ENV BASE_URL  https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
+ENV VERSION   0.x.y
+ENV VALIDATOR /biobox-validator
+
+# Install the biobox file validator
+RUN mkdir ${VALIDATOR}
+RUN wget \
+      --quiet \
+      --output-document - \
+      ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
+    | tar xJf - \
+      --directory ${VALIDATOR} \
+      --strip-components=1
+ENV PATH ${PATH}:${VALIDATOR}
+~~~
+
+The next part downloads the schema for the assembler biobox specification.
+
+~~~Dockerfile
+RUN wget \
+    --output-document /schema.yaml
+    https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
+~~~
+
+The above Dockerfile together with the `file-validator` looks like this:
+
+~~~ Dockerfile
+FROM ubuntu:14.04
+MAINTAINER first_name last_name, mail@example.com
+
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+    velvet wget zx-utils
+
+# Locations for biobox file validator
+ENV BASE_URL  https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
+ENV VERSION   0.x.y
+ENV VALIDATOR /biobox-validator
+
+# Install the biobox file validator
+RUN mkdir ${VALIDATOR}
+RUN wget \
+      --quiet \
+      --output-document - \
+      ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
+    | tar xJf - \
+      --directory ${VALIDATOR} \
+      --strip-components=1
+ENV PATH ${PATH}:${VALIDATOR}
+
+# Fetch the schema file
+RUN wget \
+    --output-document /schema.yaml
+    https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
+
+~~~
+
+This downloads the [biobox file validator][validator] and adds it to the $PATH.
+The corresponding biobox assembler schema is also downloaded.
+
+[Putting everything together]:/guide/developer/putting-everything-together/
+[Creating a Docker image]:/guide/developer/build-your-image/
+[Create a Task]:/guide/developer/create-a-task/
+[jq]:http://stedolan.github.io/jq/
+[bioboxes assembler validator]:http://bioboxes.org/validator/short-read-assembler/
+[biobox velvet]:https://github.com/bioboxes/velvet

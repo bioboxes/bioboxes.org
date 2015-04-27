@@ -4,6 +4,12 @@ user:
   - ["Using Docker Images", "/using-a-docker-image/"]
   - ["Images vs. Containers", "/images-vs-containers/"]
   - ["Using a biobox", "/using-a-biobox/"]
+developer:
+  - ["Creating a Docker Image", "/build-your-image/"]
+  - ["Use the RFC", "/read-the-rfc/"]
+  - ["Create a Task", "/create-a-task/"]
+  - ["Putting Everything Together", "/putting-everything-together/"]
+  - ["Validate your Biobox", "/validate-your-biobox/"]
 community:
   - ["GitHub", "https://github.com/bioboxes"]
   - ["Twitter", "https://twitter.com/bioboxes"]

@@ -12,9 +12,6 @@
           %a{ :href => "/manifesto/" }
             Manifesto
         %li
-          %a{ :href => "/how-to-create-a-biobox/" }
-            How To Create A Biobox
-        %li
           %a{:href => "#", :class => "dropdown-toggle",
             :"data-toggle" => "dropdown",
             :role => "button",
@@ -22,9 +19,27 @@
             User Guide
             %span.caret
           %ul{:class => "dropdown-menu", :role => "menu"}
+            %li
+              %a{:href => "/guide/user/" }
+                Contents
             - data.guides.user.each do |name, url|
               %li
                 %a{:href => "/guide/user" + url }
+                  = name
+        %li
+          %a{:href => "#", :class => "dropdown-toggle",
+            :"data-toggle" => "dropdown",
+            :role => "button",
+            :"aria-expanded" => "false"}
+            Developer Guide
+            %span.caret
+          %ul{:class => "dropdown-menu", :role => "menu"}
+            %li
+              %a{:href => "/guide/developer/" }
+                Contents
+            - data.guides.developer.each do |name, url|
+              %li
+                %a{:href => "/guide/developer" + url }
                   = name
         %li
           %a{:href => "#", :class => "dropdown-toggle",

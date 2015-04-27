@@ -1,0 +1,37 @@
+# Create a Task
+
+Tasks allow the same assembler to be run with different combinations of
+parameters. You can also think of a task as a command bundle that groups
+different command line flags together into a simpler interface. This guide
+describes using tasks in your image.
+
+The a biobox interface requires that a container be called with a `task`
+parameter. This follows the name of the biobox when using `docker run`.
+ 
+~~~shell
+docker run [OPTIONS] BIOBOX_NAME TASK
+~~~
+
+You should use tasks to describe the different ways your software can be run.
+Using genome assembly as an example, there might be a way to run an assembler
+that create large contigs but at the same time may contain errors. There may
+also be a separate way to run an assembler more carefully which results in
+smaller more correct contigs. These different ways of running the same software
+are the reason tasks are used.
+
+Each biobox should provide a `default` task which should be the set of command
+line flags that work best in most situations. The task should later be provided
+to your run command:
+
+### Example
+
+In this velvet example we'll create a script that provides the `default` task.
+We'll define this in a file called `Taskfile`. You can see this `Taskfile`
+contains the commands to run velvet along with environment variables.
+
+~~~ shell
+default: velveth ${TMP_DIR} 31 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff auto
+~~~
+
+[read the rfc]:/guide/developer/read-the-rfc/
+[Putting everything together]:/guide/developer/putting-everything-together/
