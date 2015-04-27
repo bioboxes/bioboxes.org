@@ -1,26 +1,3 @@
-# How to create a biobox
-
-Bioboxes provides an interface definition to allow Docker containers of the
-same type to be interchangeable. This guide provides a step by step description
-for creating a simple biobox and consists out of the sections
-
-* [Create a Docker Image][create]
-
-* [Read the RFC][read-the-rfc]
-
-* [Create a Task][task]
-
-* [Putting everything Together][together]
-
-* [Validate your Biobox][validate]
-
-Each section has an example where an assembler biobox (velvet) following the biobox specification version 0.9.0+  
-is implemented. The final velvet biobox is available in our [Github][velvet] repository. 
-This guide requires that you have familiarity with [unix commands][] and [Docker][].
-
-[unix commands]: http://en.wikipedia.org/wiki/List_of_Unix_commands
-[Docker]: http://www.docker.com
-
 # Creating a Docker image
 
 Docker uses the concepts "images" and "containers". An image can be thought of
