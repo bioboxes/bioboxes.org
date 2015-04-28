@@ -18,7 +18,7 @@ documentation available for building Dockerfiles][Dockerfile].
 ## Example
 
 This example sets the base image operating system as Ubuntu version 14:04 using
-the `BASE` directive. Next you should specify your name and email address
+the `FROM` directive. Next you should specify your name and email address
 using the `MAINTAINER` line. The last line installs the [velvet][] genome
 assembler using the apt package manager. This line is broken across two lines
 using `\`, this makes the Dockerfile easier to read as opposed to very long
