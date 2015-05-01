@@ -7,14 +7,31 @@ class PageTitle < Middleman::Extension
 
   def manipulate_resource_list(resources)
     resources.each do |resource|
-      if is_index? resource
-        resource.raw_data['page_title'] = "Bioboxes"
-      elsif is_markdown? resource
-        resource.raw_data['title'] = fetch_title(resource.source_file)
-        resource.raw_data['page_title'] = "Bioboxes - " + resource.raw_data['title']
+      resource.raw_data.merge! page_metadata(resource)
+      resource.raw_data.merge! page_type(resource)
+    end
+  end
 
-        resource.raw_data['summary'] = fetch_first_paragraph(resource.source_file)
-      end
+  def page_metadata(resource)
+    if is_index? resource
+      {"page_title" => "Bioboxes"}
+    elsif is_markdown? resource
+      title = fetch_title(resource.source_file)
+      {
+        'title'      =>  title,
+        'page_title' => "Bioboxes - " + title,
+        'summary'    => fetch_first_paragraph(resource.source_file)
+      }
+    else
+      {}
+    end
+  end
+
+  def page_type(resource)
+    if is_guide? resource
+      {'type' => :guide}
+    else
+      {'type' => :standard}
     end
   end
 
@@ -26,6 +43,10 @@ class PageTitle < Middleman::Extension
 
   def fetch_first_paragraph(path)
     File.read(path).split("\n\n")[1]
+  end
+
+  def is_guide?(resource)
+    resource.source_file =~ /\/guide\/(developer|user)\//
   end
 
   def is_index?(resource)
