@@ -11,7 +11,7 @@ class PageTitle < Middleman::Extension
         resource.raw_data['page_title'] = "Bioboxes"
       elsif is_markdown? resource
         resource.raw_data['title'] = fetch_title(resource.source_file)
-        resource.raw_data['page_title'] = "Bioboxes — " + resource.raw_data['title']
+        resource.raw_data['page_title'] = "Bioboxes - " + resource.raw_data['title']
 
         resource.raw_data['summary'] = fetch_first_paragraph(resource.source_file)
       end
