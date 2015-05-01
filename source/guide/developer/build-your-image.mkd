@@ -65,8 +65,6 @@ velveth
 
 You can now exit this container with `CTRL+D`.
 
-Next section: [Read the RFC][read the rfc]
-
 [create]:/guide/developer/build-your-image/
 [read-the-rfc]:/guide/developer/read-the-rfc/
 [task]:/guide/developer/create-a-task/
