@@ -1,9 +1,13 @@
 require 'extensions/page'
+require 'extensions/guide'
 
-activate :page_title
 activate :automatic_image_sizes
 activate :directory_indexes
 activate :livereload
+
+# Custom extensions
+activate :page
+activate :guide
 
 activate :s3_sync do |s3_sync|
   s3_sync.bucket = 'bioboxes.org'

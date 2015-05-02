@@ -1,4 +1,4 @@
-class PageTitle < Middleman::Extension
+class Page < Middleman::Extension
 
   def initialize(app, options_hash={}, &block)
     require 'titleize'
@@ -8,7 +8,6 @@ class PageTitle < Middleman::Extension
   def manipulate_resource_list(resources)
     resources.each do |resource|
       resource.raw_data.merge! page_metadata(resource)
-      resource.raw_data.merge! page_type(resource)
     end
   end
 
@@ -27,14 +26,6 @@ class PageTitle < Middleman::Extension
     end
   end
 
-  def page_type(resource)
-    if is_guide? resource
-      {'type' => :guide}
-    else
-      {'type' => :standard}
-    end
-  end
-
   def fetch_title(path)
     line = File.readlines(path).detect{|i| i =~ /^# /}
     raise ArgumentError, "No title set for #{path}" if line.nil?
@@ -43,10 +34,6 @@ class PageTitle < Middleman::Extension
 
   def fetch_first_paragraph(path)
     File.read(path).split("\n\n")[1]
-  end
-
-  def is_guide?(resource)
-    resource.source_file =~ /\/guide\/(developer|user)\//
   end
 
   def is_index?(resource)
@@ -59,4 +46,4 @@ class PageTitle < Middleman::Extension
 
 end
 
-::Middleman::Extensions.register(:page_title, PageTitle)
+::Middleman::Extensions.register(:page, Page)
