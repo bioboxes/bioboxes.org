@@ -1,0 +1,16 @@
+- if current_page.data.type == :guide
+  %nav
+    %ul.pager
+      - if url = current_page.data.prev
+        %li
+          %a{:href => url, :rel => "prev"}
+            %span{"aria-hidden" => "true"} &larr;
+            = "Previous"
+      %li
+        %a{:href => current_page.data.home}
+          = "Guide Home"
+      - if url = current_page.data.next
+        %li
+          %a{:href => url, :rel => "next"}
+            = "Next"
+            %span{"aria-hidden" => "true"} &rarr;

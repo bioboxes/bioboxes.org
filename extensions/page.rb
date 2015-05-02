@@ -1,4 +1,4 @@
-class PageTitle < Middleman::Extension
+class Page < Middleman::Extension
 
   def initialize(app, options_hash={}, &block)
     require 'titleize'
@@ -7,14 +7,22 @@ class PageTitle < Middleman::Extension
 
   def manipulate_resource_list(resources)
     resources.each do |resource|
-      if is_index? resource
-        resource.raw_data['page_title'] = "Bioboxes"
-      elsif is_markdown? resource
-        resource.raw_data['title'] = fetch_title(resource.source_file)
-        resource.raw_data['page_title'] = "Bioboxes — " + resource.raw_data['title']
+      resource.raw_data.merge! page_metadata(resource)
+    end
+  end
 
-        resource.raw_data['summary'] = fetch_first_paragraph(resource.source_file)
-      end
+  def page_metadata(resource)
+    if is_index? resource
+      {"page_title" => "Bioboxes"}
+    elsif is_markdown? resource
+      title = fetch_title(resource.source_file)
+      {
+        'title'      =>  title,
+        'page_title' => "Bioboxes - " + title,
+        'summary'    => fetch_first_paragraph(resource.source_file)
+      }
+    else
+      {}
     end
   end
 
@@ -38,4 +46,4 @@ class PageTitle < Middleman::Extension
 
 end
 
-::Middleman::Extensions.register(:page_title, PageTitle)
+::Middleman::Extensions.register(:page, Page)
