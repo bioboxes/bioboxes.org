@@ -108,7 +108,7 @@ ENV PATH ${PATH}:${VALIDATOR}
 
 # Fetch the schema file
 RUN wget \
-    --output-document /schema.yaml
+    --output-document /schema.yaml \
     https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
 
 ~~~
