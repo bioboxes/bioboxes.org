@@ -5,8 +5,16 @@ guide puts all these parts together to create a working biobox that you can
 give to users. This includes parsing the biobox.yaml file.
 
 Now that we have in the previous sections integrated the file-validator,
-specified the task, we will write a script to combine everything. This script
-will do the following:
+specified the task, we will write a script to combine everything.
+This script serves as an entrypoint to your container. An entrypoint points to a binary
+inside your container that will be executed on a `docker run` command.
+Command line arguments that will be appended after `docker run` will also be available to your
+Entrypoint.
+That means that the task in the command `docker run task` will be available as the first argument
+to your Entrypoint. You can configure the entrypoint in your Dockerfile with
+`ENTRYPOINT ["/path/to/your/script/inside/the/container"]`
+
+This script will do the following:
 
   1. Check if the provided biobox.yaml is in the correct format using the
      file-validator.
@@ -30,6 +38,9 @@ set -o nounset
 
 INPUT=/bbx/input/biobox.yaml
 OUTPUT=/bbx/output/bbx
+
+# Since this script is the entrypoint to your container
+# you can access the task in `docker run task` as the first argument
 TASK=$1
 
 # Ensure the biobox.yaml file is valid
