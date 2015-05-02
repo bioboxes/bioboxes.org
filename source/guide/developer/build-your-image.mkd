@@ -64,10 +64,3 @@ velveth
 ~~~
 
 You can now exit this container with `CTRL+D`.
-
-[create]:/guide/developer/build-your-image/
-[read-the-rfc]:/guide/developer/read-the-rfc/
-[task]:/guide/developer/create-a-task/
-[together]:/guide/developer/putting-everything-together/
-[validate]:/guide/developer/validate-your-biobox/
-[read the rfc]:/guide/developer/read-the-rfc/

@@ -41,6 +41,3 @@ how you can access the task with a simple shell command. Another task could be f
 ~~~ shell
 default: velveth ${TMP_DIR} 31 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff auto
 ~~~
-
-[read the rfc]:/guide/developer/read-the-rfc/
-[Putting everything together]:/guide/developer/putting-everything-together/

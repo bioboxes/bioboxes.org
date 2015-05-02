@@ -107,10 +107,8 @@ arguments:
 EOF
 ~~~
 
-[Validate your Biobox]:/guide/developer/validate-your-biobox/
 [task]:/guide/developer/create-a-task/
 [outputs]:https://github.com/bioboxes/rfc/blob/master/container/short-read-assembler/rfc.mkd#outputs
-[create a task]:http://bioboxes.org/guide/developer/create-a-task/
 [jq]:http://stedolan.github.io/jq/
 [bioboxes assembler validator]:http://bioboxes.org/validator/short-read-assembler/
 [biobox velvet]:https://github.com/bioboxes/velvet

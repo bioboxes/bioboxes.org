@@ -36,7 +36,7 @@ and each assembler has biobox specific [inputs][] and [outputs][].
      always follows the types and structure defined in the rfc.
 
   4. In the RFC you find the definition where the input biobox.yaml and data should be mounted
-     and where you will find the output biobox.yaml (see section [Putting everything together][together]).
+     and where you will find the output biobox.yaml (see section [Putting everything together][]).
 
 [new issue]: https://github.com/bioboxes/rfc/issues/new
 [binary]: https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file/0.x.y/validate-biobox-file.tar.xz
@@ -117,8 +117,6 @@ This downloads the [biobox file validator][validator] and adds it to the $PATH.
 The corresponding biobox assembler schema is also downloaded.
 
 [Putting everything together]:/guide/developer/putting-everything-together/
-[Creating a Docker image]:/guide/developer/build-your-image/
-[Create a Task]:/guide/developer/create-a-task/
 [jq]:http://stedolan.github.io/jq/
 [bioboxes assembler validator]:http://bioboxes.org/validator/short-read-assembler/
 [biobox velvet]:https://github.com/bioboxes/velvet
