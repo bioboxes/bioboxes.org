@@ -118,6 +118,87 @@ arguments:
 EOF
 ~~~
 
+The final Dockerfile looks now like this:
+
+~~~ Dockerfile
+FROM ubuntu:14.04
+MAINTAINER first_name last_name, mail@example.com
+
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+    velvet wget xz-utils ca-certificates
+
+# Locations for biobox file validator
+ENV BASE_URL  https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
+ENV VERSION   0.x.y
+ENV VALIDATOR /biobox-validator
+
+# Install the biobox file validator
+RUN mkdir ${VALIDATOR}
+RUN wget \
+      --quiet \
+      --output-document - \
+      ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
+    | tar xJf - \
+      --directory ${VALIDATOR} \
+      --strip-components=1
+ENV PATH ${PATH}:${VALIDATOR}
+
+# Fetch the schema file
+RUN wget \
+    --output-document $VALIDATOR/schema.yaml \
+    https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
+
+ADD Taskfile /
+ADD assemble /usr/local/bin/
+
+ENTRYPOINT ["assemble"]
+~~~
+
+and the final script like this:
+
+~~~ shell
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+
+INPUT=/bbx/input/biobox.yaml
+OUTPUT=/bbx/output/bbx
+TASK=$1
+
+# Ensure the biobox.yml file is valid
+validate-input --input ${INPUT} --schema /bbx/validator/schema.yaml
+mkdir -p ${OUTPUT}
+
+# Parse the read locations from this file
+READS=$(yaml2json < ${INPUT} \
+        | jq --raw-output '.arguments[] | select(has("fastq")) | .fastq[].value | "-short \(.)"' \
+        | tr '\n' ' ')
+
+
+TMP_DIR=$(mktemp -d)
+
+# Run the given task
+CMD=$(egrep ^${TASK}: /Taskfile | cut -f 2 -d ':')
+if [[ -z ${CMD} ]]; then
+  echo "Abort, no task found for '${TASK}'."
+  exit 1
+fi
+eval ${CMD}
+
+cp ${TMP_DIR}/contigs.fa ${OUTPUT}
+
+cat << EOF > ${OUTPUT}/biobox.yaml
+version: 0.9.0
+arguments:
+  - fasta:
+    - id: velvet_contigs_1
+      value: contigs.fa
+      type: contigs
+EOF
+~~~
+
 [task]:/guide/developer/create-a-task/
 [outputs]:https://github.com/bioboxes/rfc/blob/master/container/short-read-assembler/rfc.mkd#outputs
 [jq]:http://stedolan.github.io/jq/
