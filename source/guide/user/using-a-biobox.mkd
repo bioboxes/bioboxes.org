@@ -1,4 +1,4 @@
-# Getting started
+# Using a biobox Docker image
 
 Bioboxes aims to make it much simpler for anyone to use the most recent
 advances in bioinformatics software. This page will provide a short example of
