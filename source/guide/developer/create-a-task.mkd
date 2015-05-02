@@ -25,9 +25,18 @@ to your run command:
 
 ### Example
 
-In this velvet example we'll create a script that provides the `default` task.
+In this velvet example we'll create a script that provides two tasks.
 We'll define this in a file called `Taskfile`. You can see this `Taskfile`
-contains the commands to run velvet along with environment variables.
+contains in the `default` task the commands to run velvet along with environment variables.
+
+~~~ shell
+default: velveth ${TMP_DIR} 31 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff auto
+careful: velveth ${TMP_DIR} 91 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff 10
+~~~
+
+The second task has a larger kmer size and sets a low assembly coverage cutoff.
+The Taskfile is added in your Dockerfile with an `ADD` command. In the next section you will see
+how you can access the task with a simple shell command. Another task could be for example:
 
 ~~~ shell
 default: velveth ${TMP_DIR} 31 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff auto
