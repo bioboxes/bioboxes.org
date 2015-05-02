@@ -22,7 +22,10 @@ with the `validate-biobox-file`:
 ~~~shell
 #!/bin/bash
 
+# exit script if one command fails
 set -o errexit
+
+# exit script if Variable is not set
 set -o nounset
 
 INPUT=/bbx/input/biobox.yaml
@@ -67,18 +70,22 @@ READS=$(yaml2json < ${INPUT} \
         | jq --raw-output '.arguments[] | select(has("fastq")) | .fastq[].value | "-short \(.)"' \
         | tr '\n' ' ')
 
+#create temporary directory in /tmp
 TMP_DIR=$(mktemp -d)
 ~~~
 
 This part access the task provided to the docker container by using `egrep` on the Taskfile (see [Create a Task][task] )
 
 ~~~shell
-# Run the given task
+# Use grep to get $TASK in /Taskfile
 CMD=$(egrep ^${TASK}: /Taskfile | cut -f 2 -d ':')
 if [[ -z ${CMD} ]]; then
   echo "Abort, no task found for '${TASK}'."
   exit 1
 fi
+
+# Run the given task with eval.
+# Eval evaluates a String as if you would use it on a command line.
 eval ${CMD}
 
 ~~~
@@ -89,6 +96,7 @@ The last part copies the contigs to the output directory and creates the output.
 
 cp ${TMP_DIR}/contigs.fa ${OUTPUT}
 
+# This command writes yaml into the biobox.yaml until the EOF symbol is reached
 cat << EOF > ${OUTPUT}/biobox.yaml
 version: 0.9.0
 arguments:
