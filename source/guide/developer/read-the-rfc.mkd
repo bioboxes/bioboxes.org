@@ -88,7 +88,7 @@ MAINTAINER first_name last_name, mail@example.com
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
-    velvet wget zx-utils
+    velvet wget xz-utils ca-certificates
 
 # Locations for biobox file validator
 ENV BASE_URL  https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
