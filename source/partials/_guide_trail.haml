@@ -1,0 +1,21 @@
+- if current_page.data.type == :guide
+  - path = current_page.destination_path.gsub('index.html', '').gsub(/guide\/(developer|user)/, '')
+  - guide_name, guide_set = data.guides.detect{|key, guides| guides.map(&:last).include? path}
+  - guide_paths = guide_set.map(&:last)
+  - index = guide_paths.index(path)
+
+  %nav
+    %ul.pager
+      - if index - 1 >= 0
+        %li
+          %a{:href => "/guide/#{guide_name}#{guide_paths[index - 1]}", :rel => "prev"}
+            %span{"aria-hidden" => "true"} &larr;
+            = "Previous"
+      %li
+        %a{:href => "/guide/#{guide_name}/" }
+          = "Guide Home"
+      - if index + 1 < guide_set.length
+        %li
+          %a{:href => "/guide/#{guide_name}#{guide_paths[index + 1]}", :rel => "next"}
+            = "Next"
+            %span{"aria-hidden" => "true"} &rarr;

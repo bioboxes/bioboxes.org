@@ -27,4 +27,3 @@ end
 
 page "*", :layout => "layouts/default"
 page "/", :layout => "layouts/front-page"
-page "/guide/*", :layout => "layouts/guides"
