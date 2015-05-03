@@ -104,6 +104,8 @@ ENV VALIDATOR /bbx/validator/
 ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
 ENV VERSION  0.x.y
 RUN mkdir -p ${VALIDATOR}
+
+# download the validate-biobox-file binary and extract it to the directory $VALIDATOR
 RUN wget \
       --quiet \
       --output-document -\
@@ -111,11 +113,12 @@ RUN wget \
     | tar xJf - \
       --directory ${VALIDATOR} \
       --strip-components=1
+
 ENV PATH ${PATH}:${VALIDATOR}
 
-# Fetch the schema file
+# download the assembler schema
 RUN wget \
-    --output-document ${VALIDATOR}schema.yaml \
+    --output-document /schema.yaml \
     https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
 ~~~
 
