@@ -55,21 +55,30 @@ The velvet example works with just the provided FASTQ type.
 3. By specifying the below instructions in the Dockerfile we download the validate-biobox-file binary. 
 
 ~~~Dockerfile
-# Locations for biobox file validator
-ENV BASE_URL  https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
-ENV VERSION   0.x.y
-ENV VALIDATOR /biobox-validator
+FROM ubuntu:14.04
+MAINTAINER first_name last_name, mail@example.com
 
-# Install the biobox file validator
-RUN mkdir ${VALIDATOR}
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+    velvet wget xz-utils ca-certificates
+
+# Locations for biobox file validator
+ENV VALIDATOR /bbx/validator/
+ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
+ENV VERSION  0.x.y
+RUN mkdir -p ${VALIDATOR}
+
+# download the validate-biobox-file binary and extract it to the directory $VALIDATOR
 RUN wget \
       --quiet \
-      --output-document - \
+      --output-document -\
       ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
     | tar xJf - \
       --directory ${VALIDATOR} \
       --strip-components=1
+
 ENV PATH ${PATH}:${VALIDATOR}
+
 ~~~
 
 The next part downloads the schema for the assembler biobox specification.
@@ -112,7 +121,7 @@ RUN wget \
 
 This downloads the [biobox file validator][validator] and adds it to the $PATH.
 The corresponding biobox assembler schema is also downloaded. If you run the below commands
-in the same directory you have placed your Dockerfile and type `validate-biobox-file`, you will see the
+in the same directory you have placed your Dockerfile and type `validate-biobox-file`, you will see its
 usage output.
 
 ~~~ shell
