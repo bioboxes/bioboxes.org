@@ -24,6 +24,8 @@ This script will do the following:
 
 ### Example
 
+Let's go through the parts of the script. At the end of this section you find
+the entire script and an updated Dockerfile.
 The first part of the script checks the given `/bbx/input/biobox.yaml` file
 with the `validate-biobox-file`: 
 
@@ -118,57 +120,30 @@ arguments:
 EOF
 ~~~
 
-The final Dockerfile looks now like this:
-
-~~~ Dockerfile
-FROM ubuntu:14.04
-MAINTAINER first_name last_name, mail@example.com
-
-RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends \
-    velvet wget xz-utils ca-certificates
-
-# Locations for biobox file validator
-ENV BASE_URL  https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
-ENV VERSION   0.x.y
-ENV VALIDATOR /biobox-validator
-
-# Install the biobox file validator
-RUN mkdir ${VALIDATOR}
-RUN wget \
-      --quiet \
-      --output-document - \
-      ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
-    | tar xJf - \
-      --directory ${VALIDATOR} \
-      --strip-components=1
-ENV PATH ${PATH}:${VALIDATOR}
-
-# Fetch the schema file
-RUN wget \
-    --output-document $VALIDATOR/schema.yaml \
-    https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
-
-ADD Taskfile /
-ADD assemble /usr/local/bin/
-
-ENTRYPOINT ["assemble"]
-~~~
-
-and the final script like this:
+The final script that we call `assemble` should be placed
+in the same directory of your Dockerfile and looks like this:
 
 ~~~ shell
 #!/bin/bash
 
+# exit script if one command fails
 set -o errexit
+
+# exit script if Variable is not set
 set -o nounset
 
 INPUT=/bbx/input/biobox.yaml
 OUTPUT=/bbx/output/bbx
+
+# Since this script is the entrypoint to your container
+# you can access the task in `docker run task` as the first argument
 TASK=$1
 
-# Ensure the biobox.yml file is valid
-validate-input --input ${INPUT} --schema /bbx/validator/schema.yaml
+# Ensure the biobox.yaml file is valid
+validate-biobox-file \
+  --input ${INPUT} \
+  --schema /schema.yaml \
+
 mkdir -p ${OUTPUT}
 
 # Parse the read locations from this file
@@ -176,19 +151,24 @@ READS=$(yaml2json < ${INPUT} \
         | jq --raw-output '.arguments[] | select(has("fastq")) | .fastq[].value | "-short \(.)"' \
         | tr '\n' ' ')
 
-
+#create temporary directory in /tmp
 TMP_DIR=$(mktemp -d)
 
-# Run the given task
+
+# Use grep to get $TASK in /Taskfile
 CMD=$(egrep ^${TASK}: /Taskfile | cut -f 2 -d ':')
 if [[ -z ${CMD} ]]; then
   echo "Abort, no task found for '${TASK}'."
   exit 1
 fi
+
+# Run the given task with eval.
+# Eval evaluates a String as if you would use it on a command line.
 eval ${CMD}
 
 cp ${TMP_DIR}/contigs.fa ${OUTPUT}
 
+# This command writes yaml into the biobox.yaml until the EOF symbol is reached
 cat << EOF > ${OUTPUT}/biobox.yaml
 version: 0.9.0
 arguments:
@@ -199,8 +179,62 @@ arguments:
 EOF
 ~~~
 
+The final Dockerfile that has now additional `RUN` commands
+for downloading yaml2json and jq library now looks like this:
+
+~~~ Dockerfile
+FROM ubuntu:14.04
+MAINTAINER first_name last_name, mail@example.com
+
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+    velvet wget xz-utils ca-certificates
+
+ENV CONVERT https://github.com/bronze1man/yaml2json/raw/master/builds/linux_386/yaml2json
+RUN cd /usr/local/bin && wget --quiet ${CONVERT} && chmod 700 yaml2json
+
+ENV JQ http://stedolan.github.io/jq/download/linux64/jq
+RUN cd /usr/local/bin && wget --quiet ${JQ} && chmod 700 jq
+
+# Locations for biobox file validator
+ENV VALIDATOR /bbx/validator/
+ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
+ENV VERSION  0.x.y
+RUN mkdir -p ${VALIDATOR}
+RUN wget \
+      --quiet \
+      --output-document -\
+      ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
+    | tar xJf - \
+      --directory ${VALIDATOR} \
+      --strip-components=1
+
+ADD Taskfile /
+ADD assemble /usr/local/bin/
+
+ENV PATH ${PATH}:${VALIDATOR}
+RUN wget \
+    --output-document ${VALIDATOR}schema.yaml \
+    https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
+
+ENV PATH ${PATH}:${VALIDATOR}
+ENTRYPOINT ["assemble"]
+~~~
+
+Furthermore the Dockerfile sets the Entrypoint to the `assemble` script so that it will be executed on `docker run`.
+If you have followed the examples you should now have the following directory structure:
+
+* `/Dockerfile`
+
+* `/assemble`
+
+* `/Taskfile`
+
+If you run now `docker build -t velvet .` in the same directory, you should have a biobox that accepts the
+tasks `default` and `careful`.
+
 [task]:/guide/developer/create-a-task/
 [outputs]:https://github.com/bioboxes/rfc/blob/master/container/short-read-assembler/rfc.mkd#outputs
 [jq]:http://stedolan.github.io/jq/
 [bioboxes assembler validator]:http://bioboxes.org/validator/short-read-assembler/
-[biobox velvet]:https://github.com/bioboxes/velvet
+[biobox velvet]:https://github.com/bioboxes/velvet/tree/developer_guide

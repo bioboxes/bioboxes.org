@@ -76,7 +76,7 @@ The next part downloads the schema for the assembler biobox specification.
 
 ~~~Dockerfile
 RUN wget \
-    --output-document /schema.yaml
+    --output-document /schema.yaml \
     https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
 ~~~
 
@@ -91,15 +91,13 @@ RUN apt-get update -y && \
     velvet wget xz-utils ca-certificates
 
 # Locations for biobox file validator
-ENV BASE_URL  https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
-ENV VERSION   0.x.y
-ENV VALIDATOR /biobox-validator
-
-# Install the biobox file validator
-RUN mkdir ${VALIDATOR}
+ENV VALIDATOR /bbx/validator/
+ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
+ENV VERSION  0.x.y
+RUN mkdir -p ${VALIDATOR}
 RUN wget \
       --quiet \
-      --output-document - \
+      --output-document -\
       ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
     | tar xJf - \
       --directory ${VALIDATOR} \
@@ -108,13 +106,21 @@ ENV PATH ${PATH}:${VALIDATOR}
 
 # Fetch the schema file
 RUN wget \
-    --output-document /schema.yaml \
+    --output-document ${VALIDATOR}schema.yaml \
     https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
-
 ~~~
 
 This downloads the [biobox file validator][validator] and adds it to the $PATH.
-The corresponding biobox assembler schema is also downloaded.
+The corresponding biobox assembler schema is also downloaded. If you run the below commands
+in the same directory you have placed your Dockerfile and type `validate-biobox-file`, you will see the
+usage output.
+
+~~~ shell
+docker build -t velvet .
+docker run -it velvet /bin/bash
+~~~
+
+
 
 [Putting everything together]:/guide/developer/putting-everything-together/
 [jq]:http://stedolan.github.io/jq/
