@@ -25,13 +25,43 @@ to your run command:
 
 ### Example
 
-In this velvet example we'll create a script that provides the `default` task.
-We'll define this in a file called `Taskfile`. You can see this `Taskfile`
-contains the commands to run velvet along with environment variables.
+In this velvet example we'll create a script that provides two tasks.
+We'll define this in a file called `Taskfile`. It is important for the next sections that you place
+this file in the same directory you have placed the Dockerfile of the preceding section.
+You can see the `default` task contains
+the commands to run velvet along with environment variables.
 
 ~~~ shell
 default: velveth ${TMP_DIR} 31 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff auto
+careful: velveth ${TMP_DIR} 91 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff 10
 ~~~
 
-[read the rfc]:/guide/developer/read-the-rfc/
-[Putting everything together]:/guide/developer/putting-everything-together/
+The second task has a larger kmer size and sets a low assembly coverage cutoff.
+The Taskfile is added in your Dockerfile with an `ADD` command and now looks like this:
+
+~~~ Dockerfile
+FROM ubuntu:14.04
+MAINTAINER first_name last_name, mail@example.com
+
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+    velvet wget xz-utils ca-certificates
+
+# Locations for biobox file validator
+ENV VALIDATOR /bbx/validator/
+ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
+ENV VERSION  0.x.y
+RUN mkdir -p ${VALIDATOR}
+RUN wget \
+      --quiet \
+      --output-document -\
+      ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
+    | tar xJf - \
+      --directory ${VALIDATOR} \
+      --strip-components=1
+ENV PATH ${PATH}:${VALIDATOR}
+ADD Taskfile /
+~~~
+
+In the next section you will see
+how you can access the task with a simple shell command.

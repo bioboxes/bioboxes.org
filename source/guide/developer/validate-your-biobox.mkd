@@ -1,6 +1,6 @@
 # Validate your Biobox
 
-After creating your biobox you should validate the image to ensure if follows
+After creating your biobox you should validate the image to ensure its follows
 the specification. This validation ensures that your image behaves as expected
 when given to an end user. This means more work in the short term, however
 ultimately it should mean your image is easier to use and gets used more often.
@@ -13,17 +13,21 @@ how you can use this to validate your container.
 ### Example
 
 This example first downloads and extracts the latest release of the validator.
-Then tests the `default` task of the bioboxes/velvet image.
+Then tests the `default` task of the velvet image.
 
 ~~~ shell
 # Fetch the latest 0.1.x release of the validator
 wget https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-short-read-assembler/0.1.x/validate-short-read-assembler.tar.gz
 tar xzf validate-short-read-assembler.tar.gz
 
-./validate-short-read-assembler/validate bioboxes/velvet default
+./validate-short-read-assembler/validate velvet default
 ~~~
 
 You can find the final [biobox velvet][] example in our Github repository.
+In the section [using a biobox image] you find a tutorial with example data that explains
+how to use your biobox.
 
+[using a biobox image]:/guide/user/using-a-biobox/
 [bioboxes assembler validator]:http://bioboxes.org/validator/short-read-assembler/
-[biobox velvet]:https://github.com/bioboxes/velvet
+[biobox velvet]:https://github.com/bioboxes/velvet/tree/developer_guide
+

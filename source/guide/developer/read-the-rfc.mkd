@@ -36,7 +36,7 @@ and each assembler has biobox specific [inputs][] and [outputs][].
      always follows the types and structure defined in the rfc.
 
   4. In the RFC you find the definition where the input biobox.yaml and data should be mounted
-     and where you will find the output biobox.yaml (see section [Putting everything together][together]).
+     and where you will find the output biobox.yaml (see section [Putting everything together][]).
 
 [new issue]: https://github.com/bioboxes/rfc/issues/new
 [binary]: https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file/0.x.y/validate-biobox-file.tar.xz
@@ -55,28 +55,37 @@ The velvet example works with just the provided FASTQ type.
 3. By specifying the below instructions in the Dockerfile we download the validate-biobox-file binary. 
 
 ~~~Dockerfile
-# Locations for biobox file validator
-ENV BASE_URL  https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
-ENV VERSION   0.x.y
-ENV VALIDATOR /biobox-validator
+FROM ubuntu:14.04
+MAINTAINER first_name last_name, mail@example.com
 
-# Install the biobox file validator
-RUN mkdir ${VALIDATOR}
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+    velvet wget xz-utils ca-certificates
+
+# Locations for biobox file validator
+ENV VALIDATOR /bbx/validator/
+ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
+ENV VERSION  0.x.y
+RUN mkdir -p ${VALIDATOR}
+
+# download the validate-biobox-file binary and extract it to the directory $VALIDATOR
 RUN wget \
       --quiet \
-      --output-document - \
+      --output-document -\
       ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
     | tar xJf - \
       --directory ${VALIDATOR} \
       --strip-components=1
+
 ENV PATH ${PATH}:${VALIDATOR}
+
 ~~~
 
 The next part downloads the schema for the assembler biobox specification.
 
 ~~~Dockerfile
 RUN wget \
-    --output-document /schema.yaml
+    --output-document /schema.yaml \
     https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
 ~~~
 
@@ -88,37 +97,44 @@ MAINTAINER first_name last_name, mail@example.com
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
-    velvet wget zx-utils
+    velvet wget xz-utils ca-certificates
 
 # Locations for biobox file validator
-ENV BASE_URL  https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
-ENV VERSION   0.x.y
-ENV VALIDATOR /biobox-validator
+ENV VALIDATOR /bbx/validator/
+ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
+ENV VERSION  0.x.y
+RUN mkdir -p ${VALIDATOR}
 
-# Install the biobox file validator
-RUN mkdir ${VALIDATOR}
+# download the validate-biobox-file binary and extract it to the directory $VALIDATOR
 RUN wget \
       --quiet \
-      --output-document - \
+      --output-document -\
       ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
     | tar xJf - \
       --directory ${VALIDATOR} \
       --strip-components=1
+
 ENV PATH ${PATH}:${VALIDATOR}
 
-# Fetch the schema file
+# download the assembler schema
 RUN wget \
-    --output-document /schema.yaml
+    --output-document /schema.yaml \
     https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
-
 ~~~
 
 This downloads the [biobox file validator][validator] and adds it to the $PATH.
-The corresponding biobox assembler schema is also downloaded.
+The corresponding biobox assembler schema is also downloaded. If you run the below commands
+in the same directory you have placed your Dockerfile and type `validate-biobox-file`, you will see its
+usage output.
+
+~~~ shell
+docker build -t velvet .
+docker run -it velvet /bin/bash
+~~~
+
+
 
 [Putting everything together]:/guide/developer/putting-everything-together/
-[Creating a Docker image]:/guide/developer/build-your-image/
-[Create a Task]:/guide/developer/create-a-task/
 [jq]:http://stedolan.github.io/jq/
 [bioboxes assembler validator]:http://bioboxes.org/validator/short-read-assembler/
 [biobox velvet]:https://github.com/bioboxes/velvet

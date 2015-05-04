@@ -8,7 +8,7 @@ as a blueprint of your tool, including all the dependencies it needs to run.
 When you use a Docker image, such as passing FASTQ data, then you create an
 live instance of the image running on your system. This is called a container.
 
-The first step to creating an image of your tool is to write a Dockerfile. Each
+The first step to creating an image of your tool is to write a file called Dockerfile. Each
 line in a Dockerfile is a set of instructions that are to build an image. Below
 is an example Dockerfile which you can copy. There is more [detailed
 documentation available for building Dockerfiles][Dockerfile].
@@ -35,7 +35,8 @@ RUN apt-get update -y && \
 
 You can test this example Dockerfile by building an image. The `--tag`
 specifies what the image should be called. In this case "velvet", because this
-is the name of the assembler.
+is the name of the assembler. Run the following command in the same directory
+you have placed your Dockerfile.
 
 ~~~ shell
 docker build --tag velvet .
@@ -64,10 +65,3 @@ velveth
 ~~~
 
 You can now exit this container with `CTRL+D`.
-
-[create]:/guide/developer/build-your-image/
-[read-the-rfc]:/guide/developer/read-the-rfc/
-[task]:/guide/developer/create-a-task/
-[together]:/guide/developer/putting-everything-together/
-[validate]:/guide/developer/validate-your-biobox/
-[read the rfc]:/guide/developer/read-the-rfc/
