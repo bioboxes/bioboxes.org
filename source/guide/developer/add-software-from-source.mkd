@@ -1,0 +1,91 @@
+# Add software from source
+
+Sometimes the software you need may not be available using apt. This guide will
+illustrate how to add software to an image when only the source code is
+available.
+
+In this guide we will add velvet to an image again, this time however we'll
+assume that there is no apt package available for it. This is often the case
+where bioinformatics software is only available from the developer's website or
+as part of a publication. Being able to add software from source code will
+allow you to have more options when creating an image.
+
+The [velvet developer's][velvet] website provides a link where you can download
+the [current version][download] source code. We'll be begin by adding this
+source code to a Docker image.
+
+[velvet]: https://www.ebi.ac.uk/~zerbino/velvet/
+[download]: https://www.ebi.ac.uk/~zerbino/velvet/velvet_1.2.10.tgz
+
+~~~ Dockerfile
+FROM debian:stable
+MAINTAINER Jane Smith, mail@example.com
+
+ENV PACKAGES wget ca-certificates
+RUN apt-get update && apt-get install --yes ${PACKAGES}
+
+ENV SRC https://www.ebi.ac.uk/~zerbino/velvet/velvet_1.2.10.tgz
+ENV TAR /velvet.tar.gz
+RUN wget ${SRC} --output-document ${TAR}
+RUN tar xzf ${TAR}
+~~~
+
+This Dockerfile introduces the `ENV` directive. You can use `ENV` store
+environment variables, and then use them later. For example the list of apt
+packages is stored in the `PACKAGES` variable and then referenced later using
+`${PACKAGES}`. You use this `${...}` construct to get the values stored in the
+variable.
+
+In the `Dockerfile` the wget and ca-certificates packages are installed. These
+are used to fetch items from the web. In the last four lines, the velvet source
+code is downloaded and stored in the `--output-document` file `/velvet.tar.gz`.
+Finally the downloaded file is decompressed using `tar`. Build this image and
+then list the file system contents to confirm the downloaded file and directory
+is there.
+
+~~~ shell
+docker build --tag velvet .
+docker run velvet ls
+~~~
+
+So far this Dockerfile only download and decompresses the source code, next
+we'll need compile the source into a binary that the assembler can use.
+
+
+~~~ Dockerfile
+FROM debian:stable
+MAINTAINER Jane Smith, mail@example.com
+
+ENV PACKAGES ca-certificates \
+             gcc \
+             libc6-dev \
+             make \
+             wget \
+             zlib1g-dev
+RUN apt-get update && apt-get install --yes ${PACKAGES}
+
+ENV SRC https://www.ebi.ac.uk/~zerbino/velvet/velvet_1.2.10.tgz
+ENV TAR /velvet.tar.gz
+RUN wget ${SRC} --output-document ${TAR}
+RUN tar xzf ${TAR}
+
+WORKDIR /velvet_1.2.10
+RUN make
+RUN mv velveth velvetg /usr/local/bin/
+WORKDIR /
+
+~~~
+
+This installs the packages `make`, `gcc`, `libc6-dev` and `zlibg-dev`. These
+are the dependencies needed to compile velvet from source code. The downside of
+using Docker is that you need to know and install all of these when creating
+and image for software. The upside however is that once you do this, the
+software should be usable by anyone else and they don't need to worry about
+these.
+
+In the last four lines we change directory to where velvet was decompressed.
+This is using the `WORKDIR` directive, you should use this instead of `cd`
+because `cd` does not persist between `RUN` lines. Next we compile velvet using
+`make`, if a Makefile exists in a directory you can usually use `make` to build
+the software. Finally we copy the created `velveth` and `velvetg` files to
+`/usr/local/bin/`. This is a good location to place any compiled software.
