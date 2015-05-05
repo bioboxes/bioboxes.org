@@ -7,6 +7,10 @@ $(document).ready(function () {
             lang = regexp.exec(block.classList[i])[0];
         }
 
-        $(block).parent().prepend(lang.toUpperCase() + ":")
+        var blockTitle = document.createElement("span")
+        blockTitle.setAttribute("class", "code-block-title")
+        blockTitle.innerHTML = lang.toUpperCase() + ":"
+
+        $(block).parent().prepend(blockTitle)
     });
 });
