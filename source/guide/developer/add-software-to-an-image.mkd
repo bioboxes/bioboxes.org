@@ -1,6 +1,6 @@
 # Adding software to an image
 
-When you create a biobox image you'll want to add your own bioinfomatics
+When you create a biobox image you'll want to add your own bioinformatics
 software and the any third-party dependencies it needs. This guide illustrates
 how to install and include software in an image.
 

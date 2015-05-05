@@ -16,7 +16,7 @@ FROM busybox
 MAINTAINER Jane Smith, mail@example.com
 ~~~
 
-Each line in the file must begin with a recognized `Dockerfile` command. In
+Each line in the file must begin with a recognised `Dockerfile` command. In
 this case the commands are `FROM` and `MAINTAINER`. The first described a base
 Docker image that we'll build our own on top of. Here we use the 'busybox'
 image. This is the same image we experimented with in the [user guide][user].
@@ -58,7 +58,7 @@ docker run --interactive --tty my_image /bin/bash
 ~~~
 
 Once you've logged into a container you can experiment with listing the
-internal filesystem or the current version of linux.
+internal file system or the current version of Linux.
 
 ~~~ shell
 ls
