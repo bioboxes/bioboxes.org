@@ -1,67 +1,103 @@
-# Creating a Docker image
+# Building your first Docker image
 
-This guide describes creating a Docker image. This includes using Dockerfiles
-and the commands used to create and name the images from Dockerfiles.
+Docker images are the basic way of sharing software in bioboxes. This guide
+describes creating a Docker image. This includes using Dockerfiles and the
+commands used to create and name the images made from Dockerfiles.
 
-Docker uses the concepts "images" and "containers". An image can be thought of
-as a blueprint of your tool, including all the dependencies it needs to run.
-When you use a Docker image, such as passing FASTQ data, then you create an
-live instance of the image running on your system. This is called a container.
+## Dockerfiles
 
-The first step to creating an image of your tool is to write a file called Dockerfile. Each
-line in a Dockerfile is a set of instructions that are to build an image. Below
-is an example Dockerfile which you can copy. There is more [detailed
-documentation available for building Dockerfiles][Dockerfile].
-
-[Dockerfile]:https://docs.docker.com/reference/builder/
-
-## Example
-
-This example sets the base image operating system as Ubuntu version 14:04 using
-the `FROM` directive. Next you should specify your name and email address
-using the `MAINTAINER` line. The last line installs the [velvet][] genome
-assembler using the apt package manager. This line is broken across two lines
-using `\`, this makes the Dockerfile easier to read as opposed to very long
-lines.
-
-[velvet]:https://www.ebi.ac.uk/~zerbino/velvet/
+The first step to creating an image of your tool is to write a file called
+Dockerfile. Each line in a Dockerfile is a set of instructions that are to
+build an image. Here's the most simple `Dockerfile` you can have. Begin by
+creating your own `Dockerfile` with these contents.
 
 ~~~ Dockerfile
-FROM ubuntu:14.04
-MAINTAINER first_name last_name, mail@example.com
-RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends velvet
+FROM busybox
+MAINTAINER Jane Smith, mail@example.com
 ~~~
 
-You can test this example Dockerfile by building an image. The `--tag`
-specifies what the image should be called. In this case "velvet", because this
-is the name of the assembler. Run the following command in the same directory
-you have placed your Dockerfile.
+Each line in the file must begin with a recognised `Dockerfile` command. In
+this case the commands are `FROM` and `MAINTAINER`. The first described a base
+Docker image that we'll build our own on top of. Here we use the 'busybox'
+image. This is the same image we experimented with in the [user guide][user].
+On the second line we specify the name and email address person who is
+responsible for this image. Once you've created this image you can build it
+with the command:
+
+You can test this example Dockerfile by building it into an image using `docker
+build`. The `--tag` specifies what the image should be called. In this case
+we'll call the image "my_image". Run the following command in the same
+directory you have placed your Dockerfile.
+
+[user]: /guide/user/
 
 ~~~ shell
-docker build --tag velvet .
+docker build --tag my_image .
 ~~~
 
-If this builds successfully you should have a velvet Docker image available on
-your system. You list all your images with the command.
+If this builds successfully you should have a Docker image called 'my_image'
+Docker image available on your system. You list all your images with the
+command.
 
 ~~~ shell
 docker images
 ~~~
 
-You can create a container from this image and then log into it. This will
-allow you to test that the internals are correct.
+## Running a container
+
+When you're building a container it's useful to be able to log into it so you
+can experiment. You can create a container from this image and log in using the
+`--interactive` and `--tty` flags. You should specify a shell command to run
+also, in this case we use `/bin/bash` which is the command to start the bash
+shell. If you're not too familiar with what bash is, it's fine to use this
+command, without understanding the details, whenever you want to log into a
+container.
 
 ~~~ shell
-docker run --interactive --tty velvet /bin/bash
+docker run --interactive --tty my_image /bin/bash
 ~~~
 
-This specifies that you want to log into a velvet container interactively and run
-the command `/bin/bash`. When you run this you should a prompt inside your
-container. You can test that velvet is available:
+Once you've logged into a container you can experiment with listing the
+internal file system or the current version of Linux.
 
 ~~~ shell
-velveth
+ls
+uname
 ~~~
 
-You can now exit this container with `CTRL+D`.
+The output of both these commands comes from the operating system inside the
+container, not your host computer. If this is not clear, there is a guide we
+explaining the [difference between containers and images][diff]. You can exit
+this container with `CTRL+D`.
+
+[diff]: /guide/user/images-vs-containers/
+
+## An image to do something
+
+You will want to create an image to do something useful that you can share with
+others. We'll create an example Docker that returns the current time when run.
+
+~~~ Dockerfile
+FROM busybox
+MAINTAINER Jane Smith, mail@example.com
+
+ENTRYPOINT ["date"]
+~~~
+
+This uses the `ENTRYPOINT` directive to specify this command gets run when the
+container gets run. In this case we specify the `date` should be run. Build and
+run this container, and you should see your image tells you the current date
+and time.
+
+~~~ shell
+docker build --tag timepiece .
+docker run timepiece
+~~~
+
+You can specify different date output formats by passing these as an argument
+to the `docker run` command. For example you can pass a format string and the
+date will be returned in this format.
+
+~~~ shell
+docker run timepiece +"%Y-%m-%d"
+~~~

@@ -1,0 +1,87 @@
+# Adding software to an image
+
+When you create a biobox image you'll want to add your own bioinformatics
+software and the any third-party dependencies it needs. This guide illustrates
+how to install and include software in an image.
+
+## Installing using apt
+
+A relatively simple way to install any software you require is using the
+[advanced packaging tool (apt)][apt]. Apt is used by an Ubuntu or Debian Linux
+image, so we'll need to switch to using one of these as the base image. [Docker
+recommends Debian][debian] as the base image, because it's small and
+well-maintained.
+
+[apt]: http://en.wikipedia.org/wiki/Advanced_Packaging_Tool
+[debian]: https://docs.docker.com/articles/dockerfile_best-practices/
+
+~~~ Dockerfile
+FROM debian:stable
+MAINTAINER Jane Smith, mail@example.com
+~~~
+
+Notice here you can specify different versions of an operating system by adding
+a tag after the name using a colon (`:`). In this case we use the stable
+version of Debian. Take a look at [the Debian page on DockerHub][debian_image]
+and you can see that there are a large number of tags available. Build and then
+log into this image.
+
+[debian_image]: https://registry.hub.docker.com/_/debian/
+
+~~~ shell
+docker build --tag apt_image .
+docker run --interactive --tty /bin/bash
+~~~
+
+Apt allows you to install packages relatively easily as long as you know their
+name. First though you'll need to update the list of packages apt uses. Do this
+using `apt-get update`.
+
+~~~ shell
+apt-get update
+~~~
+
+This will stream some text as `apt` fetches all available packages that can be
+installed. For this guide we'll install the [velvet genome assembler][velvet],
+one of the early short read assemblers. To do this we'll need to search through
+the list of available packages.
+
+[velvet]: https://www.ebi.ac.uk/~zerbino/velvet/
+
+~~~ shell
+apt-cache search velvet
+~~~
+
+This will return a list of apt packages that match the name 'velvet'. The first
+one is the velvet assembler, so that's the one we'll install.
+
+~~~ shell
+apt-get install velvet
+~~~
+
+You can ensure that velvet is installed and available after doing this by
+running the command `velveth` which lists the command line options for running
+velvet. Now exit the container by pressing `CTRL+D`.
+
+## Installing with the Dockerfile
+
+When you build an image you would install velvet automatically. This can be
+done using the `RUN` directive which executes the given commands as the image
+is being built. In this case we'll add the commands we used to install velvet.
+We'll combine them using `&&` which means 'run the second command if the first
+one works'. We also add `--yes` which skips the prompt asking about installing
+the software.
+
+~~~ Dockerfile
+FROM debian:stable
+MAINTAINER Jane Smith, mail@example.com
+
+RUN apt-get update && apt-get install --yes velvet
+~~~
+
+Build this image and you'll see the output of apt installing velvet. If you log
+into this image and run `velveth` again, you'll see velvet is installed.
+
+~~~ shell
+docker build --tag velvet .
+~~~

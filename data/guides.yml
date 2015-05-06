@@ -6,6 +6,8 @@ user:
   - ["Using a biobox image", "/using-a-biobox/"]
 developer:
   - ["Creating a Docker Image", "/build-your-image/"]
+  - ["Add Software to an Image", "/add-software-to-an-image/"]
+  - ["Add Software from Source", "/add-software-from-source/"]
   - ["Use the RFC", "/read-the-rfc/"]
   - ["Create a Task", "/create-a-task/"]
   - ["Putting Everything Together", "/putting-everything-together/"]
