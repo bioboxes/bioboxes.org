@@ -39,7 +39,7 @@ set -o errexit
 set -o nounset
 
 INPUT=/bbx/input/biobox.yaml
-OUTPUT=/bbx/output/bbx
+OUTPUT=/bbx/output
 
 # Since this script is the entrypoint to your container
 # you can access the task in `docker run task` as the first argument
@@ -133,7 +133,7 @@ set -o errexit
 set -o nounset
 
 INPUT=/bbx/input/biobox.yaml
-OUTPUT=/bbx/output/bbx
+OUTPUT=/bbx/output
 
 # Since this script is the entrypoint to your container
 # you can access the task in `docker run task` as the first argument
