@@ -32,8 +32,7 @@ You can see the `default` task contains
 the commands to run velvet along with environment variables.
 
 ~~~ shell
-default: velveth ${TMP_DIR} 31 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff auto
-careful: velveth ${TMP_DIR} 91 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff 10
+https://raw.githubusercontent.com/bioboxes/velvet/developer_guide/Taskfile
 ~~~
 
 The second task has a larger kmer size and sets a low assembly coverage cutoff.
