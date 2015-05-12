@@ -1,5 +1,6 @@
 require 'extensions/page'
 require 'extensions/guide'
+require 'extensions/render'
 
 activate :automatic_image_sizes
 activate :directory_indexes
@@ -12,13 +13,16 @@ activate :guide
 activate :s3_sync do |s3_sync|
   s3_sync.bucket = 'bioboxes.org'
   s3_sync.region = 'us-west-1'
-  s3_sync.acl    = 'public-read'
+  s3_sync.acl = 'public-read'
 end
 
-set :css_dir,      'stylesheets'
-set :js_dir,       'javascripts'
-set :images_dir,   'images'
+set :css_dir, 'stylesheets'
+set :js_dir, 'javascripts'
+set :images_dir, 'images'
 set :partials_dir, 'partials'
+
+set :markdown_engine, :redcarpet
+set :markdown, :fenced_code_blocks => true, :renderer => CustomCodeBlocks
 
 configure :build do
   activate :minify_css
