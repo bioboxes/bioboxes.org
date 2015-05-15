@@ -7,6 +7,7 @@ describes using tasks in your image.
 
 The a biobox interface requires that a container be called with a `task`
 parameter. This follows the name of the biobox when using `docker run`.
+
  
 ~~~shell
 docker run [OPTIONS] BIOBOX_NAME TASK
@@ -31,12 +32,11 @@ this file in the same directory you have placed the Dockerfile of the preceding 
 You can see the `default` task contains
 the commands to run velvet along with environment variables.
 
-~~~ shell
-https://raw.githubusercontent.com/bioboxes/velvet/developer_guide/Taskfile
-~~~
+<%= github_code "bioboxes/velvet", "Taskfile", "shell" %>
 
 The second task has a larger kmer size and sets a low assembly coverage cutoff.
-The Taskfile is added in your Dockerfile with an `ADD` command and now looks like this:
+The Taskfile is added in your Dockerfile with an `ADD` command and now looks
+like this:
 
 ~~~ Dockerfile
 FROM ubuntu:14.04
