@@ -105,20 +105,7 @@ eval ${CMD}
 
 The last part copies the contigs to the output directory and creates the output.yaml which also is specified in the [rfc][outputs]. 
 
-~~~shell
-
-cp ${TMP_DIR}/contigs.fa ${OUTPUT}
-
-# This command writes yaml into the biobox.yaml until the EOF symbol is reached
-cat << EOF > ${OUTPUT}/biobox.yaml
-version: 0.9.0
-arguments:
-  - fasta:
-    - id: velvet_contigs_1
-      value: contigs.fa
-      type: contigs
-EOF
-~~~
+<%= github_code "bioboxes/velvet", "assemble", "shell", 36, 46 %>
 
 The final script that we call `assemble` should be placed
 in the same directory of your Dockerfile and looks like this:
