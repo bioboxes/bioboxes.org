@@ -27,34 +27,12 @@ This script will do the following:
 Let's go through the parts of the script. At the end of this section you find
 the entire script and an updated Dockerfile.
 The first part of the script checks the given `/bbx/input/biobox.yaml` file
-with the `validate-biobox-file`: 
+with the `validate-biobox-file`:
 
-~~~shell
-#!/bin/bash
-
-# exit script if one command fails
-set -o errexit
-
-# exit script if Variable is not set
-set -o nounset
-
-INPUT=/bbx/input/biobox.yaml
-OUTPUT=/bbx/output
-
-# Since this script is the entrypoint to your container
-# you can access the task in `docker run task` as the first argument
-TASK=$1
-
-# Ensure the biobox.yaml file is valid
-validate-biobox-file \
-  --input ${INPUT} \
-  --schema /schema.yaml \
-
-mkdir -p ${OUTPUT}
-~~~
+<%= github_code "bioboxes/velvet", "assemble", "shell", 0, 22 %>
 
 You can savely reuse this part in your biobox implementation since all biobox
-RFCs have to use the validate-biobox-file binary.  
+RFCs have to use the validate-biobox-file binary.
 
 The next part transforms the yaml to json and uses the [jq][] tool to fetch the
 paths to fastq files. Jq is used to slice, filter, map and even to manipulate
@@ -66,60 +44,36 @@ yaml:
 version: 0.9.0
 arguments:
   - fastq:
-    - id: "pe" 
+    - id: "pe"
       value: "/test1/reads.fastq.gz"
       type: paired
-    - id: "pe_1" 
+    - id: "pe_1"
       value: "/test2/reads.fastq.gz"
 ~~~
 
-You see below that we first fetch the array in the `arguments` property with `.arguments[]` then we select the `fastq` property and access the `value` entry in 
+You see below that we first fetch the array in the `arguments` property with `.arguments[]` then we select the `fastq` property and access the `value` entry in
 each array item with the `.fastq[].value` directive. The last part `| -short \(.) | tr '\n' ' ' ` allows to append each entry `-short` and to replace the newline with a whitespace.
 `-short`  must be specified for the velvet command. The result of the jq command is `/test1/reads.fastq.gz -short /test2/reads.fastq.gz -short`.
 
-~~~shell
-# Parse the read locations from this file
-READS=$(yaml2json < ${INPUT} \
-        | jq --raw-output '.arguments[] | select(has("fastq")) | .fastq[].value | "-short \(.)"' \
-        | tr '\n' ' ')
-
-#create temporary directory in /tmp
-TMP_DIR=$(mktemp -d)
-~~~
+<%= github_code "bioboxes/velvet", "assemble", "shell", 23, 29 %>
 
 This part access the task provided to the docker container by using `egrep` on the Taskfile (see [Create a Task][task] )
 
-~~~shell
-# Use grep to get $TASK in /Taskfile
-CMD=$(egrep ^${TASK}: /Taskfile | cut -f 2 -d ':')
-if [[ -z ${CMD} ]]; then
-  echo "Abort, no task found for '${TASK}'."
-  exit 1
-fi
-
-# Run the given task with eval.
-# Eval evaluates a String as if you would use it on a command line.
-eval ${CMD}
-
-~~~
+<%= github_code "bioboxes/velvet", "assemble", "shell", 32, 47 %>
 
 The last part copies the contigs to the output directory and creates the output.yaml which also is specified in the [rfc][outputs]. 
 
-<%= github_code "bioboxes/velvet", "assemble", "shell", 36, 46 %>
+<%= github_code "bioboxes/velvet", "assemble", "shell", 51, 59 %>
 
 The final script that we call `assemble` should be placed
 in the same directory of your Dockerfile and looks like this:
 
-~~~ shell
-https://raw.githubusercontent.com/bioboxes/velvet/developer_guide/assemble
-~~~
+<%= github_code "bioboxes/velvet", "assemble", "shell" %>
 
 The final Dockerfile that has now additional `RUN` commands
 for downloading yaml2json and jq library now looks like this:
 
-~~~ Dockerfile
-https://raw.githubusercontent.com/bioboxes/velvet/developer_guide/Dockerfile
-~~~
+<%= github_code "bioboxes/velvet", "Dockerfile", "Dockerfile" %>
 
 Furthermore the Dockerfile sets the Entrypoint to the `assemble` script so that it will be executed on `docker run`.
 If you have followed the examples you should now have the following directory structure:

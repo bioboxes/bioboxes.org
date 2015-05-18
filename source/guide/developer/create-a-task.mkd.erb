@@ -38,29 +38,7 @@ The second task has a larger kmer size and sets a low assembly coverage cutoff.
 The Taskfile is added in your Dockerfile with an `ADD` command and now looks
 like this:
 
-~~~ Dockerfile
-FROM ubuntu:14.04
-MAINTAINER first_name last_name, mail@example.com
-
-RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends \
-    velvet wget xz-utils ca-certificates
-
-# Locations for biobox file validator
-ENV VALIDATOR /bbx/validator/
-ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
-ENV VERSION  0.x.y
-RUN mkdir -p ${VALIDATOR}
-RUN wget \
-      --quiet \
-      --output-document -\
-      ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
-    | tar xJf - \
-      --directory ${VALIDATOR} \
-      --strip-components=1
-ENV PATH ${PATH}:${VALIDATOR}
-ADD Taskfile /
-~~~
+<%= github_code "bioboxes/velvet", "Dockerfile", "Dockerfile", 0, 46 %>
 
 In the next section you will see
 how you can access the task with a simple shell command.
