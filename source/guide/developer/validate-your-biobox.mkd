@@ -29,5 +29,5 @@ how to use your biobox.
 
 [using a biobox image]:/guide/user/using-a-biobox/
 [bioboxes assembler validator]:http://bioboxes.org/validator/short-read-assembler/
-[biobox velvet]:https://github.com/bioboxes/velvet/tree/developer_guide
+[biobox velvet]:https://github.com/bioboxes/velvet
 
