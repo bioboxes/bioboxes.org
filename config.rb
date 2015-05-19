@@ -12,12 +12,12 @@ activate :guide
 activate :s3_sync do |s3_sync|
   s3_sync.bucket = 'bioboxes.org'
   s3_sync.region = 'us-west-1'
-  s3_sync.acl    = 'public-read'
+  s3_sync.acl = 'public-read'
 end
 
-set :css_dir,      'stylesheets'
-set :js_dir,       'javascripts'
-set :images_dir,   'images'
+set :css_dir, 'stylesheets'
+set :js_dir, 'javascripts'
+set :images_dir, 'images'
 set :partials_dir, 'partials'
 
 configure :build do

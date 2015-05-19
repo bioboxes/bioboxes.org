@@ -1,0 +1,93 @@
+# Putting everything together
+
+The previous guides described building the individual parts of a biobox. The
+guide puts all these parts together to create a working biobox that you can
+give to users. This includes parsing the biobox.yaml file.
+
+Now that we have in the previous sections integrated the file-validator,
+specified the task, we will write a script to combine everything.
+This script serves as an entrypoint to your container. An entrypoint points to a binary
+inside your container that will be executed on a `docker run` command.
+Command line arguments that will be appended after `docker run` will also be available to your
+Entrypoint.
+That means that the task in the command `docker run task` will be available as the first argument
+to your Entrypoint. You can configure the entrypoint in your Dockerfile with
+`ENTRYPOINT ["/path/to/your/script/inside/the/container"]`
+
+This script will do the following:
+
+  1. Check if the provided biobox.yaml is in the correct format using the
+     file-validator.
+  2. Fetch the parameter provided by the input biobox.yaml.
+  3. Run the specified task.
+  4. Generate an output YAML file and return the assembled contigs. 
+
+### Example
+
+Let's go through the parts of the script. At the end of this section you find
+the entire script and an updated Dockerfile.
+The first part of the script checks the given `/bbx/input/biobox.yaml` file
+with the `validate-biobox-file`:
+
+<%= github_code "bioboxes/velvet", "assemble", "shell", 0, 22 %>
+
+You can savely reuse this part in your biobox implementation since all biobox
+RFCs have to use the validate-biobox-file binary.
+
+The next part transforms the yaml to json and uses the [jq][] tool to fetch the
+paths to fastq files. Jq is used to slice, filter, map and even to manipulate
+the json data by using pipes. In the example we try to access the following
+yaml:
+
+~~~YAML
+---
+version: 0.9.0
+arguments:
+  - fastq:
+    - id: "pe"
+      value: "/test1/reads.fastq.gz"
+      type: paired
+    - id: "pe_1"
+      value: "/test2/reads.fastq.gz"
+~~~
+
+You see below that we first fetch the array in the `arguments` property with `.arguments[]` then we select the `fastq` property and access the `value` entry in
+each array item with the `.fastq[].value` directive. The last part `| -short \(.) | tr '\n' ' ' ` allows to append each entry `-short` and to replace the newline with a whitespace.
+`-short`  must be specified for the velvet command. The result of the jq command is `/test1/reads.fastq.gz -short /test2/reads.fastq.gz -short`.
+
+<%= github_code "bioboxes/velvet", "assemble", "shell", 23, 29 %>
+
+This part access the task provided to the docker container by using `egrep` on the Taskfile (see [Create a Task][task] )
+
+<%= github_code "bioboxes/velvet", "assemble", "shell", 32, 47 %>
+
+The last part copies the contigs to the output directory and creates the output.yaml which also is specified in the [rfc][outputs]. 
+
+<%= github_code "bioboxes/velvet", "assemble", "shell", 51, 59 %>
+
+The final script that we call `assemble` should be placed
+in the same directory of your Dockerfile and looks like this:
+
+<%= github_code "bioboxes/velvet", "assemble", "shell" %>
+
+The final Dockerfile that has now additional `RUN` commands
+for downloading yaml2json and jq library now looks like this:
+
+<%= github_code "bioboxes/velvet", "Dockerfile", "Dockerfile" %>
+
+Furthermore the Dockerfile sets the Entrypoint to the `assemble` script so that it will be executed on `docker run`.
+If you have followed the examples you should now have the following directory structure:
+
+* `/Dockerfile`
+
+* `/assemble`
+
+* `/Taskfile`
+
+If you run now `docker build -t velvet .` in the same directory, you should have a biobox that accepts the
+tasks `default` and `careful`.
+
+[task]:/guide/developer/create-a-task/
+[outputs]:https://github.com/bioboxes/rfc/blob/master/container/short-read-assembler/rfc.mkd#outputs
+[jq]:http://stedolan.github.io/jq/
+[bioboxes assembler validator]:http://bioboxes.org/validator/short-read-assembler/

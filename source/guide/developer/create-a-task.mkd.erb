@@ -7,6 +7,7 @@ describes using tasks in your image.
 
 The a biobox interface requires that a container be called with a `task`
 parameter. This follows the name of the biobox when using `docker run`.
+
  
 ~~~shell
 docker run [OPTIONS] BIOBOX_NAME TASK
@@ -31,37 +32,13 @@ this file in the same directory you have placed the Dockerfile of the preceding 
 You can see the `default` task contains
 the commands to run velvet along with environment variables.
 
-~~~ shell
-default: velveth ${TMP_DIR} 31 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff auto
-careful: velveth ${TMP_DIR} 91 -fastq.gz ${READS} && velvetg ${TMP_DIR} -cov_cutoff 10
-~~~
+<%= github_code "bioboxes/velvet", "Taskfile", "shell" %>
 
 The second task has a larger kmer size and sets a low assembly coverage cutoff.
-The Taskfile is added in your Dockerfile with an `ADD` command and now looks like this:
+The Taskfile is added in your Dockerfile with an `ADD` command and now looks
+like this:
 
-~~~ Dockerfile
-FROM ubuntu:14.04
-MAINTAINER first_name last_name, mail@example.com
-
-RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends \
-    velvet wget xz-utils ca-certificates
-
-# Locations for biobox file validator
-ENV VALIDATOR /bbx/validator/
-ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
-ENV VERSION  0.x.y
-RUN mkdir -p ${VALIDATOR}
-RUN wget \
-      --quiet \
-      --output-document -\
-      ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
-    | tar xJf - \
-      --directory ${VALIDATOR} \
-      --strip-components=1
-ENV PATH ${PATH}:${VALIDATOR}
-ADD Taskfile /
-~~~
+<%= github_code "bioboxes/velvet", "Dockerfile", "Dockerfile", 0, 46 %>
 
 In the next section you will see
 how you can access the task with a simple shell command.

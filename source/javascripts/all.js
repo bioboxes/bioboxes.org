@@ -1,3 +1,3 @@
 //= require "_highlight"
-//= require "_codeBlocks"
+//= require "_code_blocks"
 //= require "_bioboxes"

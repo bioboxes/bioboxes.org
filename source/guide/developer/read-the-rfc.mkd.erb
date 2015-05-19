@@ -54,73 +54,15 @@ The velvet example works with just the provided FASTQ type.
 
 3. By specifying the below instructions in the Dockerfile we download the validate-biobox-file binary. 
 
-~~~Dockerfile
-FROM ubuntu:14.04
-MAINTAINER first_name last_name, mail@example.com
-
-RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends \
-    velvet wget xz-utils ca-certificates
-
-# Locations for biobox file validator
-ENV VALIDATOR /bbx/validator/
-ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
-ENV VERSION  0.x.y
-RUN mkdir -p ${VALIDATOR}
-
-# download the validate-biobox-file binary and extract it to the directory $VALIDATOR
-RUN wget \
-      --quiet \
-      --output-document -\
-      ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
-    | tar xJf - \
-      --directory ${VALIDATOR} \
-      --strip-components=1
-
-ENV PATH ${PATH}:${VALIDATOR}
-
-~~~
+<%= github_code "bioboxes/velvet", "Dockerfile", "Dockerfile", 14, 30 %>
 
 The next part downloads the schema for the assembler biobox specification.
 
-~~~Dockerfile
-RUN wget \
-    --output-document /schema.yaml \
-    https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
-~~~
+<%= github_code "bioboxes/velvet", "Dockerfile", "Dockerfile", 20, 28 %>
 
-The above Dockerfile together with the `file-validator` looks like this:
+The above Dockerfile together with the `file-validator` and the initial Dockerfile in the last section looks like this:
 
-~~~ Dockerfile
-FROM ubuntu:14.04
-MAINTAINER first_name last_name, mail@example.com
-
-RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends \
-    velvet wget xz-utils ca-certificates
-
-# Locations for biobox file validator
-ENV VALIDATOR /bbx/validator/
-ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
-ENV VERSION  0.x.y
-RUN mkdir -p ${VALIDATOR}
-
-# download the validate-biobox-file binary and extract it to the directory $VALIDATOR
-RUN wget \
-      --quiet \
-      --output-document -\
-      ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
-    | tar xJf - \
-      --directory ${VALIDATOR} \
-      --strip-components=1
-
-ENV PATH ${PATH}:${VALIDATOR}
-
-# download the assembler schema
-RUN wget \
-    --output-document /schema.yaml \
-    https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
-~~~
+<%= github_code "bioboxes/velvet", "Dockerfile", "Dockerfile", 0, 35 %>
 
 This downloads the [biobox file validator][validator] and adds it to the $PATH.
 The corresponding biobox assembler schema is also downloaded. If you run the below commands
@@ -131,6 +73,7 @@ usage output.
 docker build -t velvet .
 docker run -it velvet /bin/bash
 ~~~
+
 
 
 
