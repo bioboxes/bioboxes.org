@@ -1,7 +1,7 @@
 # Images versus containers
 
 This explains the difference between a Docker image and a container. These
-terms are sometimes used interchangeably however they are not the same have two
+terms are sometimes used interchangeably however they are not the same and have two
 different meanings.
 
 Previously you downloaded the `busybox` image and showed that it was present on
