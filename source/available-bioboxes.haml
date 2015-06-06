@@ -1,0 +1,36 @@
+- biobox_yaml('https://raw.githubusercontent.com/bioboxes/data/master/images.yml').keys.each do |type|
+  %h1
+    = type
+  - data.images[type].each do |image|
+    %div{class: "biobox", id: biobox_id(image[:image][:dockerhub])}
+      %h3
+        = image[:image][:dockerhub]
+      %p
+        = image[:description]
+      %table.table
+        %tr
+          %td
+            %span{:class => "glyphicon glyphicon-envelope", :"aria-hidden" => "true"}
+          %td
+            %a{href: dockerhub_url(image)}
+              Docker Image
+        - if image[:pmid]
+          %tr
+            %td
+              %span{class: "glyphicon glyphicon-file" }
+            %td
+              %a{href: pubmed_url(image)}
+                Pubmed Entry
+        - biobox_values(image).each do |(avail, url, text)|
+          %tr
+            %td
+              - if avail
+                %span{class: "glyphicon glyphicon-ok biobox-item-good" }
+              - else
+                %span{class: "glyphicon glyphicon-remove biobox-item-bad" }
+            %td
+              - if avail
+                %a{href: url.to_s }
+                  = text
+              - else
+                = text
