@@ -2,17 +2,17 @@ require "open-uri"
 require 'yaml'
 
 VALUES = [
-  {avail: lambda{|i| ! i[:homepage].nil? },
+  {avail: lambda{|i| ! i["homepage"].nil? },
    text:  ["Homepage", "No homepage available"],
-   url:   lambda{|i| i[:homepage] }},
+   url:   lambda{|i| i["homepage"] }},
 
-  {avail: lambda{|i| ! i[:image][:source].nil? },
+  {avail: lambda{|i| ! i["image"]["source"].nil? },
    text:  ["Source Code Repository", "No source code repository available"],
-   url:   lambda{|i| i[:image][:source] }},
+   url:   lambda{|i| i["image"]["source"] }},
 
-  {avail: lambda{|i| ! i[:mailing_list].nil? },
+  {avail: lambda{|i| ! i["mailing_list"].nil? },
    text:  ["Mailing List", "No mailing list available"],
-   url:   lambda{|i| i[:mailing_list] }},
+   url:   lambda{|i| i["mailing_list"] }},
 ]
 
 module PageHelpers
@@ -33,11 +33,11 @@ module PageHelpers
   end
 
   def dockerhub_url(biobox)
-    "https://registry.hub.docker.com/u/" + biobox[:image][:dockerhub]
+    "https://registry.hub.docker.com/u/" + biobox["image"]["dockerhub"]
   end
 
   def pubmed_url(biobox)
-    "https://www.ncbi.nlm.nih.gov/pubmed/" + biobox[:pmid].to_s
+    "https://www.ncbi.nlm.nih.gov/pubmed/" + biobox["pmid"].to_s
   end
 
   def biobox_id(docker_string)

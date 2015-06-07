@@ -1,12 +1,13 @@
-- biobox_yaml('https://raw.githubusercontent.com/bioboxes/data/master/images.yml').keys.each do |type|
+- biobox_yaml('https://raw.githubusercontent.com/bioboxes/data/master/images.yml').each do |type, images|
   %h1
     = type
-  - data.images[type].each do |image|
-    %div{class: "biobox", id: biobox_id(image[:image][:dockerhub])}
+  - images.each do |image|
+    - puts image["image"]["dockerhub"]
+    %div{class: "biobox", id: biobox_id(image["image"]["dockerhub"])}
       %h3
-        = image[:image][:dockerhub]
+        = image["image"]["dockerhub"]
       %p
-        = image[:description]
+        = image["description"]
       %table.table
         %tr
           %td
@@ -14,7 +15,7 @@
           %td
             %a{href: dockerhub_url(image)}
               Docker Image
-        - if image[:pmid]
+        - if image["pmid"]
           %tr
             %td
               %span{class: "glyphicon glyphicon-file" }
