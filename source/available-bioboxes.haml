@@ -2,7 +2,6 @@
   %h1
     = type
   - images.each do |image|
-    - puts image["image"]["dockerhub"]
     %div{class: "biobox", id: biobox_id(image["image"]["dockerhub"])}
       %h3
         = image["image"]["dockerhub"]
