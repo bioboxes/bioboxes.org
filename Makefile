@@ -24,16 +24,8 @@ fetch =  source/validate-biobox-file.mkd source/validator/short-read-assembler.m
 
 bootstrap: Gemfile.lock \
 	   vendor/bootstrap \
-	   vendor/javascripts/strftime.min.js \
 	   vendor/javascripts/lodash.min.js \
 	   $(fetch)
-
-vendor/javascripts/strftime.min.js:
-	mkdir -p $(dir $@)
-	wget \
-	  --quiet \
-	  --output-document $@ \
-          https://github.com/samsonjs/strftime/blob/master/strftime-min.js
 
 vendor/javascripts/lodash.min.js:
 	mkdir -p $(dir $@)
