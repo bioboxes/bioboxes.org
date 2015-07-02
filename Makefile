@@ -22,7 +22,11 @@ clean:
 
 fetch =  source/validate-biobox-file.mkd source/validator/short-read-assembler.mkd
 
-bootstrap: Gemfile.lock vendor/bootstrap vendor/javascripts/strftime.js $(fetch)
+bootstrap: Gemfile.lock \
+	   vendor/bootstrap \
+	   vendor/javascripts/strftime.js \
+	   vendor/javascripts/lodash.js \
+	   $(fetch)
 
 vendor/javascripts/strftime.js:
 	mkdir -p $(dir $@)
