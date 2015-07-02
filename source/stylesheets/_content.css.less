@@ -83,8 +83,45 @@
 
 }
 
-.metric {
+.widget {
+  .make-row();
+
+  border-style: solid;
+  border-color: @primary;
+  .border-top-radius(10px);
+  .border-right-radius(10px);
+  .border-bottom-radius(10px);
+  .border-left-radius(10px);
+
+  max-width: 400px;
   margin-right: auto;
   margin-left: auto;
-  max-width: 300px;
+
+  text-align: center;
+
+  .icon {
+    .make-lg-column(6);
+    padding-top: 1.5em;
+    padding-bottom: 1em;
+  }
+
+  .metric {
+    .make-lg-column(6);
+    .value {
+      font-size: 6em;
+      font-weight: 300;
+    }
+  }
+
+  .name {
+    background-color: @primary;
+    color: white;
+    padding-top: 0.5em;
+    padding-bottom: 0.25em;
+    font-size: @font-size-base * 1.1;
+  }
+
+  .glyphicon {
+    font-size: 6em;
+  }
 }
