@@ -1,0 +1,11 @@
+!!! 5
+%HTML{lang: "en"}
+  = partial "_header"
+  %body
+    = partial "_nav"
+    .container
+      .main
+        .sidebar
+        .content
+          = partial "_title_image"
+          = preserve yield
