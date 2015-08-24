@@ -15,5 +15,5 @@
     - ["Validate your Biobox", "/guide/developer/validate-your-biobox/"]
 - name: Developer Tools
   pages:
-    - ["Biobox file validator", "/validate-biobox-file/"]
-    - ["Assembler Validator", "/validator/short-read-assembler/"]
+    - ["Biobox file validator", "/tools/validate-biobox-file/"]
+    - ["Assembler Validator", "/tools/short-read-assembler/"]
