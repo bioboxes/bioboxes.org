@@ -5,7 +5,12 @@
     = partial "_nav"
     .container
       .main
-        .sidebar
-        .content
-          = partial "_title_image"
-          = preserve yield
+        .sidebar-wrapper
+          .sidebar-nav
+            .section
+              = partial "_documentation_sidebar"
+        .content-wrapper
+          .content
+            .section
+              = partial "_title_image"
+              = preserve yield

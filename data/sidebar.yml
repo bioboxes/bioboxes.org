@@ -1,0 +1,19 @@
+- name: User Guide
+  pages:
+    - ["Getting Docker Images", "/getting-an-image/"]
+    - ["Using Docker Images", "/using-a-docker-image/"]
+    - ["Images vs. Containers", "/images-vs-containers/"]
+    - ["Using a biobox image", "/using-a-biobox/"]
+- name: Developer Guide
+  pages:
+    - ["Creating a Docker Image", "/build-your-image/"]
+    - ["Add Software to an Image", "/add-software-to-an-image/"]
+    - ["Add Software from Source", "/add-software-from-source/"]
+    - ["Use the RFC", "/read-the-rfc/"]
+    - ["Create a Task", "/create-a-task/"]
+    - ["Putting Everything Together", "/putting-everything-together/"]
+    - ["Validate your Biobox", "/validate-your-biobox/"]
+- name: Developer Tools
+  pages:
+    - ["Biobox file validator", "/validate-biobox-file/"]
+    - ["Assembler Validator", "/validator/short-read-assembler/"]
