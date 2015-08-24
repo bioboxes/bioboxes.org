@@ -1,18 +1,18 @@
 - name: User Guide
   pages:
-    - ["Getting Docker Images", "/getting-an-image/"]
-    - ["Using Docker Images", "/using-a-docker-image/"]
-    - ["Images vs. Containers", "/images-vs-containers/"]
-    - ["Using a biobox image", "/using-a-biobox/"]
+    - ["Getting Docker Images", "/guide/user/getting-an-image/"]
+    - ["Using Docker Images", "/guide/user/using-a-docker-image/"]
+    - ["Images vs. Containers", "/guide/user/images-vs-containers/"]
+    - ["Using a biobox image", "/guide/user/using-a-biobox/"]
 - name: Developer Guide
   pages:
-    - ["Creating a Docker Image", "/build-your-image/"]
-    - ["Add Software to an Image", "/add-software-to-an-image/"]
-    - ["Add Software from Source", "/add-software-from-source/"]
-    - ["Use the RFC", "/read-the-rfc/"]
-    - ["Create a Task", "/create-a-task/"]
-    - ["Putting Everything Together", "/putting-everything-together/"]
-    - ["Validate your Biobox", "/validate-your-biobox/"]
+    - ["Creating a Docker Image", "/guide/developer/build-your-image/"]
+    - ["Add Software to an Image", "/guide/developer/add-software-to-an-image/"]
+    - ["Add Software from Source", "/guide/developer/add-software-from-source/"]
+    - ["Use the RFC", "/guide/developer/read-the-rfc/"]
+    - ["Create a Task", "/guide/developer/create-a-task/"]
+    - ["Putting Everything Together", "/guide/developer/putting-everything-together/"]
+    - ["Validate your Biobox", "/guide/developer/validate-your-biobox/"]
 - name: Developer Tools
   pages:
     - ["Biobox file validator", "/validate-biobox-file/"]
