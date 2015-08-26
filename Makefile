@@ -66,4 +66,4 @@ source/tools/command-line-interface.mkd:
 	wget \
 		--quiet \
 		--output-document $@ \
-                https://raw.githubusercontent.com/bioboxes/command-line-interface/master/doc/biobox-cli.md
+	        https://raw.githubusercontent.com/bioboxes/command-line-interface/master/doc/bioboxes-cli.mkd
