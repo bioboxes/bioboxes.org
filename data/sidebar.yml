@@ -15,5 +15,5 @@
     - ["Validate your Biobox", "/guide/developer/validate-your-biobox/"]
 - name: Developer Tools
   pages:
-    - ["biobox.yml validator",   "/tools/validate-biobox-file/"]
+    - ["Input file validator",   "/tools/validate-biobox-file/"]
     - ["Command line interface", "/tools/command-line-interface/"]

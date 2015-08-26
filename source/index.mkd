@@ -1,2 +1,2 @@
-
-This is bioboxes.org
+This text is not rendered, instead the page is laid out using the
+`front-page.haml` partial.
