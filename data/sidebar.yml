@@ -1,11 +1,14 @@
-- name: User Guide
+- name: Quick Start
   pages:
-    - ["What is a biobox",      "/guide/user/what-is-a-biobox/"]
-    - ["Getting Docker images", "/guide/user/getting-an-image/"]
-    - ["Using Docker images",   "/guide/user/using-a-docker-image/"]
-    - ["Images vs. containers", "/guide/user/images-vs-containers/"]
-    - ["Using a biobox image",  "/guide/user/using-a-biobox/"]
-- name: Developer Guide
+    - ["What is a biobox",        "/guide/quick/what-is-a-biobox/"]
+    - ["How to install bioboxes", "/guide/quick/how-to-install/"]
+- name: Biobox Docker Guide
+  pages:
+    - ["Getting a Docker image",      "/guide/user/getting-an-image/"]
+    - ["Using Docker images",         "/guide/user/using-a-docker-image/"]
+    - ["Images vs. containers",       "/guide/user/images-vs-containers/"]
+    - ["Using a biobox Docker image", "/guide/user/using-a-biobox/"]
+- name: Biobox developer Guide
   pages:
     - ["Creating a Docker image",     "/guide/developer/build-your-image/"]
     - ["Add software to an image",    "/guide/developer/add-software-to-an-image/"]
