@@ -1,41 +1,47 @@
 # What is a biobox?
 
-Bioboxes solves the problem where you would like to try new a bioinformatics
-tool but you can't get it to install or you can't get good results with it. A
-biobox is a Docker image which has a standardised interface for the type of
-tool it contains. This page will explain what these terms mean.
+Biologists should not have to be experts in computer systems administration.
+Getting a bioinformatics tool to analyse your sequence or proteomics data
+should not require spending the afternoon debugging installation problems.
+Bioboxes solves this situation by creating pre-packaged versions of
+bioinformatics tools that are simple to install and simple to use. Each biobox
+is a Docker image containing a bioinformatics tool, with a standardised
+interface through which data and parameters are passed. This page explains what
+these terms mean.
 
 ## What is a Docker image?
 
-Docker is [a San Francisco company][docker] that creates a software tool with
-the same name. When we discuss Docker we are referring to the tool and not the
-company. Docker allows the creation of "images". An image can be thought of as
-a software box which you can add everything you need to make a tool work. For
-example the [velvet genome assembler][velvet] Docker image includes Ubuntu
-Linux, extra libraries required for installation, and velvet itself and some
-extra scripts to run velvet. Packaging all these together into a software image
-makes it easier for you get hold of everything you need to run velvet. This is
-key advantage that Docker provides: the process of giving your software, or
-using other's software is now much simpler.
+Docker is [a San Francisco company][docker] that has created a software
+platform with the same name. Docker allows the creation of "images", which can
+be thought of as a software box in which you can add everything you need to
+make a particular tool work. For example a Docker image of the [velvet genome
+assembler][velvet] includes Ubuntu Linux, extra libraries required for
+installation, velvet itself, and extra scripts to run velvet on input data.
+Packaging all these together into a Docker image makes it easier to share and
+obtain everything needed to run velvet. You don't need to go through the manual
+process of installing velvet yourself. This is key advantage that Docker
+provides: the process of giving your software, or using another persons
+software is now much simpler.
 
-If you're already familiar with virtual machines (VMs) you can think of Docker
-images as more lightweight versions of a VM. Starting a Docker image is much
-faster than a VM, Docker images also share the host machine resources rather
-than reserving a portion of host resources for their own use.
+If you're familiar with virtual machines (VMs) you can think of Docker images
+as more lightweight versions of a VM. Starting a Docker image is much faster
+than a VM, as Docker images also the host machine resources rather than
+reserving a portion of host resources for their own use. If you have docker
+installed, here is an example of how simple it is to get the velvet Docker
+image:
 
 [docker]: https://www.docker.com/
 [velvet]: http://www.ebi.ac.uk/~zerbino/velvet/
-
-If you have docker installed, here is an example of how simple it is to get the
-velvet Docker image:
 
 ~~~ bash
 docker pull bioboxes/velvet
 ~~~
 
-This will pull down the velvet Docker image on to your computer and you can now
-begin using it as if it is installed, because in effect it is. You don't need
+This will fetch the velvet Docker image on to your computer and you can now
+begin using it as if it was installed, because in effect it is. You don't need
 to do any other set up or installation to start using the velvet Docker image
 in your work.
 
 ## the Biobox standardised interface
+
+
