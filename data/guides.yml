@@ -1,5 +1,6 @@
 ---
 user:
+  - ["What is a biobox",      "/what-is-a-biobox/"]
   - ["Getting Docker Images", "/getting-an-image/"]
   - ["Using Docker Images", "/using-a-docker-image/"]
   - ["Images vs. Containers", "/images-vs-containers/"]
