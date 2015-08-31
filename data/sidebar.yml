@@ -22,3 +22,8 @@
   pages:
     - ["Input file validator",   "/docs/validate-biobox-file/"]
     - ["Command line interface", "/docs/command-line-interface/"]
+- name: Open Source
+  pages:
+  - ["Quick Start Guide", "/docs/contribute-getting-started/"]
+  - ["Organisation",      "/docs/organisation/"]
+  - ["Contribute",        "/docs/how-to-contribute/"]
