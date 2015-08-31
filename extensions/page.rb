@@ -17,9 +17,10 @@ class Page < Middleman::Extension
     elsif is_markdown? resource
       title = fetch_title(resource.source_file)
       {
-        'title'      =>  title,
-        'page_title' => "Bioboxes - " + title,
-        'summary'    => fetch_first_paragraph(resource.source_file)
+        'title'            => title,
+        'page_title'       => "Bioboxes - " + title,
+        'summary'          => fetch_first_paragraph(resource.source_file),
+        'is_documentation' => is_documentation?(resource)
       }
     else
       {}
@@ -36,13 +37,15 @@ class Page < Middleman::Extension
     File.read(path).split("\n\n")[1]
   end
 
-  def is_index?(resource)
-    resource.source_file =~ /index\.mkd/
+  def self.match_resource_url(name, regexp)
+    define_method(name) do |resource|
+      not resource.source_file.match(regexp).nil?
+    end
   end
 
-  def is_markdown?(resource)
-    resource.source_file =~ /\.mkd/
-  end
+  match_resource_url :is_index?,         /index\.mkd/
+  match_resource_url :is_documentation?, /\/docs\//
+  match_resource_url :is_markdown?,      /\.mkd/
 
 end
 
