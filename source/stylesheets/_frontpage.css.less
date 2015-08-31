@@ -33,7 +33,7 @@
      .center-block();
      background-image: url('https://s3-us-west-1.amazonaws.com/bioboxes-images/logo/0.2.1/logo_only_dark.png');
      background-position: 50% 50%;
-     background-repeat: no-repeat; 
+     background-repeat: no-repeat;
      background-size: @logo-size;
      width: @logo-size;
      height: @logo-size;
@@ -74,32 +74,72 @@
     font-weight: 500;
     line-height: @line-height-base * 1.2;
   }
+
+  a {
+    color: @primary;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+}
+
+@menu-size: 4;
+@menu-left-offset: 0;
+@menu-right-offset: 0;
+
+.front-menu {
+
+  @menu-image-opacity: 0.9;
+
+  .make-lg-column(@menu-size);
+  .make-md-column(@menu-size);
+  .make-sm-column(@menu-size);
+  .make-xs-column(8);
+  .make-xs-column-offset(2);
+
+  text-align: center;
+  margin-top: 4em;
+
+  .glyphicon {
+    color: @primary;
+    opacity: @menu-image-opacity;
+    font-size: 5em;
+    height: 2em;
+    padding-top: 0.4em;
+  }
+
+  img {
+    max-width: 10em;
+    opacity: @menu-image-opacity;
+  }
+
   h3 {
+    margin-top: -0.2em;
     font-weight: 300;
+  }
+
+  p {
+    padding-left: 1em;
+    padding-right: 1em;
   }
 }
 
-.left-menu {
-  margin-top: 3em;
-  .make-lg-column(2);
-  .make-lg-column-offset(3);
-  .make-md-column(2);
-  .make-md-column-offset(3);
-  .make-sm-column(2);
-  .make-sm-column-offset(3);
-  .make-xs-column(8);
-  .make-xs-column-offset(3);
+#left-front-menu {
+  .make-lg-column-offset(@menu-left-offset);
+  .make-md-column-offset(@menu-left-offset);
+  .make-sm-column-offset(@menu-left-offset);
 }
 
-.right-menu {
-  margin-top: 3em;
-  .make-lg-column-offset(2);
-  .make-lg-column(3);
-  .make-md-column-offset(2);
-  .make-md-column(3);
-  .make-sm-column-offset(2);
-  .make-sm-column(3);
-  .make-xs-column(8);
-  .make-xs-column-offset(3);
+#middle-front-menu {
+  .make-lg-column-offset(@menu-right-offset);
+  .make-md-column-offset(@menu-right-offset);
+  .make-sm-column-offset(@menu-right-offset);
 }
 
+#right-front-menu {
+  .make-lg-column-offset(@menu-right-offset);
+  .make-md-column-offset(@menu-right-offset);
+  .make-sm-column-offset(@menu-right-offset);
+}
