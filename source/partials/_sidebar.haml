@@ -2,5 +2,6 @@
   %h1= category.name
   %ul
     - category.pages.each do |page_name, url|
-      %li
+      - _class = url == current_page.url ? 'selected' : 'unselected'
+      %li{class: _class}
         = link_to page_name, url
