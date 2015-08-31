@@ -3,7 +3,7 @@
 Biologists should not have to be experts in computer systems administration.
 Getting a bioinformatics tool to analyse your sequence or proteomics data
 should not require spending the afternoon debugging installation problems.
-Bioboxes solves this situation by creating pre-packaged versions of
+Bioboxes solves this problem by creating pre-packaged versions of
 bioinformatics tools that are simple to install and simple to use. Each biobox
 is a Docker image containing a bioinformatics tool, with a standardised
 interface through which data and parameters are passed. This page explains what

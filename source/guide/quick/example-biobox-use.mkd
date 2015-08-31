@@ -1,0 +1,65 @@
+# Example biobox usage
+
+Bioboxes simplify getting and using bioinformatics software. This short guide
+illustrates this using an example scenario where you would like to assemble
+some Illumina reads into contigs. This is a common situation for anyone who
+works in genomics. The purpose of this guide is to illustrate how bioboxes work
+and this could then be applied for any application for which a biobox exists,
+not only genome assembly.
+
+This tutorial uses real sequence data so that the example biobox can be run as
+as you might do with your own data. The data [is available for download][data]
+and is a FASTQ file of Illumina reads from a real genome which was sequenced at
+the Joint Genome Institute. You can download the data [using this link][data]
+or on the command line using `wget`.
+
+[data]: https://www.dropbox.com/s/uxgn6cqngctqv74/reads.fq.gz?dl=1
+
+~~~ bash
+wget \
+  --output-document reads.fq.gz \
+  'https://www.dropbox.com/s/uxgn6cqngctqv74/reads.fq.gz?dl=1'
+~~~
+
+Assuming that you have the biobox CLI installed as described in the
+[installation instructions][install]. You can use this to run a biobox which
+will assemble these reads into longer contigs. Make sure the reads you
+downloaded are in a file named `reads.fq.gz` in the same directory you are
+running the commands.
+
+[install]: /guide/quick/how-to-install/
+
+~~~ bash
+# Fetch the velvet assembler image using Docker
+docker pull bioboxes/velvet
+
+# Use the velvet biobox to assemble these reads
+biobox run \
+  short_read_assembler \
+  bioboxes/velvet \
+  --input reads.fq.gz \
+  --output contigs.fa
+~~~
+
+You can see this command is specifying the location of the assembly reads using
+`--input` and the output location for the assembled contigs using `--output`.
+The advantage provided by bioboxes is that you can try a different biobox
+instead of velvet using almost the same command. For example you might try
+using megahit.
+
+~~~ bash
+# Fetch the megahit biobox
+docker pull bioboxes/megahit
+
+# Assemble using megahit
+biobox run \
+  short_read_assembler \
+  bioboxes/megahit \
+  --input reads.fq.gz \
+  --output contigs.fa
+~~~
+
+This examples shows that only the name of the referenced biobox had to be
+changed to use a different one to assemble the reads. This illustrates the core
+principles behind bioboxes - that bioinformatics software should be simple to
+install and equally simple to use.

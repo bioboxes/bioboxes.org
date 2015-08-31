@@ -1,7 +1,8 @@
 - name: Quick Start
   pages:
-    - ["What is a biobox",        "/guide/quick/what-is-a-biobox/"]
+    - ["What is a biobox?",       "/guide/quick/what-is-a-biobox/"]
     - ["How to install bioboxes", "/guide/quick/how-to-install/"]
+    - ["Example biobox usage",    "/guide/quick/example-biobox-use/"]
 - name: Biobox Docker Guide
   pages:
     - ["Getting a Docker image",      "/guide/user/getting-an-image/"]
