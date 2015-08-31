@@ -1,24 +1,24 @@
 - name: Quick Start
   pages:
-    - ["What is a biobox?",       "/guide/quick/what-is-a-biobox/"]
-    - ["How to install bioboxes", "/guide/quick/how-to-install/"]
-    - ["Example biobox usage",    "/guide/quick/example-biobox-use/"]
+    - ["What is a biobox?",       "/docs/what-is-a-biobox/"]
+    - ["How to install bioboxes", "/docs/how-to-install/"]
+    - ["Example biobox usage",    "/docs/example-biobox-use/"]
 - name: Biobox Docker Guide
   pages:
-    - ["Getting a Docker image",      "/guide/user/getting-an-image/"]
-    - ["Using Docker images",         "/guide/user/using-a-docker-image/"]
-    - ["Images vs. containers",       "/guide/user/images-vs-containers/"]
-    - ["Using a biobox Docker image", "/guide/user/using-a-biobox/"]
+    - ["Getting a Docker image",      "/docs/getting-an-image/"]
+    - ["Using Docker images",         "/docs/using-a-docker-image/"]
+    - ["Images vs. containers",       "/docs/images-vs-containers/"]
+    - ["Using a biobox Docker image", "/docs/using-a-biobox/"]
 - name: Biobox developer guide
   pages:
-    - ["Creating a Docker image",     "/guide/developer/build-your-image/"]
-    - ["Add software to an image",    "/guide/developer/add-software-to-an-image/"]
-    - ["Add software from source",    "/guide/developer/add-software-from-source/"]
-    - ["Use the RFC",                 "/guide/developer/read-the-rfc/"]
-    - ["Create a task",               "/guide/developer/create-a-task/"]
-    - ["Putting Everything Together", "/guide/developer/putting-everything-together/"]
-    - ["Validate your Biobox",        "/guide/developer/validate-your-biobox/"]
+    - ["Creating a Docker image",     "/docs/build-your-image/"]
+    - ["Add software to an image",    "/docs/add-software-to-an-image/"]
+    - ["Add software from source",    "/docs/add-software-from-source/"]
+    - ["Use the RFC",                 "/docs/read-the-rfc/"]
+    - ["Create a task",               "/docs/create-a-task/"]
+    - ["Putting Everything Together", "/docs/putting-everything-together/"]
+    - ["Validate your Biobox",        "/docs/validate-your-biobox/"]
 - name: Developer Tools
   pages:
-    - ["Input file validator",   "/tools/validate-biobox-file/"]
-    - ["Command line interface", "/tools/command-line-interface/"]
+    - ["Input file validator",   "/docs/validate-biobox-file/"]
+    - ["Command line interface", "/docs/command-line-interface/"]

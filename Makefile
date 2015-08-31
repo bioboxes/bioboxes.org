@@ -5,7 +5,7 @@ test: build
 	bundle exec htmlproof --check-html --check-favicon --href-ignore '#' $<
 	bundle exec ./plumbing/check-forbidden-words forbidden.txt $(shell find $< -name "*index.html")
 
-build: $(shell find source) $(fetch) Gemfile.lock
+build: $(shell find source data) $(fetch) Gemfile.lock
 	bundle exec middleman build --verbose
 
 dev: $(shell find source) $(fetch) Gemfile.lock

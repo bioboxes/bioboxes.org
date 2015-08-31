@@ -15,7 +15,7 @@
           %a{:href => "/available-bioboxes/"}
             Biobox Images
         %li
-          %a{:href => "/documentation/"}
+          %a{:href => "/docs/"}
             Documentation
         %li
           %a{:href => "#", :class => "dropdown-toggle",
@@ -25,7 +25,7 @@
             Community
             %span.caret
           %ul{:class => "dropdown-menu", :role => "menu"}
-            - data.guides.community.each do |name, url|
+            - data.community.each do |name, url|
               %li
                 %a{:href => url}
                   = name

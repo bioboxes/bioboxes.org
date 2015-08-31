@@ -1,5 +1,4 @@
 require 'extensions/page'
-require 'extensions/guide'
 
 activate :automatic_image_sizes
 activate :directory_indexes
@@ -31,6 +30,3 @@ end
 
 page "*",               :layout => "layouts/default"
 page "/",               :layout => "layouts/front-page"
-page "/documentation*", :layout => "layouts/documentation"
-page "/guide*",         :layout => "layouts/documentation"
-page "/tools*",         :layout => "layouts/documentation"
