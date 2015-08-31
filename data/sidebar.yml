@@ -8,7 +8,7 @@
     - ["Using Docker images",         "/guide/user/using-a-docker-image/"]
     - ["Images vs. containers",       "/guide/user/images-vs-containers/"]
     - ["Using a biobox Docker image", "/guide/user/using-a-biobox/"]
-- name: Biobox developer Guide
+- name: Biobox developer guide
   pages:
     - ["Creating a Docker image",     "/guide/developer/build-your-image/"]
     - ["Add software to an image",    "/guide/developer/add-software-to-an-image/"]
