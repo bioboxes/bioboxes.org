@@ -44,7 +44,7 @@ class Page < Middleman::Extension
   end
 
   match_resource_url :is_index?,         /index\.mkd/
-  match_resource_url :is_documentation?, /\/docs\//
+  match_resource_url :is_documentation?, /\/docs/
   match_resource_url :is_markdown?,      /\.mkd/
 
 end
