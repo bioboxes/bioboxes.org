@@ -1,0 +1,7 @@
+- data.sidebar.each do |(category, pages)|
+  %h1= category.name
+  %ul
+    - category.pages.each do |page_name, url|
+      - _class = url == current_page.url ? 'selected' : 'unselected'
+      %li{class: _class}
+        = link_to page_name, url

@@ -19,30 +19,21 @@
             %h2
               a standard for creating interchangable bioinformatics software containers
       .menus
-        .left-menu
+        %a.front-menu#left-front-menu{href: '/docs/example-biobox-use/'}
+          %img{src: image("getting-started.png"), class: "title-image", alt: "Jack in the biobox"}
           %h3
-            Documentation
-          %ul
-            %li
-              %a{:href => "/manifesto/"}
-                Manifesto
-            %li
-              %a{:href => "/guide/user/"}
-                User Guide
-            %li
-              %a{:href => "/guide/developer/"}
-                Developer Guide
-            %li
-              %a{:href => "/available-bioboxes/"}
-                Available Bioboxes
-            %li
-              %a{:href => "/contribute/getting-started/"}
-                How to Help
-        .right-menu
+            quick start
+          %p
+            see the quick start guide on how bioboxes works
+        %a.front-menu#middle-front-menu{href: '/docs/'}
+          %span{class: "glyphicon glyphicon-file", "aria-hidden": true}
           %h3
-            Community
-          %ul
-            - data.guides.community.each do |name, url|
-              %li
-                %a{:href => url}
-                  = name
+            documentation
+          %p
+            read through the documentation on how to use and create a biobox
+        %a.front-menu#right-front-menu{href: '/available-bioboxes/'}
+          %img{src: image("single-biobox.png"), class: "title-image", alt: "Jack in the biobox"}
+          %h3
+            get a biobox
+          %p
+            see the list of created bioboxes which you can download and use

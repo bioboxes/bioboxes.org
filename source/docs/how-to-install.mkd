@@ -1,0 +1,29 @@
+# How to install bioboxes
+
+Bioboxes depend on [Docker][]. If you have Docker installed then this is all
+you need to start using bioboxes. If you are using Mac OSX then the [Docker
+toolbox][tool] can be used to install Docker on your computer. There are
+install instructions if you use [Ubuntu][ubuntu] and instructions for other
+[Linux flavors and cloud providers][others].
+
+[Docker]: https://www.docker.com/
+[tool]: https://www.docker.com/toolbox
+[ubuntu]: https://docs.docker.com/installation/ubuntulinux/
+[others]: https://docs.docker.com/installation/
+
+## biobox CLI tool
+
+Once you have Docker install that's all you need to starting using bioboxes. We
+also provide a python command line interface (CLI) that can make it simpler to
+use bioboxes without having to interact with Docker directly. However you do
+still need to have Docker installed. Installing the biobox CLI requires python
+and pip to be installed, most systems have python. There are detailed
+instructions on [how to install pip][pip]. Once you have pip installed you can
+install the CLI:
+
+~~~ bash
+# Install the CLI
+pip install --user biobox_cli
+~~~
+
+[pip]: https://packaging.python.org/en/latest/installing.html

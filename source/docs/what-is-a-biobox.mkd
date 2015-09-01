@@ -1,0 +1,95 @@
+# What is a biobox?
+
+Biologists should not have to be experts in computer systems administration.
+Getting a bioinformatics tool to analyse your sequence or proteomics data
+should not require spending the afternoon debugging installation problems.
+Bioboxes solves this problem by creating pre-packaged versions of
+bioinformatics tools that are simple to install and simple to use. Each biobox
+is a Docker image containing a bioinformatics tool, with a standardised
+interface through which data and parameters are passed. This page explains what
+these terms mean.
+
+## Pre-packaged bioinformatics tools
+
+Docker is [a San Francisco company][docker] that has created a software
+platform with the same name. Docker allows the creation of "images", which can
+be thought of as a software box in which you can add everything you need to
+make a particular tool work. For example a Docker image of the [velvet genome
+assembler][velvet] includes Ubuntu Linux, extra libraries required for
+installation, velvet itself, and extra scripts to run velvet on input data.
+Packaging all these together into a Docker image makes it easier to share and
+obtain everything needed to run velvet. You don't need to go through the manual
+process of installing velvet yourself. This is key advantage that Docker
+provides: the process of giving your software, or using another persons
+software is now much simpler.
+
+If you're familiar with virtual machines (VMs) you can think of Docker images
+as more lightweight versions of a VM. Starting a Docker image is much faster
+than a VM, as Docker images also the host machine resources rather than
+reserving a portion of host resources for their own use. If you have docker
+installed, here is an example of how simple it is to get the velvet Docker
+image:
+
+[docker]: https://www.docker.com/
+[velvet]: http://www.ebi.ac.uk/~zerbino/velvet/
+
+~~~ bash
+docker pull bioboxes/velvet
+~~~
+
+This will fetch the velvet Docker image on to your computer and you can now
+begin using it as if it was installed, because in effect it is. You don't need
+to do any other set up or installation to start using the velvet Docker image
+in your work. 
+
+Simplifying the install process is only half of what a biobox is. The other
+half is making bioinformatics tools simple to use. This is done by
+standardising the tool interface.
+
+## a simplified user interface
+
+Having a bioinformatics tool installed is no garantee of getting good results
+with your data. This requires experimenting with different combinations of
+paramaters and run time options. Again this means extra work for biologists and
+bioinformatics when most of the time they would like they are only interested
+in the results for further downstream analyses. 
+
+Bioboxes solve this usuability problem by making all tools of the same type
+have the same interface. For example all biobox genome assemblers accept input
+FASTQ the same way, and return assembled contigs the same way. This means that
+if you learn how to use one biobox assembler you can use all available biobox
+assemblers. This standardised interface makes it simple to swap one type of
+biobox for another in your workflow, a common situtation when algorithm
+improvement are published.
+
+The biobox interface is a file passed to the biobox image specifying all the
+inputs needed to run. This file is called the 'biobox.yaml', an example for a
+genome assembler biobox is:
+
+~~~ yaml
+---
+version: "0.9.0"
+arguments:
+  - fastq:
+    - id: "test_reads"
+      type: "paired"
+      value: "/bbx/input/reads.fq.gz"
+~~~
+
+This specifies the version of the file and the arguments. In this case the
+argument is a paired fastq file which will be mounted in the biobox at
+"/bbx/input/reads.fq.gz". YAML is used as a standard machine- and
+human-readable file format. The interface work where a user writes biobox.yaml
+file containing their input data and parameters, and then passes this to
+biobox. A biobox developer then expects the input data to be in this format,
+and so they are can build their tool around accepting this kind of input.
+Importantly this biobox.yaml file will work with all biobox assemblers, making
+it easy to swap one tool for another.
+
+## Where next?
+
+After reading this guide, you can follow the [installation
+instructions][install], or try [running a biobox for the first time][running].
+
+[install]: /docs/how-to-install/
+[running]: /docs/example-biobox-use/

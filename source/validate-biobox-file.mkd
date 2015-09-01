@@ -1,0 +1,55 @@
+# biobox.yaml Validator
+
+Biobox authors should check the input data provided by the user is valid before
+starting. This will prevent unexpected program behaviour or errors halfway
+through a multi-step pipeline. Any errors should be reported back to the user
+with a clear message so they can be understood and fixed.
+
+The bioboxes project provides the command line tool `validate-biobox-file` to help
+test the input YAML file given to a biobox. This tool with test the YAML
+and return a non-zero exit code and error message if the biobox data is not
+correct. If identified, this error message should be returned to the user, and
+then the biobox should exit. The command line interface for this tool is:
+
+~~~ bash
+validate-biobox-file --schema=schema.yml --input=input.yml
+~~~
+
+[Download the latest version.][download]
+
+[download]: https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file/0.x.y/validate-biobox-file.tar.xz
+
+## Example install
+
+The tool `validate-biobox-file` can be installed in your Docker image by
+downloading and unpacking. An example is to fetch the latest major version
+release and decompress it into the directory `/biobox-validator`.
+
+~~~ dockerfile
+ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
+ENV VERSION  0.x.y
+RUN mkdir /biobox-validator
+RUN wget \
+      --quiet \
+      --output-document -\
+      ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
+    | tar xJf - \
+      --directory /biobox-validator \
+      --strip-components=1
+~~~
+
+## Example usage
+
+The tools should be used at the start of a script to ensure the data passed by
+the user is correct. One way to do this is with a bash script that exits when a
+non-zero exit code is generated.
+
+~~~ bash
+#!/bin/bash
+
+set -o errexit
+
+/biobox-validator/validate-biobox-file \
+  --schema=schema.yml \
+  --input=input.yml
+~~~

@@ -1,5 +1,4 @@
 require 'extensions/page'
-require 'extensions/guide'
 
 activate :automatic_image_sizes
 activate :directory_indexes
@@ -12,7 +11,7 @@ activate :guide
 activate :s3_sync do |s3_sync|
   s3_sync.bucket = 'bioboxes.org'
   s3_sync.region = 'us-west-1'
-  s3_sync.acl = 'public-read'
+  s3_sync.acl    = 'public-read'
 end
 
 set :css_dir, 'stylesheets'
@@ -29,5 +28,5 @@ end
 # silence i18n warning
 ::I18n.config.enforce_available_locales = false
 
-page "*", :layout => "layouts/default"
-page "/", :layout => "layouts/front-page"
+page "*",               :layout => "layouts/default"
+page "/",               :layout => "layouts/front-page"

@@ -1,0 +1,30 @@
+# What is a biobox?
+
+Software has proliferated in bioinformatics and so have the problems associated
+with it: missing or unobtainable code, difficult to install dependencies,
+unreproducible workflows, all with terrible user experiences. We have created
+bioboxes with the aim to make accessing and using bioinformatics software more
+simple and more easy.
+
+A biobox is a Docker image where the input files, input parameters, and output
+files are specified so that every biobox of the same type has the same
+interface. The Docker platform, which bioboxes uses, makes it much simpler for
+developers to share their their bioinformatics tools. The bioboxes'
+standardised interface then makes swapping one tool for another much simpler
+because they have indentical interfaces.
+
+An example biobox type is a short-read assembler. The interface for these image
+accepts an input paired-FASTQ file and returns a contig FASTA file. Each
+developer creating a biobox should make sure the container accepts these inputs
+and returns the expected outputs. A list of [biobox images][] shows which short
+read assembler containers are currently available.
+
+[biobox images]: /available-bioboxes/
+
+We believe a community standard, using software containers, has the opportunity
+to solve the current software usability problems and increase the standard of
+scientific software as a whole. A standard for bioinformatics containers will
+move us towards a more open environment for anyone to innovate, collaborate and
+share their scientific software. Working in a truly standardized and
+interoperable ecosystem, will allow bioinformatics algorithmic developments to
+become useful to everyone.

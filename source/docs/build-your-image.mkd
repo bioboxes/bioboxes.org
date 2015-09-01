@@ -29,7 +29,7 @@ build`. The `--tag` specifies what the image should be called. In this case
 we'll call the image "my_image". Run the following command in the same
 directory you have placed your Dockerfile.
 
-[user]: /guide/user/
+[user]: /docs/using-a-biobox/
 
 ~~~ shell
 docker build --tag my_image .
@@ -70,7 +70,7 @@ container, not your host computer. If this is not clear, there is a guide we
 explaining the [difference between containers and images][diff]. You can exit
 this container with `CTRL+D`.
 
-[diff]: /guide/user/images-vs-containers/
+[diff]: /docs/images-vs-containers/
 
 ## An image to do something
 

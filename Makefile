@@ -5,7 +5,7 @@ test: build
 	bundle exec htmlproof --check-html --check-favicon --href-ignore '#' $<
 	bundle exec ./plumbing/check-forbidden-words forbidden.txt $(shell find $< -name "*index.html")
 
-build: $(shell find source) $(fetch) Gemfile.lock
+build: $(shell find source data) $(fetch) Gemfile.lock
 	bundle exec middleman build --verbose
 
 dev: $(shell find source) $(fetch) Gemfile.lock
@@ -20,7 +20,7 @@ clean:
 #
 ###################################
 
-fetch =  source/validate-biobox-file.mkd source/validator/short-read-assembler.mkd
+fetch =  source/docs/validate-biobox-file.mkd source/docs/command-line-interface.mkd
 
 bootstrap: Gemfile.lock \
 	   vendor/bootstrap \
@@ -54,15 +54,16 @@ Gemfile.lock: Gemfile
 #
 ###################################
 
-source/validate-biobox-file.mkd:
+source/docs/validate-biobox-file.mkd:
+	mkdir -p $(dir $@)
 	wget \
 		--quiet \
 		--output-document $@ \
 		https://raw.githubusercontent.com/bioboxes/file-validator/master/doc/validate-biobox-file.mkd
 
-source/validator/short-read-assembler.mkd:
+source/docs/command-line-interface.mkd:
 	mkdir -p $(dir $@)
 	wget \
 		--quiet \
 		--output-document $@ \
-		https://raw.githubusercontent.com/bioboxes/validator-short-read-assembler/master/doc/short-read-assembler-validator.md
+	        https://raw.githubusercontent.com/bioboxes/command-line-interface/master/doc/bioboxes-cli.mkd

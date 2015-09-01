@@ -5,9 +5,13 @@
     = partial "_nav"
     .container
       .main
-        .content
-          = partial "_title_image"
-          = partial "_guide_trail"
-          = preserve yield
-          = partial "_guide_trail"
-          = partial "_footer"
+        - if current_page.data.is_documentation
+          .sidebar-wrapper
+            .sidebar-nav
+              .section
+                = partial "_sidebar"
+        .content-wrapper
+          .content
+            .section
+              = preserve yield
+            = partial "_footer"

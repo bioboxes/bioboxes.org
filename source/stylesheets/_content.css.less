@@ -1,10 +1,5 @@
 @import '_settings.less';
 
-.main {
-  .make-row();
-  padding-top: 30px;
-}
-
 .biobox-item-good {
   color: green;
 }
@@ -17,24 +12,21 @@
   padding-bottom: 50px;
 }
 
-.content {
-  margin-top: 3em;
-  margin-right: auto;
-  margin-left: auto;
-  max-width: 500px;
+.main {
   color: @primary;
+}
 
-  .title-image {
-    max-width: 20em;
-    .center-block();
-  }
-
+.content {
 
   h1, h2, h3, h4, h5, h6 {
     text-align: center;
     font-family: Raleway, sans-serif;
     text-transform: lowercase;
     font-variant: small-caps;
+  }
+
+  h2, h3, h4, h5, h6 {
+    color: @strong-accent;
   }
 
   h1 {
@@ -45,7 +37,7 @@
   h2 {
     font-size: 1.8em;
     letter-spacing: 0.1em;
-    line-height: 2;
+    line-height: 1.25;
     margin-top: 2em;
     margin-left: 2em;
     margin-right: 2em;
@@ -77,51 +69,27 @@
     }
   }
 
-  .footer {
-    margin-bottom: 10em;
-  }
-
 }
 
-.widget {
-  .make-row();
+.sidebar-nav {
 
-  border-style: solid;
-  border-color: @primary;
-  .border-top-radius(10px);
-  .border-right-radius(10px);
-  .border-bottom-radius(10px);
-  .border-left-radius(10px);
-
-  max-width: 400px;
-  margin-right: auto;
-  margin-left: auto;
-
-  text-align: center;
-
-  .icon {
-    .make-lg-column(6);
-    padding-top: 1.5em;
-    padding-bottom: 1em;
+  h1 {
+    font-weight: bold;
+    font-size: @font-size-base;
+    font-family: Raleway, sans-serif;
+    text-transform: lowercase;
+    font-variant: small-caps;
   }
 
-  .metric {
-    .make-lg-column(6);
-    .value {
-      font-size: 6em;
-      font-weight: 300;
+  li {
+    padding-left: 0.5em;
+  }
+
+  li.selected {
+    background-color: #23527C;
+    a {
+      color: #ffffff;
     }
   }
 
-  .name {
-    background-color: @primary;
-    color: white;
-    padding-top: 0.5em;
-    padding-bottom: 0.25em;
-    font-size: @font-size-base * 1.1;
-  }
-
-  .glyphicon {
-    font-size: 6em;
-  }
 }
