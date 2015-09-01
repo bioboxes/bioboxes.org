@@ -79,7 +79,7 @@ arguments:
 This specifies the version of the file and the arguments. In this case the
 argument is a paired fastq file which will be mounted in the biobox at
 "/bbx/input/reads.fq.gz". YAML is used as a standard machine- and
-human-readable file format. The interface work where a user writes biobox.yml
+human-readable file format. The interface work where a user writes biobox.yaml
 file containing their input data and parameters, and then passes this to
 biobox. A biobox developer then expects the input data to be in this format,
 and so they are can build their tool around accepting this kind of input.
