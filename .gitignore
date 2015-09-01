@@ -19,7 +19,8 @@ Gemfile.lock
 vendor
 
 # Pulled files
-source/tools/*
+source/docs/validate-biobox-file.mkd
+source/docs/command-line-interface.mkd
 
 # Ignore any generated CSS
 *.css
