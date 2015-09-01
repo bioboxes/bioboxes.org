@@ -16,14 +16,14 @@
     - ["Add software from source",    "/docs/add-software-from-source/"]
     - ["Use the RFC",                 "/docs/read-the-rfc/"]
     - ["Create a task",               "/docs/create-a-task/"]
-    - ["Putting Everything Together", "/docs/putting-everything-together/"]
-    - ["Validate your Biobox",        "/docs/validate-your-biobox/"]
+    - ["Putting everything together", "/docs/putting-everything-together/"]
+    - ["Validate your biobox",        "/docs/validate-your-biobox/"]
 - name: Developer Tools
   pages:
     - ["Input file validator",   "/docs/validate-biobox-file/"]
     - ["Command line interface", "/docs/command-line-interface/"]
 - name: Open Source
   pages:
-  - ["Quick Start Guide", "/docs/contribute-getting-started/"]
+  - ["Quick start guide", "/docs/contribute-getting-started/"]
   - ["Organisation",      "/docs/organisation/"]
   - ["Contribute",        "/docs/how-to-contribute/"]
