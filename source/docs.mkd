@@ -1,0 +1,26 @@
+# Documentation
+
+Detailed documentation is provided to help use bioboxes in your research
+pipelines and to help you create a biobox so that others can more easily use
+your bioinformatics tool. The documentation covers the following sections.
+
+* The "quick start guide" introduces the fastest way to start using bioboxes.
+  This covers installing docker, downloading bioboxes, and using the command
+  line tool to run a biobox.
+
+* The "biobox Docker guide" outlines how to use bioboxes via the Docker client.
+  This includes setting the volume directories to mount data into a container.
+  This tutorial is suitable if you would like to learn how to use Docker with
+  bioboxes in more detail.
+
+* The "developer guide" describes how to create a biobox Docker image. This
+  guide assumes that you are already familiar with running and using bioboxes.
+  This guide will cover the basics of creating a Docker image that is
+  biobox-compatible.
+
+* The "developer tool" documentation covers the tools we have created to help
+  using and developing bioboxes.
+
+* The "open source" documentation outlines how bioboxes functions as an open
+  source project. We welcome feedback and contributes to the project, these
+  pages outline how you can do this.
