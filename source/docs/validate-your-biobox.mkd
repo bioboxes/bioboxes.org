@@ -27,7 +27,7 @@ You can find the final [biobox velvet][] example in our Github repository.
 In the section [using a biobox image] you find a tutorial with example data that explains
 how to use your biobox.
 
-[using a biobox image]:/guide/user/using-a-biobox/
-[bioboxes assembler validator]:http://bioboxes.org/validator/short-read-assembler/
-[biobox velvet]:https://github.com/bioboxes/velvet
+[using a biobox image]: /docs/using-a-biobox/
+[bioboxes assembler validator]: http://bioboxes.org/validator/short-read-assembler/
+[biobox velvet]: https://github.com/bioboxes/velvet
 

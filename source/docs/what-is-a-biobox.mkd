@@ -91,5 +91,5 @@ it easy to swap one tool for another.
 After reading this guide, you can follow the [installation
 instructions][install], or try [running a biobox for the first time][running].
 
-[install]: /user/guide/how-to-install/
-[running]: /user/guide/biobox-quick-start/
+[install]: /docs/how-to-install/
+[running]: /docs/example-biobox-use/

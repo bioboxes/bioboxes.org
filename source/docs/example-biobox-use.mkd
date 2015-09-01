@@ -27,7 +27,7 @@ will assemble these reads into longer contigs. Make sure the reads you
 downloaded are in a file named `reads.fq.gz` in the same directory you are
 running the commands.
 
-[install]: /guide/quick/how-to-install/
+[install]: /docs/how-to-install/
 
 ~~~ bash
 # Fetch the velvet assembler image using Docker
