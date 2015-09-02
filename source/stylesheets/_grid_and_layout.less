@@ -1,42 +1,63 @@
 @import '_settings.less';
 
+@sidebar-width: 280px;
+
 .main {
   .make-row();
-  padding-top: 30px;
-  padding-left: 250px;
-  transition: all 0.4s ease 0s;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .sidebar-wrapper {
-  margin-top: 5em;
-  margin-left: -175px;
-  left: 250px;
-  width: 250px;
-  position: fixed;
-  height: 100%;
-  overflow-y: auto;
   z-index: 1000;
-  transition: all 0.4s ease 0s;
-
+  position: fixed;
+  left: @sidebar-width;
+  width: 0;
+  height: 100%;
+  margin-left: -1 * @sidebar-width;
+  overflow-y: auto;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .sidebar-nav {
   position: absolute;
-  top: 0;
-  width: 250px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  width: @sidebar-width;
+  margin-left: 2em;
+}
+
+.content-wrapper {
+  width: 100%;
+  position: absolute;
 }
 
 .content {
-  width: 500px;
-  margin-top: 5em;
-  margin-left: 4em;
+  margin-left:  1em;
+  margin-right: 1em;
+}
 
-  .title-image {
-    max-width: 20em;
-    .center-block();
+@media(min-width:768px) {
+  .main {
+    padding-left: @sidebar-width * .95;
   }
-
+  .sidebar-wrapper {
+    width: @sidebar-width;
+  }
+  .content-wrapper {
+    position: relative;
+    padding: 0;
+    margin: 0;
+  }
+  .sidebar-nav {
+    margin-top: 6em;
+  }
+  .content {
+    width: 500px;
+    margin-top: 6em;
+    margin-right: 3em;
+  }
 }
