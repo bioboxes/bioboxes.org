@@ -127,10 +127,10 @@ chmod 700 evaluate.sh
 We can now evaluate multiple different assemblers on our read data:
 
 ~~~ bash
-./evalute.sh velvet
-./evalute.sh sga
-./evalute.sh idba
-./evalute.sh minia
+./evaluate.sh velvet
+./evaluate.sh sga
+./evaluate.sh idba
+./evaluate.sh minia
 ~~~
 
 Following this we can scrape the metrics to see which assembler gave largest
