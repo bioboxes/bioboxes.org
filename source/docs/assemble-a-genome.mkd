@@ -1,0 +1,145 @@
+# Assemble a genome and evaluate the result
+
+A common task in genomics is to assemble a FASTQ file of reads into a genome
+assembly and followed by evaluating the quality of this assembly. This recipe
+will explore using bioboxes to do this task. First make sure you have the
+[biobox command line tool installed][install].
+
+[install]: /docs/how-to-install/
+
+~~~ SHELL
+# Will print current versions if both are installed
+docker -v
+biobox -v
+~~~
+
+## Setup
+
+This recipe will use real sequence data so that the example biobox can be run
+as as you might do with your own data. The data is available for download and
+is a FASTQ file of Illumina reads from a real genome which was sequenced at the
+Joint Genome Institute. You can download the data [using this link][link] or on
+the command line using wget show below. In either case make sure this file is
+named 'reads.fq.gz.' If you would like to follow with your own data, make sure
+your reads are from paired sequencing, and interleaved in gzip format.
+
+[link]: https://www.dropbox.com/s/uxgn6cqngctqv74/reads.fq.gz?dl=1
+
+~~~ bash
+wget \
+  --output-document reads.fq.gz \
+  --quiet \
+  'https://www.dropbox.com/s/j1z91gr9ovboekm/genome_reads.fq.gz?dl=1'
+~~~
+
+Next we will fetch the biobox Docker images we will be using. These downloaded
+using the `docker pull` command. This is all that is required to get these
+installed on your computer. This may take a few minutes while everything is
+downloaded.
+
+~~~ bash
+docker pull bioboxes/velvet
+docker pull bioboxes/minia
+docker pull bioboxes/sga
+docker pull bioboxes/idba
+docker pull bioboxes/quast
+~~~
+
+## Assemble
+
+The next step is to assemble these reads into longer contiguous lengths of DNA,
+called 'contigs'. We'll use the velvet biobox to do this. Run the biobox
+command line interface to do this specifying the location of the reads using
+`--input` and the output location for the assembled contigs using `--output`.
+
+~~~ bash
+biobox run \
+  short_read_assembler \
+  bioboxes/velvet \
+  --input reads.fq.gz \
+  --output contigs.fa
+~~~
+
+Next we will want to evaluate the result of our assembly to see how well velvet
+did. We'll use the biobox quast tool to evaluate the assembly and generate
+metrics.
+
+~~~ bash
+mkdir -p ref output
+biobox \
+  run \
+  assembler_benchmark \
+  bioboxes/quast \
+  --input-ref=ref \
+  --input-fasta=contigs.fa \
+  --output=output
+~~~
+
+Notice that we are running a different kind of biobox, and we specify the type
+of the biobox when running the command. In the first instance we use
+`short_read_assembler` and the second instance use `assembler_benchmark`. The
+quast generated files can be found in `output/combined_quast_output/` and
+metrics about the assembly can be found in
+`output/combined_quast_output/report.tsv`. Take a look at this file to see how
+good or bad the assembly is.
+
+## Evaluating multiple assemblers
+
+The final step of this recipe is to try different multiple genome assemblers to
+see which gives the best results for the data. This is not an uncommon step to
+take as each assembler performs differently using different algorithms. We
+could cut and paste each of the steps above, but this would be tedious. Instead
+create a small script to do it.
+
+~~~ bash
+cat <<'EOF' > evaluate.sh
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+
+BIOBOX=$1
+CONTIGS=${BIOBOX}_contigs.fa
+QUAST_DIR=.tmp/${BIOBOX}_eval
+METRICS=${BIOBOX}_metrics.tsv
+
+mkdir -p ref ${QUAST_DIR}
+
+biobox run \
+  short_read_assembler \
+  bioboxes/${BIOBOX} \
+  --input reads.fq.gz \
+  --output ${CONTIGS}
+
+biobox \
+  run \
+  assembler_benchmark \
+  bioboxes/quast \
+  --input-ref=ref \
+  --input-fasta=${CONTIGS} \
+  --output=${QUAST_DIR}
+
+cp ${QUAST_DIR}/combined_quast_output/report.tsv ${METRICS}
+EOF
+chmod 700 evaluate.sh
+~~~
+
+We can now evaluate multiple different assemblers on our read data:
+
+~~~ bash
+./evalute velvet
+./evalute sga
+./evalute idba
+./evalute minia
+~~~
+
+Following this we can scrape the metrics to see which assembler gave largest
+assembly in contigs over 1000bp.
+
+~~~ bash
+grep 'Total length (>= 1000 bp)' *_metrics.tsv \
+  | tr '_' '\t' \
+  | cut -f 1,3 \
+  | sort -k 2
+~~~
+
