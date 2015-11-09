@@ -20,12 +20,21 @@ pip to be installed, most systems have python and may also have pip.
 
 You can test whether pip is installed by typing `pip` and seeing if you get and
 error or not. If pip is not installed there are detailed instructions on [how
-to install pip][pip]. Once you have pip installed you can install the CLI with
-the command:
+to install pip][pip]. If you do install pip you may need to set your `$PATH` to
+include where pip is installed.
+
+~~~ bash
+# Put pip installed command on $PATH
+echo 'PATH=$PATH:${HOME}/.local/bin' >> ~/.bashrc
+source ~/.bashrc
+~~~
+
+Once you have pip installed you can install the biobox CLI with the command:
 
 ~~~ bash
 # Install the CLI
 pip install --user biobox_cli
 ~~~
+
 
 [pip]: http://pip.readthedocs.org/en/stable/installing/
