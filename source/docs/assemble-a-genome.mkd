@@ -29,7 +29,7 @@ your reads are from paired sequencing, and interleaved in gzip format.
 wget \
   --output-document reads.fq.gz \
   --quiet \
-  'https://www.dropbox.com/s/uxgn6cqngctqv74/reads.fq.gz?dl=1'
+  'https://www.dropbox.com/s/j1z91gr9ovboekm/genome_reads.fq.gz?dl=1'
 ~~~
 
 Next we will fetch the biobox Docker images we will be using. These downloaded
