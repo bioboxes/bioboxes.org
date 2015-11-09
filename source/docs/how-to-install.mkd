@@ -28,4 +28,4 @@ the command:
 pip install --user biobox_cli
 ~~~
 
-[pip]: https://pip.readthedocs.org/en/stable/installing/
+[pip]: http://pip.readthedocs.org/en/stable/installing/
