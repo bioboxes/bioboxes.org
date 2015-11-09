@@ -18,6 +18,9 @@
     - ["Create a task",               "/docs/create-a-task/"]
     - ["Putting everything together", "/docs/putting-everything-together/"]
     - ["Validate your biobox",        "/docs/validate-your-biobox/"]
+- name: Bioinformatics Recipes
+  pages:
+    - ["Assembling a genome",     "/docs/assemble-a-genome/"]
 - name: Developer Tools
   pages:
     - ["Input file validator",   "/docs/validate-biobox-file/"]
