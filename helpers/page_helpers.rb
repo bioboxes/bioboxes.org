@@ -33,7 +33,7 @@ module PageHelpers
   end
 
   def dockerhub_url(biobox)
-    "https://registry.hub.docker.com/u/" + biobox["image"]["dockerhub"]
+    "https://hub.docker.com/r/" + biobox["image"]["dockerhub"]
   end
 
   def pubmed_url(biobox)
