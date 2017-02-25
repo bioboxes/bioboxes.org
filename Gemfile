@@ -8,6 +8,6 @@ gem 'html-proofer', '~>  2.1.0'
 gem 'colorize',     '~>  0.7.0'
 
 gem 'middleman-s3_sync',    '~> 3.0.0'
-gem 'mime-types' # Required for middleman-s3_sync
+gem 'mime-types',           '~> 3.1.0' # Required for middleman-s3_sync
 gem 'middleman',            '~> 3.2.0'
 gem "middleman-livereload", "~> 3.3.0"
