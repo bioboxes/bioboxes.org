@@ -36,8 +36,8 @@ module PageHelpers
     "https://hub.docker.com/r/" + biobox["image"]["dockerhub"]
   end
 
-  def pubmed_url(biobox)
-    "https://www.ncbi.nlm.nih.gov/pubmed/" + biobox["pmid"].to_s
+  def pubmed_url(pmid)
+    "https://www.ncbi.nlm.nih.gov/pubmed/#{pmid}"
   end
 
   def biobox_id(docker_string)
