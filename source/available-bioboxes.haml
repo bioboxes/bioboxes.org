@@ -14,13 +14,16 @@
           %td
             %a{href: dockerhub_url(image)}
               Docker Image
-        - if image["pmid"]
+        - if image["pmids"]
           %tr
             %td
               %span{class: "glyphicon glyphicon-file" }
             %td
-              %a{href: pubmed_url(image)}
-                Pubmed Entry
+              %ol{:class => "biobox-pubmed-list"}
+                - image["pmids"].each_with_index do |pmid, index|
+                  %li
+                    %a{href: pubmed_url(pmid)}
+                      Pubmed Entry
         - biobox_values(image).each do |(avail, url, text)|
           %tr
             %td
@@ -34,3 +37,29 @@
                   = text
               - else
                 = text
+
+      %table.table
+        - image["image"]["versions"].each do |version|
+          %tr
+            %td
+              %span{class: "glyphicon glyphicon-cog" }
+            %td
+              Version:
+            %td
+              = version["name"]
+          %tr
+            %td
+            %td
+              Sha256:
+            %td
+              %p{class: "biobox-sha256"}
+                = version["sha256"]
+          %tr
+            %td
+            %td
+              Tasks:
+            %td
+              %ul
+              - version["tasks"].each do |task|
+                %li
+                  = task
