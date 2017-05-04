@@ -30,7 +30,7 @@ log into this image.
 
 ~~~ shell
 docker build --tag apt_image .
-docker run --interactive --tty /bin/bash
+docker run --interactive --tty apt_image /bin/bash
 ~~~
 
 Apt allows you to install packages relatively easily as long as you know their
