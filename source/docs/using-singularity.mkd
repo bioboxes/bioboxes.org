@@ -66,7 +66,7 @@ Copy your newly-converted biobox Singularity image to a system with Singularity
 installed and do the following:
 
 1. Create a `biobox.yaml` file for your biobox as described in the tutorial for
-[using a biobox](using-a-biobox).
+[using a biobox].
 2. Put the `biobox.yaml` file and the required input data in the input directory
 that will be bound to /bbx/input in the container.
 3. Run your container with `singularity exec`.
@@ -108,4 +108,5 @@ total 8
 ~~~
 
 [Singularity]: http://singularity.lbl.gov
+[using a biobox]: http://bioboxes.org/docs/using-a-biobox/
 [docker2singularity]: https://github.com/singularityware/docker2singularity
