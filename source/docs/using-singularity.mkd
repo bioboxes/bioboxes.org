@@ -16,8 +16,9 @@ a Singularity image that can be run on any system with Singularity
 installed. For the moment, **the process described below will only
 work for assembler bioboxes**, but in the future this capability will
 be extended to all bioboxes. The conversion process for a standard
-Docker container is described [here], but this tutorial will highlight
-some specific requirements for converting biobox Docker images.
+Docker container is described [here][docker2singularity], but this
+tutorial will highlight some specific requirements for converting
+biobox Docker images.
 
 ## Requirements
 + Linux system or Linux VM
@@ -64,7 +65,8 @@ when you run a Singularity container from that image.
 Copy your newly-converted biobox Singularity image to a system with Singularity
 installed and do the following:
 
-1. Create a `biobox.yaml` file for your biobox as described in this [tutorial].
+1. Create a `biobox.yaml` file for your biobox as described in the tutorial for
+[using a biobox](using-a-biobox.mkd).
 2. Put the `biobox.yaml` file and the required input data in the input directory
 that will be bound to /bbx/input in the container.
 3. Run your container with `singularity exec`.
@@ -105,6 +107,5 @@ total 8
 -rw-rw-r-- 1 username grpname 2812 May  4 19:18 contigs.fa
 ~~~
 
-[1]: http://singularity.lbl.gov
-[2]: https://github.com/singularityware/docker2singularity
-[3]: http://bioboxes.org/docs/using-a-biobox
+[Singularity]: http://singularity.lbl.gov
+[docker2singularity] https://github.com/singularityware/docker2singularity
