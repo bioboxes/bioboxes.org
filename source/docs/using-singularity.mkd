@@ -62,7 +62,7 @@ requires that internal directories must already exist in an image if
 you wish to bind those internal directories to external directories
 when you run a Singularity container from that image.
 
-##Running a Singularity container
+## Running a Singularity container
 Either install Singularity or copy your newly-converted biobox
 Singularity image to a system with Singularity installed and do the
 following:
@@ -73,7 +73,7 @@ following:
 that will be bound to /bbx/input in the container.
 3. Run your container with `singularity exec`.
 
-###Example:
+### Example:
 ~~~bash
 $ image=bioboxes_velvet-2015-05-18-e7b58697c1b0.img
 $ command="assemble default"
