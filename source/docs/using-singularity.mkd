@@ -73,7 +73,7 @@ following:
 
 1. Create a `biobox.yaml` file for your biobox as described in the tutorial for
 [using a biobox].
-2. As in the [using a biobox] tutorial, create `input_data` and `output_data`
+2. As in the "[using a biobox]" tutorial, create `input_data` and `output_data`
 directories and put the `biobox.yaml` file and the required input data for that
 biobox in the `input_data` directory, which will be bound to /bbx/input in the
 container.
