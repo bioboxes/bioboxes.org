@@ -43,24 +43,28 @@ $ sudo docker run \
 -m "/bbx/input /bbx/output" $my_biobox
 ~~~
 
-In the example above, the `singularityware/docker2singularity` Docker
-container is used to convert `bioboxes/velvet` to a Singularity
-image. The resulting image name will be something like:
-`bioboxes_velvet-2015-05-18-e7b58697c1b0.img`. The command `pwd`
-returns the current working directory. The construct `$(...)` replaces
-itself with the result of evaluating the contents inside the
-parenthesis. Therefore `$(pwd)` will be replaced with the current
-working directory you are in. This is necessary because the `--volume`
-flags require the full directory path. The options to `docker run` are
-are described in the output of `docker run --help`.
+In this example, the command `pwd` returns the current working
+directory. The construct `$(...)` replaces itself with the result of
+evaluating the contents inside the parenthesis. Therefore `$(pwd)`
+will be replaced with the current working directory you are in. This
+is necessary because the `--volume` flags require the full directory
+path. The options to `docker run` are described in the output of
+`docker run --help`.
 
-To create a working biobox Singularity image, one must also pass the
-`-m` option to the `singularityware/docker2singularity` with the full
-path to the input and output directories that will be used inside the
-biobox container. This is necessary because Singularity usually
-requires that internal directories must already exist in an image if
-you wish to bind those internal directories to external directories
-when you run a Singularity container from that image.
+This example uses the `singularityware/docker2singularity` Docker
+container to convert `bioboxes/velvet` to a Singularity
+image. The resulting image name will be something like:
+`bioboxes_velvet-2015-05-18-e7b58697c1b0.img` and will be in the
+`singularity` directory you just created.
+
+As shown in this example, to create a working biobox Singularity
+image one must also pass the `-m` option to the
+`singularityware/docker2singularity` with the full path to the input
+and output directories that will be used inside the biobox
+container. This is necessary because Singularity usually requires that
+internal directories must already exist in an image if you wish to
+bind those internal directories to external directories when you run a
+Singularity container from that image.
 
 ## Running a Singularity container
 Either install Singularity or copy your newly-converted biobox
@@ -69,16 +73,20 @@ following:
 
 1. Create a `biobox.yaml` file for your biobox as described in the tutorial for
 [using a biobox].
-2. Put the `biobox.yaml` file and the required input data in the input directory
-that will be bound to /bbx/input in the container.
+2. As in the [using a biobox] tutorial, create `input_data` and `output_data`
+directories and put the `biobox.yaml` file and the required input data for that
+biobox in the `input_data` directory, which will be bound to /bbx/input in the
+container.
 3. Run your container with `singularity exec`.
 
 ### Example:
 ~~~bash
+$ cd singularity
 $ image=bioboxes_velvet-2015-05-18-e7b58697c1b0.img
 $ command="assemble default"
-$ inputdir=$(pwd)/input_data
-$ outputdir=$(pwd)/output_data
+$ inputdir=$(pwd)/input_data # this directory was already created and populated
+previously
+$ outputdir=$(pwd)/output_data # this directory was created previously
 $ singularity exec \
 --bind "$inputdir:/bbx/input" \
 --bind "$outputdir:/bbx/output" \
