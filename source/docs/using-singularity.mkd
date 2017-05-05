@@ -84,9 +84,8 @@ container.
 $ cd singularity
 $ image=bioboxes_velvet-2015-05-18-e7b58697c1b0.img
 $ command="assemble default"
-$ inputdir=$(pwd)/input_data # this directory was already created and populated
-previously
-$ outputdir=$(pwd)/output_data # this directory was created previously
+$ inputdir=$(pwd)/input_data # directory was created and populated previously
+$ outputdir=$(pwd)/output_data # directory was created previously
 $ singularity exec \
 --bind "$inputdir:/bbx/input" \
 --bind "$outputdir:/bbx/output" \
