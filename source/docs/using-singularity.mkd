@@ -33,10 +33,10 @@ like the following on your Linux system with Docker installed (omit
 'sudo' if you are in the Docker group):
 
 ~~~ bash
-$ mkdir singularity
-$ my_biobox=bioboxes/velvet
-$ output_path=$(pwd)/singularity
-$ sudo docker run \
+mkdir singularity
+my_biobox=bioboxes/velvet
+output_path=$(pwd)/singularity
+sudo docker run \
 --volume=/var/run/docker.sock:/var/run/docker.sock \
 --volume=$output_path:/output \
 --privileged --tty --rm singularityware/docker2singularity \
@@ -81,15 +81,16 @@ container.
 
 ### Example:
 ~~~bash
-$ cd singularity
-$ image=bioboxes_velvet-2015-05-18-e7b58697c1b0.img
-$ command="assemble default"
-$ inputdir=$(pwd)/input_data # directory was created and populated previously
-$ outputdir=$(pwd)/output_data # directory was created previously
-$ singularity exec \
+cd singularity
+image=bioboxes_velvet-2015-05-18-e7b58697c1b0.img
+entrypoint=assemble
+command=default
+inputdir=$(pwd)/input_data # directory was created and populated previously
+outputdir=$(pwd)/output_data # directory was created previously
+singularity exec \
 --bind "$inputdir:/bbx/input" \
 --bind "$outputdir:/bbx/output" \
-$image $command
+$image $entrypoint $command
 ~~~
 
 The `--bind` flag to `singularity exec` binds an external directory to
@@ -119,7 +120,7 @@ total 8
 [Singularity]: http://singularity.lbl.gov
 [using a biobox]: http://bioboxes.org/docs/using-a-biobox/
 [docker2singularity]: https://github.com/singularityware/docker2singularity
-[Docker version 1.10 or higher]:
+[Docker version 1.10 or higher]: 
 https://docs.docker.com/engine/installation/#supported-platforms
-[Stable release of Singularity 2.1 or higher]:
+[Stable release of Singularity 2.1 or higher]: 
 http://singularity.lbl.gov/install-linux
