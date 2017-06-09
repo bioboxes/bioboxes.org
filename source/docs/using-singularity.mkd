@@ -118,7 +118,7 @@ total 8
 ~~~
 
 [Singularity]: http://singularity.lbl.gov
-[using a biobox]: http://bioboxes.org/docs/using-a-biobox/
+[using a biobox]: /docs/using-a-biobox/
 [docker2singularity]: https://github.com/singularityware/docker2singularity
 [Docker version 1.10 or higher]: https://docs.docker.com/engine/installation/#supported-platforms
 [Stable release of Singularity 2.1 or higher]: http://singularity.lbl.gov/install-linux
