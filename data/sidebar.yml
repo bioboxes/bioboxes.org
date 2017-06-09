@@ -9,6 +9,9 @@
     - ["Using Docker images",         "/docs/using-a-docker-image/"]
     - ["Images vs. containers",       "/docs/images-vs-containers/"]
     - ["Using a biobox Docker image", "/docs/using-a-biobox/"]
+- name: Biobox Singularity guide
+  pages:
+    - ["Use Singularity Bioboxes images",     "/docs/using-singularity/"]
 - name: Biobox developer guide
   pages:
     - ["Creating a Docker image",     "/docs/build-your-image/"]
